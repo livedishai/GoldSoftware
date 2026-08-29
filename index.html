@@ -1,18 +1,32 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>AURELIA ERP — Jewellery Retail System</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AURELIA — Jewellery Owner Dashboard</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+:root{
+    --bg:#f6f4ef;
+    --surface:#ffffff;
+    --surface-2:#faf9f6;
+    --border:#e8e4db;
+    --text:#1c1c1a;
+    --muted:#817d73;
+    --gold:#b18a45;
+    --gold-dark:#8e6a2e;
+    --gold-soft:#f4ead6;
+    --green:#3f7657;
+    --green-soft:#e8f2eb;
+    --red:#b6504b;
+    --red-soft:#f9e9e7;
+    --orange:#b87931;
+    --orange-soft:#f8eddd;
+    --shadow:0 12px 40px rgba(32,28,20,.06);
+    --radius:18px;
+}
 
 *{
     box-sizing:border-box;
@@ -21,3104 +35,2196 @@
 }
 
 body{
-    font-family:
-        Inter,
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    background:#f7f7f5;
-    color:#181818;
+    font-family:'DM Sans',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
 }
 
+button,input,select{
+    font:inherit;
+}
 
-/* =========================================
-   LAYOUT
-========================================= */
+button{
+    cursor:pointer;
+}
+
+/* =========================
+   APP
+========================= */
 
 .app{
     display:flex;
     min-height:100vh;
 }
 
-
-/* =========================================
+/* =========================
    SIDEBAR
-========================================= */
+========================= */
 
 .sidebar{
-
-    width:218px;
-
-    background:#151515;
-
-    color:white;
-
-    padding:20px 14px;
-
+    width:250px;
+    background:#1b1b19;
+    color:#fff;
+    padding:25px 16px;
+    display:flex;
+    flex-direction:column;
     position:fixed;
-
     left:0;
     top:0;
     bottom:0;
-
     z-index:100;
+    transition:.3s ease;
 }
-
 
 .brand{
-
+    padding:5px 14px 30px;
     display:flex;
-
     align-items:center;
-
-    gap:10px;
-
-    padding:0 8px 22px;
-
-    border-bottom:1px solid #2b2b2b;
-
+    gap:11px;
 }
 
-
-.brand-icon{
-
+.brand-mark{
     width:38px;
     height:38px;
-
-    border:1px solid #b9954b;
-
-    border-radius:10px;
-
+    border:1px solid rgba(255,255,255,.28);
+    border-radius:50%;
     display:flex;
-
     align-items:center;
     justify-content:center;
-
-    color:#d1ad63;
-
+    color:#d7b36a;
+    font-family:'Playfair Display',serif;
     font-size:18px;
-
 }
 
-
-.brand-title{
-
-    font-size:14px;
-
-    font-weight:700;
-
-    letter-spacing:.5px;
-
+.brand-name{
+    font-family:'Playfair Display',serif;
+    font-size:22px;
+    letter-spacing:1px;
 }
-
 
 .brand-sub{
-
-    font-size:8px;
-
-    color:#888;
-
-    margin-top:3px;
-
-    letter-spacing:.7px;
-
-}
-
-
-.menu-section{
-
-    margin-top:28px;
-
-}
-
-
-.menu-title{
-
     font-size:9px;
+    letter-spacing:2px;
+    color:#aaa69c;
+    margin-top:2px;
+}
 
-    color:#666;
-
-    letter-spacing:1.5px;
-
+.nav-section{
     margin:0 8px 10px;
-
-}
-
-
-.menu-item{
-
-    height:42px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    padding:0 14px;
-
-    border-radius:9px;
-
-    color:#aaa;
-
-    cursor:pointer;
-
-    font-size:12px;
-
-    margin-bottom:3px;
-
-}
-
-
-.menu-item:hover{
-
-    background:#232320;
-
-    color:#fff;
-
-}
-
-
-.menu-item.active{
-
-    background:#292925;
-
-    color:#fff;
-
-}
-
-
-.menu-icon{
-
-    width:14px;
-
-    text-align:center;
-
-    font-size:12px;
-
-}
-
-
-.menu-arrow{
-
-    margin-left:auto;
-
+    color:#77746c;
     font-size:10px;
-
+    font-weight:700;
+    letter-spacing:1.4px;
+    text-transform:uppercase;
 }
 
-
-.user-box{
-
-    position:absolute;
-
-    bottom:18px;
-
-    left:14px;
-    right:14px;
-
-    border-top:1px solid #2b2b2b;
-
-    padding-top:14px;
-
+.nav{
     display:flex;
+    flex-direction:column;
+    gap:5px;
+}
 
+.nav-item{
+    border:0;
+    background:transparent;
+    color:#aaa79f;
+    padding:12px 13px;
+    border-radius:11px;
+    display:flex;
     align-items:center;
-
-    gap:9px;
-
+    gap:12px;
+    text-align:left;
+    transition:.2s;
+    width:100%;
 }
 
+.nav-item:hover{
+    background:rgba(255,255,255,.06);
+    color:#fff;
+}
 
-.user-avatar{
+.nav-item.active{
+    background:#2c2b27;
+    color:#fff;
+}
 
-    width:31px;
-    height:31px;
+.nav-icon{
+    width:21px;
+    text-align:center;
+    font-size:17px;
+}
 
-    border-radius:50%;
+.nav-label{
+    font-size:13px;
+    font-weight:500;
+}
 
-    background:#28251e;
+.sidebar-bottom{
+    margin-top:auto;
+}
 
-    border:1px solid #3e3a2f;
-
+.owner-mini{
+    background:#252420;
+    border:1px solid #35342f;
+    padding:13px;
+    border-radius:14px;
     display:flex;
+    align-items:center;
+    gap:10px;
+}
 
+.avatar{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#c6a15c,#80612c);
+    display:flex;
     align-items:center;
     justify-content:center;
+    color:white;
+    font-weight:700;
+    font-size:12px;
+}
 
-    color:#c8a75d;
+.owner-name{
+    font-size:12px;
+    font-weight:600;
+}
 
+.owner-role{
+    color:#88857d;
     font-size:10px;
-
-}
-
-
-.user-name{
-
-    font-size:11px;
-    color:#eee;
-
-}
-
-
-.user-role{
-
-    font-size:9px;
-    color:#777;
-
     margin-top:2px;
-
 }
 
-
-/* =========================================
+/* =========================
    MAIN
-========================================= */
+========================= */
 
 .main{
-
-    margin-left:218px;
-
-    width:calc(100% - 218px);
-
+    margin-left:250px;
+    width:calc(100% - 250px);
+    min-height:100vh;
 }
-
-
-/* =========================================
-   TOP BAR
-========================================= */
 
 .topbar{
-
-    height:62px;
-
-    background:#fff;
-
-    border-bottom:1px solid #e8e8e5;
-
+    height:78px;
+    padding:0 34px;
+    background:rgba(246,244,239,.92);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
-    padding:0 28px;
-
+    position:sticky;
+    top:0;
+    z-index:50;
 }
 
-
-.location{
-
+.top-left{
     display:flex;
-
     align-items:center;
-
-    gap:9px;
-
-    font-size:11px;
-
-    color:#999;
-
+    gap:18px;
 }
 
-
-.location strong{
-
-    color:#252525;
-
-    font-size:12px;
-
+.mobile-menu{
+    display:none;
+    border:0;
+    background:transparent;
+    font-size:22px;
 }
-
-
-.top-actions{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:20px;
-
-}
-
-
-.top-icon{
-
-    color:#777;
-
-    cursor:pointer;
-
-    font-size:13px;
-
-}
-
-
-.date{
-
-    font-size:11px;
-
-    color:#777;
-
-}
-
-
-/* =========================================
-   CONTENT
-========================================= */
-
-.content{
-
-    padding:25px 28px 50px;
-
-}
-
-
-.page-header{
-
-    display:flex;
-
-    align-items:flex-start;
-
-    justify-content:space-between;
-
-    margin-bottom:20px;
-
-}
-
-
-.eyebrow{
-
-    font-size:10px;
-
-    color:#a3844c;
-
-    letter-spacing:1.5px;
-
-    font-weight:600;
-
-    margin-bottom:5px;
-
-}
-
 
 .page-title{
-
-    font-size:25px;
-
-    font-weight:700;
-
-    letter-spacing:-.7px;
-
+    font-family:'Playfair Display',serif;
+    font-size:22px;
 }
 
-
-.page-subtitle{
-
+.page-date{
+    color:var(--muted);
     font-size:11px;
-
-    color:#888;
-
-    margin-top:6px;
-
+    margin-top:2px;
 }
 
-
-.primary-btn{
-
-    border:0;
-
-    background:#050505;
-
-    color:#fff;
-
-    padding:10px 17px;
-
-    border-radius:8px;
-
-    font-size:11px;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-}
-
-
-.primary-btn:hover{
-
-    background:#282828;
-
-}
-
-
-/* =========================================
-   SYNC BAR
-========================================= */
-
-.sync-bar{
-
-    background:#fff;
-
-    border:1px solid #e8e8e5;
-
-    border-radius:10px;
-
-    padding:13px 15px;
-
+.top-actions{
     display:flex;
-
     align-items:center;
+    gap:10px;
+}
 
+.icon-btn{
+    width:40px;
+    height:40px;
+    border-radius:12px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#555149;
+    position:relative;
+}
+
+.notification-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#bd514d;
+    position:absolute;
+    right:8px;
+    top:7px;
+    border:2px solid white;
+}
+
+.branch-select{
+    height:40px;
+    padding:0 13px;
+    border-radius:12px;
+    background:white;
+    border:1px solid var(--border);
+    color:#49463f;
+    outline:none;
+}
+
+.dashboard{
+    padding:30px 34px 45px;
+    max-width:1700px;
+    margin:auto;
+}
+
+/* =========================
+   WELCOME
+========================= */
+
+.welcome{
+    display:flex;
+    align-items:flex-end;
     justify-content:space-between;
-
-    margin-bottom:18px;
-
+    margin-bottom:25px;
 }
 
+.welcome h1{
+    font-family:'Playfair Display',serif;
+    font-size:30px;
+    font-weight:600;
+}
 
-.sync-left{
+.welcome p{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:5px;
+}
 
+.date-filter{
     display:flex;
-
-    align-items:center;
-
-    gap:9px;
-
+    background:#fff;
+    border:1px solid var(--border);
+    padding:4px;
+    border-radius:11px;
 }
 
+.date-filter button{
+    border:0;
+    background:transparent;
+    padding:8px 12px;
+    color:var(--muted);
+    border-radius:8px;
+    font-size:11px;
+}
 
-.status-dot{
+.date-filter button.active{
+    background:#272621;
+    color:#fff;
+}
 
+/* =========================
+   GOLD RATE STRIP
+========================= */
+
+.gold-strip{
+    background:#201f1b;
+    border-radius:18px;
+    padding:17px 21px;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:22px;
+    overflow:hidden;
+    position:relative;
+}
+
+.gold-strip:after{
+    content:"";
+    position:absolute;
+    width:260px;
+    height:260px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.05);
+    right:-100px;
+    top:-130px;
+}
+
+.gold-left{
+    display:flex;
+    align-items:center;
+    gap:17px;
+    position:relative;
+    z-index:1;
+}
+
+.gold-icon{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    background:rgba(185,145,70,.15);
+    border:1px solid rgba(185,145,70,.25);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#d8b66f;
+    font-size:20px;
+}
+
+.gold-title{
+    font-size:10px;
+    color:#aaa69d;
+    letter-spacing:1.2px;
+    text-transform:uppercase;
+}
+
+.gold-value{
+    font-size:19px;
+    font-weight:700;
+    margin-top:2px;
+}
+
+.gold-value span{
+    font-size:10px;
+    font-weight:400;
+    color:#96928a;
+}
+
+.gold-items{
+    display:flex;
+    gap:35px;
+    position:relative;
+    z-index:1;
+}
+
+.gold-item{
+    padding-left:25px;
+    border-left:1px solid rgba(255,255,255,.1);
+}
+
+.gold-item-label{
+    font-size:9px;
+    color:#8d8a82;
+}
+
+.gold-item-value{
+    font-size:13px;
+    font-weight:600;
+    margin-top:3px;
+}
+
+.rate-up{
+    color:#7fc08f;
+    font-size:10px;
+    margin-left:4px;
+}
+
+/* =========================
+   KPI GRID
+========================= */
+
+.kpi-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:22px;
+}
+
+.kpi{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:19px;
+    box-shadow:0 4px 18px rgba(0,0,0,.025);
+    transition:.25s;
+}
+
+.kpi:hover{
+    transform:translateY(-2px);
+    box-shadow:var(--shadow);
+}
+
+.kpi-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.kpi-label{
+    font-size:11px;
+    color:var(--muted);
+    font-weight:500;
+}
+
+.kpi-icon{
+    width:31px;
+    height:31px;
+    border-radius:9px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+}
+
+.kpi-icon.gold{
+    background:var(--gold-soft);
+}
+
+.kpi-icon.green{
+    background:var(--green-soft);
+}
+
+.kpi-icon.red{
+    background:var(--red-soft);
+}
+
+.kpi-icon.orange{
+    background:var(--orange-soft);
+}
+
+.kpi-value{
+    font-size:25px;
+    font-weight:700;
+    margin-top:12px;
+    letter-spacing:-.5px;
+}
+
+.kpi-bottom{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    margin-top:7px;
+    font-size:10px;
+}
+
+.positive{
+    color:var(--green);
+}
+
+.negative{
+    color:var(--red);
+}
+
+.kpi-note{
+    color:#aaa69d;
+}
+
+/* =========================
+   GENERAL CARD
+========================= */
+
+.card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    box-shadow:0 4px 18px rgba(0,0,0,.025);
+}
+
+.card-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:19px 20px 0;
+}
+
+.card-title{
+    font-size:14px;
+    font-weight:700;
+}
+
+.card-subtitle{
+    font-size:10px;
+    color:var(--muted);
+    margin-top:3px;
+}
+
+.more-btn{
+    border:0;
+    background:transparent;
+    color:#88847b;
+    font-size:12px;
+}
+
+/* =========================
+   CHART SECTION
+========================= */
+
+.main-grid{
+    display:grid;
+    grid-template-columns:1.65fr 1fr;
+    gap:18px;
+    margin-bottom:18px;
+}
+
+.chart-card{
+    min-height:355px;
+}
+
+.chart-controls{
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+
+.chart-controls button{
+    border:1px solid transparent;
+    background:transparent;
+    color:var(--muted);
+    font-size:10px;
+    padding:5px 8px;
+    border-radius:7px;
+}
+
+.chart-controls button.active{
+    background:#f3f0e9;
+    color:#4e4a41;
+}
+
+.chart-wrap{
+    padding:20px 20px 16px;
+}
+
+.chart{
+    height:230px;
+    display:flex;
+    align-items:flex-end;
+    gap:9px;
+    border-bottom:1px solid var(--border);
+    position:relative;
+    padding:0 5px;
+}
+
+.chart-grid{
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    pointer-events:none;
+}
+
+.grid-line{
+    border-top:1px dashed #ece9e2;
+    width:100%;
+}
+
+.bar-group{
+    flex:1;
+    height:100%;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    position:relative;
+}
+
+.bar{
+    width:62%;
+    max-width:32px;
+    border-radius:6px 6px 0 0;
+    background:linear-gradient(180deg,#c9a65f,#a9803b);
+    position:relative;
+    z-index:2;
+    transition:.3s;
+}
+
+.bar:hover{
+    filter:brightness(1.08);
+}
+
+.bar-label{
+    position:absolute;
+    bottom:-22px;
+    font-size:9px;
+    color:#99958c;
+}
+
+.chart-legend{
+    display:flex;
+    justify-content:space-between;
+    margin-top:30px;
+    font-size:10px;
+    color:var(--muted);
+}
+
+/* =========================
+   SALES SUMMARY
+========================= */
+
+.sales-summary{
+    padding:20px;
+}
+
+.big-number{
+    font-size:28px;
+    font-weight:700;
+    margin-top:8px;
+}
+
+.summary-change{
+    font-size:10px;
+    color:var(--green);
+    margin-top:3px;
+}
+
+.mini-chart{
+    height:85px;
+    margin-top:17px;
+    display:flex;
+    align-items:flex-end;
+    gap:5px;
+}
+
+.mini-bar{
+    flex:1;
+    border-radius:4px 4px 0 0;
+    background:#dfd5bf;
+}
+
+.mini-bar.highlight{
+    background:#b49051;
+}
+
+/* =========================
+   INVENTORY
+========================= */
+
+.second-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:18px;
+    margin-bottom:18px;
+}
+
+.inventory-card{
+    padding-bottom:19px;
+}
+
+.inventory-content{
+    padding:20px;
+}
+
+.stock-total{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+}
+
+.stock-number{
+    font-size:26px;
+    font-weight:700;
+}
+
+.stock-unit{
+    font-size:10px;
+    color:var(--muted);
+}
+
+.stock-bars{
+    margin-top:20px;
+}
+
+.stock-row{
+    margin-bottom:13px;
+}
+
+.stock-row-top{
+    display:flex;
+    justify-content:space-between;
+    font-size:10px;
+    margin-bottom:5px;
+}
+
+.progress{
+    height:7px;
+    background:#efede7;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress span{
+    display:block;
+    height:100%;
+    border-radius:20px;
+    background:#b69251;
+}
+
+.progress.green span{
+    background:#668e70;
+}
+
+.progress.red span{
+    background:#bb6a65;
+}
+
+.progress.orange span{
+    background:#c48d4e;
+}
+
+/* =========================
+   ATTENTION
+========================= */
+
+.attention-list{
+    padding:12px 20px 20px;
+}
+
+.attention-item{
+    display:flex;
+    gap:11px;
+    padding:13px 0;
+    border-bottom:1px solid #efede8;
+}
+
+.attention-item:last-child{
+    border-bottom:0;
+}
+
+.attention-dot{
     width:8px;
     height:8px;
-
-    background:#38a169;
-
     border-radius:50%;
-
+    margin-top:5px;
+    flex-shrink:0;
 }
 
+.dot-red{background:#bd5b56}
+.dot-orange{background:#c58b47}
+.dot-green{background:#629071}
 
-.sync-text{
-
+.attention-title{
     font-size:11px;
-
     font-weight:600;
-
 }
 
-
-.sync-time{
-
+.attention-desc{
     font-size:9px;
-
-    color:#999;
-
-    margin-left:8px;
-
-}
-
-
-.sync-btn{
-
-    background:#fff;
-
-    border:1px solid #ddd;
-
-    border-radius:7px;
-
-    padding:7px 12px;
-
-    font-size:10px;
-
-    cursor:pointer;
-
-}
-
-
-.sync-btn:hover{
-
-    background:#f5f5f5;
-
-}
-
-
-/* =========================================
-   STATS
-========================================= */
-
-.stats{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:12px;
-
-    margin-bottom:18px;
-
-}
-
-
-.stat-card{
-
-    background:#fff;
-
-    border:1px solid #e8e8e5;
-
-    border-radius:10px;
-
-    padding:17px;
-
-}
-
-
-.stat-label{
-
-    color:#999;
-
-    font-size:9px;
-
-    letter-spacing:.7px;
-
-}
-
-
-.stat-value{
-
-    margin-top:8px;
-
-    font-size:21px;
-
-    font-weight:700;
-
-}
-
-
-/* =========================================
-   TABLE CARD
-========================================= */
-
-.table-card{
-
-    background:#fff;
-
-    border:1px solid #e5e5e2;
-
-    border-radius:10px;
-
-    overflow:hidden;
-
-}
-
-
-.table-header{
-
-    padding:15px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    border-bottom:1px solid #e9e9e6;
-
-}
-
-
-.table-title{
-
-    font-size:12px;
-
-    font-weight:700;
-
-}
-
-
-.table-sub{
-
-    font-size:9px;
-
-    color:#999;
-
+    color:var(--muted);
     margin-top:3px;
-
 }
 
+/* =========================
+   ORDERS
+========================= */
 
-.search{
-
-    width:190px;
-
-    border:1px solid #ddd;
-
-    border-radius:7px;
-
-    padding:8px 10px;
-
-    font-size:10px;
-
-    outline:none;
-
+.orders-card{
+    min-height:355px;
 }
 
-
-.search:focus{
-
-    border-color:#b89a5c;
-
-}
-
-
-.table-wrap{
-
-    overflow-x:auto;
-
-}
-
-
-table{
-
+.order-table{
     width:100%;
-
     border-collapse:collapse;
-
+    margin-top:17px;
 }
 
-
-th{
-
-    background:#fafaf8;
-
-    color:#777;
-
-    font-size:8px;
-
-    font-weight:600;
-
+.order-table th{
     text-align:left;
-
-    padding:11px;
-
-    white-space:nowrap;
-
-    border-bottom:1px solid #e5e5e2;
-
-}
-
-
-td{
-
+    padding:9px 20px;
+    color:#969188;
     font-size:9px;
-
-    padding:12px 11px;
-
-    border-bottom:1px solid #eeeeeb;
-
-    white-space:nowrap;
-
+    font-weight:600;
+    border-bottom:1px solid var(--border);
 }
 
-
-tr:hover td{
-
-    background:#fcfcfa;
-
+.order-table td{
+    padding:12px 20px;
+    border-bottom:1px solid #f0eee9;
+    font-size:10px;
 }
 
+.order-id{
+    font-weight:700;
+}
+
+.customer{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.customer-avatar{
+    width:25px;
+    height:25px;
+    border-radius:50%;
+    background:#ece6d8;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:8px;
+    font-weight:700;
+    color:#806b48;
+}
 
 .status{
-
-    display:inline-block;
-
-    background:#edf8f0;
-
-    color:#368151;
-
-    border-radius:20px;
-
-    padding:4px 7px;
-
-    font-size:7px;
-
+    display:inline-flex;
+    padding:5px 8px;
+    border-radius:7px;
+    font-size:8px;
     font-weight:600;
-
 }
 
-
-.item-id{
-
-    font-weight:700;
-
+.status.production{
+    background:#f5ead8;
+    color:#9a702e;
 }
 
-
-.empty{
-
-    padding:35px;
-
-    text-align:center;
-
-    color:#999;
-
-    font-size:11px;
-
+.status.ready{
+    background:#e7f1ea;
+    color:#477458;
 }
 
+.status.design{
+    background:#eceaf5;
+    color:#6b638f;
+}
 
-/* =========================================
-   MODAL
-========================================= */
+.status.overdue{
+    background:#fae7e5;
+    color:#a74e49;
+}
 
-.modal-overlay{
+/* =========================
+   AI INSIGHTS
+========================= */
 
-    position:fixed;
+.ai-card{
+    background:#211f1a;
+    color:white;
+    overflow:hidden;
+    position:relative;
+}
 
-    inset:0;
+.ai-card:before{
+    content:"";
+    position:absolute;
+    width:220px;
+    height:220px;
+    border:1px solid rgba(200,165,93,.12);
+    border-radius:50%;
+    right:-90px;
+    top:-100px;
+}
 
-    background:rgba(0,0,0,.55);
-
-    display:none;
-
-    align-items:center;
-
-    justify-content:center;
-
-    z-index:1000;
-
+.ai-header{
     padding:20px;
-
-}
-
-
-.modal-overlay.show{
-
     display:flex;
-
-}
-
-
-.modal{
-
-    width:min(900px,100%);
-
-    max-height:92vh;
-
-    overflow-y:auto;
-
-    background:#fff;
-
-    border-radius:14px;
-
-    box-shadow:
-        0 25px 80px rgba(0,0,0,.25);
-
-}
-
-
-.modal-header{
-
-    padding:20px 22px;
-
-    border-bottom:1px solid #eee;
-
-    display:flex;
-
     align-items:center;
-
-    justify-content:space-between;
-
-    position:sticky;
-
-    top:0;
-
-    background:#fff;
-
-    z-index:2;
-
-}
-
-
-.modal-title{
-
-    font-size:17px;
-
-    font-weight:700;
-
-}
-
-
-.modal-subtitle{
-
-    font-size:10px;
-
-    color:#999;
-
-    margin-top:4px;
-
-}
-
-
-.close-btn{
-
-    width:32px;
-    height:32px;
-
-    border:0;
-
-    border-radius:7px;
-
-    background:#f3f3f1;
-
-    cursor:pointer;
-
-    font-size:16px;
-
-}
-
-
-.form{
-
-    padding:22px;
-
-}
-
-
-.form-section{
-
-    margin-bottom:22px;
-
-}
-
-
-.form-section-title{
-
-    font-size:10px;
-
-    color:#a3844c;
-
-    letter-spacing:1.2px;
-
-    font-weight:700;
-
-    margin-bottom:12px;
-
-    padding-bottom:7px;
-
-    border-bottom:1px solid #eee;
-
-}
-
-
-.form-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
     gap:12px;
-
+    position:relative;
 }
 
-
-.field{
-
+.ai-symbol{
+    width:38px;
+    height:38px;
+    border-radius:12px;
+    background:rgba(194,155,84,.13);
+    border:1px solid rgba(194,155,84,.2);
     display:flex;
-
-    flex-direction:column;
-
-    gap:5px;
-
+    align-items:center;
+    justify-content:center;
+    color:#d6b16a;
 }
 
-
-.field.full{
-
-    grid-column:1/-1;
-
+.ai-title{
+    font-size:13px;
+    font-weight:700;
 }
 
-
-label{
-
+.ai-sub{
+    color:#858179;
     font-size:9px;
-
-    color:#666;
-
-    font-weight:600;
-
+    margin-top:3px;
 }
 
+.ai-content{
+    padding:0 20px 20px;
+}
 
-input,
-select,
-textarea{
+.insight{
+    border-top:1px solid rgba(255,255,255,.08);
+    padding:14px 0;
+}
 
-    width:100%;
+.insight-label{
+    color:#d0aa61;
+    font-size:9px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-weight:700;
+}
 
-    border:1px solid #ddd;
-
-    border-radius:7px;
-
-    padding:9px 10px;
-
+.insight-text{
+    color:#d8d5ce;
     font-size:10px;
-
-    outline:none;
-
-    background:#fff;
-
+    line-height:1.6;
+    margin-top:5px;
 }
 
-
-input:focus,
-select:focus,
-textarea:focus{
-
-    border-color:#b8995a;
-
-    box-shadow:
-        0 0 0 2px rgba(184,153,90,.08);
-
-}
-
-
-textarea{
-
-    min-height:70px;
-
-    resize:vertical;
-
-}
-
-
-.required{
-
-    color:#b23a3a;
-
-}
-
-
-.modal-footer{
-
-    border-top:1px solid #eee;
-
-    padding:15px 22px;
-
-    display:flex;
-
-    justify-content:flex-end;
-
-    gap:9px;
-
-    position:sticky;
-
-    bottom:0;
-
-    background:#fff;
-
-}
-
-
-.cancel-btn{
-
-    border:1px solid #ddd;
-
-    background:#fff;
-
-    padding:10px 16px;
-
-    border-radius:7px;
-
-    font-size:10px;
-
-    cursor:pointer;
-
-}
-
-
-.save-btn{
-
-    border:0;
-
-    background:#050505;
-
-    color:white;
-
-    padding:10px 18px;
-
-    border-radius:7px;
-
-    font-size:10px;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-}
-
-
-.save-btn:disabled{
-
-    opacity:.5;
-
-    cursor:not-allowed;
-
-}
-
-
-/* =========================================
-   TOAST
-========================================= */
-
-.toast{
-
-    position:fixed;
-
-    right:25px;
-
-    bottom:25px;
-
-    min-width:260px;
-
-    background:#161616;
-
-    color:white;
-
-    padding:13px 16px;
-
+.ai-btn{
+    margin-top:8px;
+    border:1px solid rgba(208,173,103,.3);
+    background:rgba(208,173,103,.08);
+    color:#d8b66f;
     border-radius:9px;
+    padding:9px 12px;
+    font-size:9px;
+}
 
+/* =========================
+   BRANCH
+========================= */
+
+.bottom-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:18px;
+}
+
+.branch-card{
+    padding-bottom:15px;
+}
+
+.branch-list{
+    padding:15px 20px;
+}
+
+.branch-row{
+    display:grid;
+    grid-template-columns:1.3fr .8fr .8fr;
+    align-items:center;
+    gap:12px;
+    padding:13px 0;
+    border-bottom:1px solid #efede8;
+}
+
+.branch-row:last-child{
+    border-bottom:0;
+}
+
+.branch-name{
+    font-size:11px;
+    font-weight:600;
+}
+
+.branch-location{
+    font-size:9px;
+    color:var(--muted);
+    margin-top:2px;
+}
+
+.branch-sales{
+    font-size:11px;
+    font-weight:700;
+    text-align:right;
+}
+
+.branch-change{
+    font-size:9px;
+    color:var(--green);
+    text-align:right;
+    margin-top:2px;
+}
+
+.rank{
+    width:23px;
+    height:23px;
+    border-radius:7px;
+    background:#f3efe5;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:9px;
+    font-weight:700;
+    color:#927644;
+}
+
+/* =========================
+   TOP PRODUCTS
+========================= */
+
+.product-list{
+    padding:15px 20px 20px;
+}
+
+.product{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:10px 0;
+}
+
+.product-image{
+    width:37px;
+    height:37px;
+    border-radius:10px;
+    background:linear-gradient(135deg,#eee6d5,#f8f5ed);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:17px;
+}
+
+.product-info{
+    flex:1;
+}
+
+.product-name{
     font-size:10px;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.2);
-
-    transform:
-        translateY(100px);
-
-    opacity:0;
-
-    transition:.25s;
-
-    z-index:2000;
-
+    font-weight:600;
 }
 
-
-.toast.show{
-
-    transform:
-        translateY(0);
-
-    opacity:1;
-
+.product-meta{
+    font-size:8px;
+    color:var(--muted);
+    margin-top:2px;
 }
 
-
-.toast.success{
-
-    border-left:3px solid #4ca66c;
-
-}
-
-
-.toast.error{
-
-    border-left:3px solid #d25b5b;
-
-}
-
-
-/* =========================================
-   LOADING
-========================================= */
-
-.loading{
-
-    text-align:center;
-
-    padding:30px;
-
-    color:#999;
-
+.product-price{
     font-size:10px;
-
+    font-weight:700;
 }
 
-
-/* =========================================
+/* =========================
    RESPONSIVE
-========================================= */
+========================= */
 
-@media(max-width:900px){
-
-    .stats{
-
-        grid-template-columns:
-            repeat(2,1fr);
-
+@media(max-width:1200px){
+    .kpi-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .form-grid{
-
-        grid-template-columns:
-            repeat(2,1fr);
-
+    .main-grid{
+        grid-template-columns:1fr;
     }
 
+    .second-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .bottom-grid{
+        grid-template-columns:1fr;
+    }
 }
 
-
-@media(max-width:700px){
-
+@media(max-width:850px){
     .sidebar{
-
-        width:70px;
-
+        transform:translateX(-100%);
     }
 
-    .brand-title,
-    .brand-sub,
-    .menu-title,
-    .menu-item span:not(.menu-icon),
-    .menu-arrow,
-    .user-name,
-    .user-role{
-
-        display:none;
-
+    .sidebar.open{
+        transform:translateX(0);
     }
 
     .main{
-
-        margin-left:70px;
-
-        width:calc(100% - 70px);
-
+        margin-left:0;
+        width:100%;
     }
 
-    .menu-item{
-
-        justify-content:center;
-
+    .mobile-menu{
+        display:block;
     }
 
-    .user-box{
-
-        justify-content:center;
-
+    .topbar{
+        padding:0 18px;
     }
 
-    .content{
-
-        padding:18px;
-
+    .dashboard{
+        padding:22px 18px 35px;
     }
 
-    .form-grid{
+    .gold-items{
+        display:none;
+    }
 
+    .second-grid{
         grid-template-columns:1fr;
-
     }
 
-    .stats{
-
-        grid-template-columns:1fr 1fr;
-
+    .welcome{
+        align-items:flex-start;
+        gap:15px;
+        flex-direction:column;
     }
-
-    .page-title{
-
-        font-size:21px;
-
-    }
-
 }
 
+@media(max-width:560px){
+    .page-title{
+        font-size:18px;
+    }
+
+    .page-date{
+        display:none;
+    }
+
+    .branch-select{
+        max-width:115px;
+    }
+
+    .kpi-grid{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .kpi{
+        padding:14px;
+    }
+
+    .kpi-value{
+        font-size:20px;
+    }
+
+    .gold-strip{
+        padding:14px;
+    }
+
+    .gold-value{
+        font-size:16px;
+    }
+
+    .chart{
+        gap:5px;
+    }
+
+    .order-table th:nth-child(3),
+    .order-table td:nth-child(3){
+        display:none;
+    }
+
+    .dashboard{
+        padding-left:12px;
+        padding-right:12px;
+    }
+
+    .topbar{
+        padding:0 12px;
+    }
+
+    .top-actions .icon-btn:nth-child(1){
+        display:none;
+    }
+}
 </style>
-
 </head>
-
 
 <body>
 
-
 <div class="app">
 
+<!-- ================= SIDEBAR ================= -->
 
-<!-- ======================================
-     SIDEBAR
-======================================= -->
+<aside class="sidebar" id="sidebar">
 
-<aside class="sidebar">
-
-
-<div class="brand">
-
-    <div class="brand-icon">
-        ✦
-    </div>
-
-    <div>
-
-        <div class="brand-title">
-            AURELIA ERP
+    <div class="brand">
+        <div class="brand-mark">A</div>
+        <div>
+            <div class="brand-name">AURELIA</div>
+            <div class="brand-sub">JEWELLERY MANAGEMENT</div>
         </div>
-
-        <div class="brand-sub">
-            JEWELLERY RETAIL SYSTEM
-        </div>
-
     </div>
 
-</div>
+    <div class="nav-section">Overview</div>
 
+    <nav class="nav">
 
-<div class="menu-section">
+        <button class="nav-item active">
+            <span class="nav-icon">⌂</span>
+            <span class="nav-label">Owner Dashboard</span>
+        </button>
 
-    <div class="menu-title">
-        MAIN
-    </div>
+        <button class="nav-item">
+            <span class="nav-icon">₹</span>
+            <span class="nav-label">Sales</span>
+        </button>
 
+        <button class="nav-item">
+            <span class="nav-icon">◈</span>
+            <span class="nav-label">Inventory</span>
+        </button>
 
-    <div class="menu-item">
+        <button class="nav-item">
+            <span class="nav-icon">◇</span>
+            <span class="nav-label">Orders</span>
+        </button>
 
-        <span class="menu-icon">⌂</span>
-        <span>Dashboard</span>
+        <button class="nav-item">
+            <span class="nav-icon">♙</span>
+            <span class="nav-label">Customers</span>
+        </button>
 
-    </div>
+    </nav>
 
+    <div class="nav-section" style="margin-top:25px;">Operations</div>
 
-    <div class="menu-item active">
+    <nav class="nav">
 
-        <span class="menu-icon">◇</span>
-        <span>Inventory</span>
+        <button class="nav-item">
+            <span class="nav-icon">◫</span>
+            <span class="nav-label">Purchases</span>
+        </button>
 
-        <span class="menu-arrow">›</span>
+        <button class="nav-item">
+            <span class="nav-icon">⚒</span>
+            <span class="nav-label">Manufacturing</span>
+        </button>
 
-    </div>
+        <button class="nav-item">
+            <span class="nav-icon">↻</span>
+            <span class="nav-label">Gold Exchange</span>
+        </button>
 
+        <button class="nav-item">
+            <span class="nav-icon">⚙</span>
+            <span class="nav-label">Repairs</span>
+        </button>
 
-    <div class="menu-item">
+    </nav>
 
-        <span class="menu-icon">◇</span>
-        <span>Products & Designs</span>
+    <div class="nav-section" style="margin-top:25px;">Business</div>
 
-    </div>
+    <nav class="nav">
 
+        <button class="nav-item">
+            <span class="nav-icon">▥</span>
+            <span class="nav-label">Reports</span>
+        </button>
 
-    <div class="menu-item">
+        <button class="nav-item">
+            <span class="nav-icon">▦</span>
+            <span class="nav-label">Branches</span>
+        </button>
 
-        <span class="menu-icon">⇄</span>
-        <span>Stock Transfers</span>
+        <button class="nav-item">
+            <span class="nav-icon">◉</span>
+            <span class="nav-label">Settings</span>
+        </button>
 
-    </div>
+    </nav>
 
+    <div class="sidebar-bottom">
 
-    <div class="menu-item">
-
-        <span class="menu-icon">⌕</span>
-        <span>Stock Verification</span>
-
-    </div>
-
-</div>
-
-
-<div class="menu-section">
-
-    <div class="menu-title">
-        CONTROL
-    </div>
-
-
-    <div class="menu-item">
-
-        <span class="menu-icon">▣</span>
-        <span>Stock Adjustments</span>
-
-    </div>
-
-
-    <div class="menu-item">
-
-        <span class="menu-icon">₹</span>
-        <span>Stock Valuation</span>
-
-    </div>
-
-
-    <div class="menu-item">
-
-        <span class="menu-icon">▤</span>
-        <span>Reports</span>
-
-    </div>
-
-</div>
-
-
-<div class="user-box">
-
-    <div class="user-avatar">
-        NP
-    </div>
-
-    <div>
-
-        <div class="user-name">
-            Nishanth Prabhu
-        </div>
-
-        <div class="user-role">
-            Administrator
+        <div class="owner-mini">
+            <div class="avatar">NP</div>
+            <div>
+                <div class="owner-name">Business Owner</div>
+                <div class="owner-role">Administrator</div>
+            </div>
         </div>
 
     </div>
-
-</div>
-
 
 </aside>
 
 
-
-<!-- ======================================
-     MAIN
-======================================= -->
+<!-- ================= MAIN ================= -->
 
 <main class="main">
 
+    <!-- TOPBAR -->
 
-<header class="topbar">
+    <header class="topbar">
 
-    <div class="location">
+        <div class="top-left">
 
-        <span>Location</span>
+            <button class="mobile-menu" onclick="toggleSidebar()">☰</button>
 
-        <strong>
-            Main Showroom
-        </strong>
+            <div>
+                <div class="page-title">Owner Dashboard</div>
+                <div class="page-date">Saturday, 29 August 2026</div>
+            </div>
 
-        <span>⌄</span>
-
-    </div>
-
-
-    <div class="top-actions">
-
-        <span class="top-icon">
-            ⌕
-        </span>
-
-        <span class="top-icon">
-            ♢
-        </span>
-
-        <span class="date"
-              id="currentDate">
-        </span>
-
-    </div>
-
-</header>
-
-
-
-<div class="content">
-
-
-<!-- PAGE HEADER -->
-
-<div class="page-header">
-
-    <div>
-
-        <div class="eyebrow">
-            PRODUCT MASTER
         </div>
 
-        <h1 class="page-title">
-            Products & Designs
-        </h1>
+        <div class="top-actions">
 
-        <div class="page-subtitle">
-            Jewellery designs and product masters.
+            <select class="branch-select">
+                <option>All Branches</option>
+                <option>Coimbatore</option>
+                <option>Chennai</option>
+                <option>Kochi</option>
+                <option>Bangalore</option>
+            </select>
+
+            <button class="icon-btn">⌕</button>
+
+            <button class="icon-btn">
+                ♧
+                <span class="notification-dot"></span>
+            </button>
+
         </div>
 
-    </div>
+    </header>
 
 
-    <button
-        class="primary-btn"
-        id="newDesignBtn">
+    <!-- DASHBOARD -->
 
-        + New Design
+    <section class="dashboard">
 
-    </button>
+        <!-- WELCOME -->
 
-</div>
+        <div class="welcome">
 
+            <div>
+                <h1>Good evening, Owner.</h1>
+                <p>Here's what's happening across your jewellery business today.</p>
+            </div>
 
+            <div class="date-filter">
+                <button>Today</button>
+                <button class="active">7 Days</button>
+                <button>30 Days</button>
+                <button>12 Months</button>
+            </div>
 
-<!-- SYNC -->
-
-<div class="sync-bar">
-
-    <div class="sync-left">
-
-        <span class="status-dot"></span>
-
-        <span class="sync-text">
-            Google Sheets Connected
-        </span>
-
-        <span class="sync-time">
-            Last Sync:
-            <span id="lastSync">
-                Never
-            </span>
-        </span>
-
-    </div>
-
-
-    <button
-        class="sync-btn"
-        id="syncBtn">
-
-        ↻ SYNC NOW
-
-    </button>
-
-</div>
-
-
-
-<!-- STATS -->
-
-<div class="stats">
-
-
-<div class="stat-card">
-
-    <div class="stat-label">
-        ACTIVE DESIGNS
-    </div>
-
-    <div
-        class="stat-value"
-        id="activeCount">
-
-        0
-
-    </div>
-
-</div>
-
-
-<div class="stat-card">
-
-    <div class="stat-label">
-        GOLD DESIGNS
-    </div>
-
-    <div
-        class="stat-value"
-        id="goldCount">
-
-        0
-
-    </div>
-
-</div>
-
-
-<div class="stat-card">
-
-    <div class="stat-label">
-        DIAMOND DESIGNS
-    </div>
-
-    <div
-        class="stat-value"
-        id="diamondCount">
-
-        0
-
-    </div>
-
-</div>
-
-
-<div class="stat-card">
-
-    <div class="stat-label">
-        NEW THIS MONTH
-    </div>
-
-    <div
-        class="stat-value"
-        id="newCount">
-
-        0
-
-    </div>
-
-</div>
-
-
-</div>
-
-
-
-<!-- PRODUCT TABLE -->
-
-<div class="table-card">
-
-
-<div class="table-header">
-
-    <div>
-
-        <div class="table-title">
-            Product Master
         </div>
 
-        <div class="table-sub">
-            Live data from Google Sheets
+
+        <!-- GOLD RATE -->
+
+        <div class="gold-strip">
+
+            <div class="gold-left">
+
+                <div class="gold-icon">✦</div>
+
+                <div>
+                    <div class="gold-title">Today's Gold Rate</div>
+                    <div class="gold-value">
+                        ₹13,285 <span>/ gram · 22K</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="gold-items">
+
+                <div class="gold-item">
+                    <div class="gold-item-label">24K GOLD</div>
+                    <div class="gold-item-value">
+                        ₹14,493 <span class="rate-up">↑ 0.4%</span>
+                    </div>
+                </div>
+
+                <div class="gold-item">
+                    <div class="gold-item-label">18K GOLD</div>
+                    <div class="gold-item-value">
+                        ₹10,867 <span class="rate-up">↑ 0.3%</span>
+                    </div>
+                </div>
+
+                <div class="gold-item">
+                    <div class="gold-item-label">SILVER</div>
+                    <div class="gold-item-value">
+                        ₹168.20 <span>/ g</span>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
 
-    </div>
+
+        <!-- KPI CARDS -->
+
+        <div class="kpi-grid">
+
+            <div class="kpi">
+
+                <div class="kpi-top">
+                    <div class="kpi-label">Today's Sales</div>
+                    <div class="kpi-icon gold">₹</div>
+                </div>
+
+                <div class="kpi-value">₹12.85 L</div>
+
+                <div class="kpi-bottom">
+                    <span class="positive">↑ 18.4%</span>
+                    <span class="kpi-note">vs yesterday</span>
+                </div>
+
+            </div>
 
 
-    <input
-        type="text"
-        id="searchInput"
-        class="search"
-        placeholder="Search item, design, product...">
+            <div class="kpi">
 
-</div>
+                <div class="kpi-top">
+                    <div class="kpi-label">Gold Sold</div>
+                    <div class="kpi-icon orange">◈</div>
+                </div>
 
+                <div class="kpi-value">342.5 g</div>
 
+                <div class="kpi-bottom">
+                    <span class="positive">↑ 11.8%</span>
+                    <span class="kpi-note">vs yesterday</span>
+                </div>
 
-<div
-    class="table-wrap"
-    id="tableContainer">
-
-    <div class="loading">
-        Loading product data...
-    </div>
-
-</div>
+            </div>
 
 
-</div>
+            <div class="kpi">
+
+                <div class="kpi-top">
+                    <div class="kpi-label">Customers</div>
+                    <div class="kpi-icon green">♙</div>
+                </div>
+
+                <div class="kpi-value">28</div>
+
+                <div class="kpi-bottom">
+                    <span class="positive">↑ 7 new</span>
+                    <span class="kpi-note">today</span>
+                </div>
+
+            </div>
 
 
-</div>
+            <div class="kpi">
 
+                <div class="kpi-top">
+                    <div class="kpi-label">Collections</div>
+                    <div class="kpi-icon green">✓</div>
+                </div>
+
+                <div class="kpi-value">₹9.45 L</div>
+
+                <div class="kpi-bottom">
+                    <span class="positive">↑ 8.6%</span>
+                    <span class="kpi-note">vs yesterday</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SALES CHART + SUMMARY -->
+
+        <div class="main-grid">
+
+            <div class="card chart-card">
+
+                <div class="card-header">
+
+                    <div>
+                        <div class="card-title">Sales Performance</div>
+                        <div class="card-subtitle">Revenue generated across all branches</div>
+                    </div>
+
+                    <div class="chart-controls">
+                        <button class="active">Sales</button>
+                        <button>Invoices</button>
+                        <button>Weight</button>
+                    </div>
+
+                </div>
+
+                <div class="chart-wrap">
+
+                    <div class="chart">
+
+                        <div class="chart-grid">
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                        </div>
+
+                        <div class="bar-group">
+                            <div class="bar" style="height:40%;"></div>
+                            <span class="bar-label">Mon</span>
+                        </div>
+
+                        <div class="bar-group">
+                            <div class="bar" style="height:55%;"></div>
+                            <span class="bar-label">Tue</span>
+                        </div>
+
+                        <div class="bar-group">
+                            <div class="bar" style="height:48%;"></div>
+                            <span class="bar-label">Wed</span>
+                        </div>
+
+                        <div class="bar-group">
+                            <div class="bar" style="height:70%;"></div>
+                            <span class="bar-label">Thu</span>
+                        </div>
+
+                        <div class="bar-group">
+                            <div class="bar" style="height:62%;"></div>
+                            <span class="bar-label">Fri</span>
+                        </div>
+
+                        <div class="bar-group">
+                            <div class="bar" style="height:85%;"></div>
+                            <span class="bar-label">Sat</span>
+                        </div>
+
+                        <div class="bar-group">
+                            <div class="bar" style="height:93%;"></div>
+                            <span class="bar-label">Today</span>
+                        </div>
+
+                    </div>
+
+                    <div class="chart-legend">
+                        <span>₹0</span>
+                        <span>₹5L</span>
+                        <span>₹10L</span>
+                        <span>₹15L</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SUMMARY -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <div>
+                        <div class="card-title">This Month</div>
+                        <div class="card-subtitle">Sales overview</div>
+                    </div>
+
+                    <button class="more-btn">•••</button>
+
+                </div>
+
+                <div class="sales-summary">
+
+                    <div class="big-number">₹84.6 L</div>
+
+                    <div class="summary-change">
+                        ↑ 12.8% compared with last month
+                    </div>
+
+                    <div class="mini-chart">
+
+                        <div class="mini-bar" style="height:45%;"></div>
+                        <div class="mini-bar" style="height:60%;"></div>
+                        <div class="mini-bar" style="height:52%;"></div>
+                        <div class="mini-bar" style="height:72%;"></div>
+                        <div class="mini-bar" style="height:68%;"></div>
+                        <div class="mini-bar highlight" style="height:90%;"></div>
+                        <div class="mini-bar highlight" style="height:96%;"></div>
+
+                    </div>
+
+                    <div style="display:flex;justify-content:space-between;margin-top:18px;">
+
+                        <div>
+                            <div style="font-size:9px;color:#999;">Avg. Bill</div>
+                            <div style="font-size:12px;font-weight:700;margin-top:3px;">₹46,280</div>
+                        </div>
+
+                        <div>
+                            <div style="font-size:9px;color:#999;">Invoices</div>
+                            <div style="font-size:12px;font-weight:700;margin-top:3px;">183</div>
+                        </div>
+
+                        <div>
+                            <div style="font-size:9px;color:#999;">Gold Sold</div>
+                            <div style="font-size:12px;font-weight:700;margin-top:3px;">2.84 kg</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- INVENTORY / ATTENTION / AI -->
+
+        <div class="second-grid">
+
+            <!-- INVENTORY -->
+
+            <div class="card inventory-card">
+
+                <div class="card-header">
+
+                    <div>
+                        <div class="card-title">Inventory Health</div>
+                        <div class="card-subtitle">Current stock position</div>
+                    </div>
+
+                    <button class="more-btn">View →</button>
+
+                </div>
+
+                <div class="inventory-content">
+
+                    <div class="stock-total">
+
+                        <div>
+                            <div class="stock-number">₹4.82 Cr</div>
+                            <div class="stock-unit">Total inventory value</div>
+                        </div>
+
+                        <div style="font-size:10px;color:#3f7657;">
+                            Healthy
+                        </div>
+
+                    </div>
+
+                    <div class="stock-bars">
+
+                        <div class="stock-row">
+                            <div class="stock-row-top">
+                                <span>Healthy Stock</span>
+                                <span>72%</span>
+                            </div>
+                            <div class="progress green">
+                                <span style="width:72%;"></span>
+                            </div>
+                        </div>
+
+                        <div class="stock-row">
+                            <div class="stock-row-top">
+                                <span>Slow Moving</span>
+                                <span>18%</span>
+                            </div>
+                            <div class="progress orange">
+                                <span style="width:18%;"></span>
+                            </div>
+                        </div>
+
+                        <div class="stock-row">
+                            <div class="stock-row-top">
+                                <span>Dead Stock</span>
+                                <span>10%</span>
+                            </div>
+                            <div class="progress red">
+                                <span style="width:10%;"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ATTENTION -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <div>
+                        <div class="card-title">Needs Your Attention</div>
+                        <div class="card-subtitle">Things requiring action</div>
+                    </div>
+
+                    <div style="font-size:9px;background:#fae8e6;color:#a54f4a;padding:5px 8px;border-radius:7px;">
+                        5 items
+                    </div>
+
+                </div>
+
+                <div class="attention-list">
+
+                    <div class="attention-item">
+                        <div class="attention-dot dot-red"></div>
+                        <div>
+                            <div class="attention-title">12 orders overdue</div>
+                            <div class="attention-desc">Delivery dates have passed.</div>
+                        </div>
+                    </div>
+
+                    <div class="attention-item">
+                        <div class="attention-dot dot-orange"></div>
+                        <div>
+                            <div class="attention-title">₹14.8L customer outstanding</div>
+                            <div class="attention-desc">38 customers have pending balances.</div>
+                        </div>
+                    </div>
+
+                    <div class="attention-item">
+                        <div class="attention-dot dot-red"></div>
+                        <div>
+                            <div class="attention-title">3 inventory mismatches</div>
+                            <div class="attention-desc">Physical stock differs from system.</div>
+                        </div>
+                    </div>
+
+                    <div class="attention-item">
+                        <div class="attention-dot dot-orange"></div>
+                        <div>
+                            <div class="attention-title">24 slow-moving products</div>
+                            <div class="attention-desc">No sale in the last 60 days.</div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- AI -->
+
+            <div class="card ai-card">
+
+                <div class="ai-header">
+
+                    <div class="ai-symbol">✦</div>
+
+                    <div>
+                        <div class="ai-title">Business Intelligence</div>
+                        <div class="ai-sub">Smart insights from your business</div>
+                    </div>
+
+                </div>
+
+                <div class="ai-content">
+
+                    <div class="insight">
+
+                        <div class="insight-label">Sales Insight</div>
+
+                        <div class="insight-text">
+                            Sales are <strong>12.8% higher</strong> this month, mainly driven by gold chains and diamond rings.
+                        </div>
+
+                    </div>
+
+                    <div class="insight">
+
+                        <div class="insight-label">Inventory Insight</div>
+
+                        <div class="insight-text">
+                            24 products have had no sale for 60+ days. Estimated inventory value: <strong>₹18.4L</strong>.
+                        </div>
+
+                    </div>
+
+                    <button class="ai-btn">
+                        Ask about my business →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ORDERS -->
+
+        <div class="card orders-card" style="margin-bottom:18px;">
+
+            <div class="card-header">
+
+                <div>
+                    <div class="card-title">Recent Custom Orders</div>
+                    <div class="card-subtitle">Latest jewellery orders requiring attention</div>
+                </div>
+
+                <button class="more-btn">View all →</button>
+
+            </div>
+
+            <table class="order-table">
+
+                <thead>
+                    <tr>
+                        <th>ORDER</th>
+                        <th>CUSTOMER</th>
+                        <th>ITEM</th>
+                        <th>VALUE</th>
+                        <th>STATUS</th>
+                        <th>DUE</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td class="order-id">#ORD-1042</td>
+
+                        <td>
+                            <div class="customer">
+                                <div class="customer-avatar">AK</div>
+                                Ananya Krishnan
+                            </div>
+                        </td>
+
+                        <td>Bridal Necklace</td>
+
+                        <td>₹4.85L</td>
+
+                        <td>
+                            <span class="status production">Production</span>
+                        </td>
+
+                        <td>02 Sep</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="order-id">#ORD-1051</td>
+
+                        <td>
+                            <div class="customer">
+                                <div class="customer-avatar">RS</div>
+                                Riya Sharma
+                            </div>
+                        </td>
+
+                        <td>Gold Bangles</td>
+
+                        <td>₹2.40L</td>
+
+                        <td>
+                            <span class="status ready">Ready</span>
+                        </td>
+
+                        <td>30 Aug</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="order-id">#ORD-1068</td>
+
+                        <td>
+                            <div class="customer">
+                                <div class="customer-avatar">PM</div>
+                                Priya Menon
+                            </div>
+                        </td>
+
+                        <td>Diamond Ring</td>
+
+                        <td>₹1.85L</td>
+
+                        <td>
+                            <span class="status design">Design</span>
+                        </td>
+
+                        <td>05 Sep</td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="order-id">#ORD-1039</td>
+
+                        <td>
+                            <div class="customer">
+                                <div class="customer-avatar">SV</div>
+                                Sneha Varma
+                            </div>
+                        </td>
+
+                        <td>Temple Necklace</td>
+
+                        <td>₹6.20L</td>
+
+                        <td>
+                            <span class="status overdue">Overdue</span>
+                        </td>
+
+                        <td>28 Aug</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- BOTTOM -->
+
+        <div class="bottom-grid">
+
+            <!-- BRANCHES -->
+
+            <div class="card branch-card">
+
+                <div class="card-header">
+
+                    <div>
+                        <div class="card-title">Branch Performance</div>
+                        <div class="card-subtitle">Sales performance this month</div>
+                    </div>
+
+                    <button class="more-btn">Compare →</button>
+
+                </div>
+
+                <div class="branch-list">
+
+                    <div class="branch-row">
+
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <div class="rank">1</div>
+                            <div>
+                                <div class="branch-name">Coimbatore</div>
+                                <div class="branch-location">Main Showroom</div>
+                            </div>
+                        </div>
+
+                        <div class="branch-sales">₹42.8L</div>
+
+                        <div>
+                            <div class="branch-sales">1.24kg</div>
+                            <div class="branch-change">↑ 18.2%</div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="branch-row">
+
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <div class="rank">2</div>
+                            <div>
+                                <div class="branch-name">Chennai</div>
+                                <div class="branch-location">Anna Nagar</div>
+                            </div>
+                        </div>
+
+                        <div class="branch-sales">₹31.4L</div>
+
+                        <div>
+                            <div class="branch-sales">890g</div>
+                            <div class="branch-change">↑ 12.6%</div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="branch-row">
+
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <div class="rank">3</div>
+                            <div>
+                                <div class="branch-name">Kochi</div>
+                                <div class="branch-location">MG Road</div>
+                            </div>
+                        </div>
+
+                        <div class="branch-sales">₹24.7L</div>
+
+                        <div>
+                            <div class="branch-sales">710g</div>
+                            <div class="branch-change">↑ 9.4%</div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="branch-row">
+
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <div class="rank">4</div>
+                            <div>
+                                <div class="branch-name">Bangalore</div>
+                                <div class="branch-location">Indiranagar</div>
+                            </div>
+                        </div>
+
+                        <div class="branch-sales">₹18.9L</div>
+
+                        <div>
+                            <div class="branch-sales">540g</div>
+                            <div class="branch-change">↑ 6.8%</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCTS -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <div>
+                        <div class="card-title">Top Selling Products</div>
+                        <div class="card-subtitle">Best performers this month</div>
+                    </div>
+
+                    <button class="more-btn">View all →</button>
+
+                </div>
+
+                <div class="product-list">
+
+                    <div class="product">
+
+                        <div class="product-image">📿</div>
+
+                        <div class="product-info">
+                            <div class="product-name">Diamond Bridal Necklace</div>
+                            <div class="product-meta">12 units · 22K Gold</div>
+                        </div>
+
+                        <div class="product-price">₹8.2L</div>
+
+                    </div>
+
+
+                    <div class="product">
+
+                        <div class="product-image">💛</div>
+
+                        <div class="product-info">
+                            <div class="product-name">Traditional Gold Bangle</div>
+                            <div class="product-meta">24 units · 22K Gold</div>
+                        </div>
+
+                        <div class="product-price">₹5.6L</div>
+
+                    </div>
+
+
+                    <div class="product">
+
+                        <div class="product-image">💍</div>
+
+                        <div class="product-info">
+                            <div class="product-name">Solitaire Diamond Ring</div>
+                            <div class="product-meta">9 units · 18K Gold</div>
+                        </div>
+
+                        <div class="product-price">₹4.8L</div>
+
+                    </div>
+
+
+                    <div class="product">
+
+                        <div class="product-image">⛓</div>
+
+                        <div class="product-info">
+                            <div class="product-name">Classic Gold Chain</div>
+                            <div class="product-meta">31 units · 22K Gold</div>
+                        </div>
+
+                        <div class="product-price">₹3.9L</div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
 
 </main>
 
-
 </div>
-
-
-
-<!-- ======================================
-     NEW DESIGN MODAL
-======================================= -->
-
-<div
-    class="modal-overlay"
-    id="modalOverlay">
-
-
-<div class="modal">
-
-
-<div class="modal-header">
-
-    <div>
-
-        <div class="modal-title">
-            Create New Design
-        </div>
-
-        <div class="modal-subtitle">
-            Add a new jewellery item to Product Master
-        </div>
-
-    </div>
-
-
-    <button
-        class="close-btn"
-        id="closeModal">
-
-        ×
-
-    </button>
-
-</div>
-
-
-
-<form
-    class="form"
-    id="productForm">
-
-
-<!-- BASIC INFORMATION -->
-
-<div class="form-section">
-
-<div class="form-section-title">
-    BASIC INFORMATION
-</div>
-
-
-<div class="form-grid">
-
-
-<div class="field">
-
-<label>
-    Item ID <span class="required">*</span>
-</label>
-
-<input
-    name="Item_ID"
-    required
-    placeholder="AU-NK-0004">
-
-</div>
-
-
-<div class="field">
-
-<label>
-    Barcode <span class="required">*</span>
-</label>
-
-<input
-    name="Barcode"
-    required
-    placeholder="890000000004">
-
-</div>
-
-
-<div class="field">
-
-<label>
-    Design Code
-</label>
-
-<input
-    name="Design_Code"
-    placeholder="NK-246">
-
-</div>
-
-
-<div class="field">
-
-<label>
-    Product Name
-</label>
-
-<input
-    name="Product_Name"
-    placeholder="Gold Necklace">
-
-</div>
-
-
-<div class="field">
-
-<label>
-    Category
-</label>
-
-<select name="Category">
-
-<option value="Necklace">
-    Necklace
-</option>
-
-<option value="Ring">
-    Ring
-</option>
-
-<option value="Bangle">
-    Bangle
-</option>
-
-<option value="Earring">
-    Earring
-</option>
-
-<option value="Chain">
-    Chain
-</option>
-
-<option value="Pendant">
-    Pendant
-</option>
-
-<option value="Bracelet">
-    Bracelet
-</option>
-
-<option value="Other">
-    Other
-</option>
-
-</select>
-
-</div>
-
-
-<div class="field">
-
-<label>
-    Sub Category
-</label>
-
-<input
-    name="Sub_Category"
-    placeholder="Traditional">
-
-</div>
-
-
-<div class="field">
-
-<label>
-    Metal
-</label>
-
-<select name="Metal">
-
-<option value="Gold">
-    Gold
-</option>
-
-<option value="Silver">
-    Silver
-</option>
-
-<option value="Platinum">
-    Platinum
-</option>
-
-<option value="Diamond">
-    Diamond
-</option>
-
-</select>
-
-</div>
-
-
-<div class="field">
-
-<label>
-    Purity
-</label>
-
-<select name="Purity">
-
-<option value="22K">
-    22K
-</option>
-
-<option value="18K">
-    18K
-</option>
-
-<option value="14K">
-    14K
-</option>
-
-<option value="24K">
-    24K
-</option>
-
-</select>
-
-</div>
-
-
-</div>
-
-</div>
-
-
-
-<!-- WEIGHT -->
-
-<div class="form-section">
-
-<div class="form-section-title">
-    WEIGHT DETAILS — GRAMS
-</div>
-
-
-<div class="form-grid">
-
-
-<div class="field">
-
-<label>
-    Gross Weight
-</label>
-
-<input
-    type="number"
-    step="0.001"
-    name="Gross_Weight_g"
-    placeholder="52.350">
-
-</div>
-
-
-<div class="field">
-
-<label>
-    Stone Weight
-</label>
-
-<input
-    type="number"
-    step="0.001"
-    name="Stone_Weight_g"
-    placeholder="1.850">
-
-</div>
-
-
-<div class="field">
-
-<label>
-    Other Weight
-</label>
-
-<input
-    type="number"
-    step="0.001"
-    name="Other_Weight_g"
-    placeholder="0.000">
-
-</div>
-
-
-<div class="field">
-
-<label>
-    Net Weight
-</label>
-
-<input
-    type="number"
-    step="0.001"
-    name="Net_Weight_g"
-    placeholder="50.500">
-
-</div>
-
-
-</div>
-
-</div>
-
-
-
-<!-- IDENTIFICATION -->
-
-<div class="form-section">
-
-<div class="form-section-title">
-    IDENTIFICATION & CERTIFICATION
-</div>
-
-
-<div class="form-grid">
-
-
-<div class="field">
-
-<label>
-    HUID
-</label>
-
-<input
-    name="HUID"
-    placeholder="ABC123456789">
-
-</div>
-
-
-<div class="field">
-
-<label>
-    Certificate No.
-</label>
-
-<input
-    name="Certificate_No"
-    placeholder="CERT-004">
-
-</div>
-
-
-<div class="field">
-
-<label>
-    Status
-</label>
-
-<select name="Status">
-
-<option value="AVAILABLE">
-    AVAILABLE
-</option>
-
-<option value="RESERVED">
-    RESERVED
-</option>
-
-<option value="SOLD">
-    SOLD
-</option>
-
-<option value="HOLD">
-    HOLD
-</option>
-
-<option value="REPAIR">
-    REPAIR
-</option>
-
-</select>
-
-</div>
-
-
-</div>
-
-</div>
-
-
-
-<!-- LOCATION -->
-
-<div class="form-section">
-
-<div class="form-section-title">
-    STOCK LOCATION
-</div>
-
-
-<div class="form-grid">
-
-
-<div class="field">
-
-<label>
-    Branch
-</label>
-
-<input
-    name="Branch"
-    value="Main Showroom">
-
-</div>
-
-
-<div class="field">
-
-<label>
-    Location
-</label>
-
-<input
-    name="Location"
-    value="Gold Counter">
-
-</div>
-
-
-<div class="field">
-
-<label>
-    Rack
-</label>
-
-<input
-    name="Rack"
-    placeholder="R1">
-
-</div>
-
-
-<div class="field">
-
-<label>
-    Tray
-</label>
-
-<input
-    name="Tray"
-    placeholder="T1">
-
-</div>
-
-
-</div>
-
-</div>
-
-
-
-<!-- PRICING -->
-
-<div class="form-section">
-
-<div class="form-section-title">
-    PRICING & GST
-</div>
-
-
-<div class="form-grid">
-
-
-<div class="field">
-
-<label>
-    Gold Rate / gram
-</label>
-
-<input
-    type="number"
-    step="0.01"
-    name="Gold_Rate"
-    placeholder="12500">
-
-</div>
-
-
-<div class="field">
-
-<label>
-    Making Charge
-</label>
-
-<input
-    type="number"
-    step="0.01"
-    name="Making_Charge"
-    placeholder="8500">
-
-</div>
-
-
-<div class="field">
-
-<label>
-    Wastage %
-</label>
-
-<input
-    type="number"
-    step="0.01"
-    name="Wastage_Percent"
-    placeholder="3">
-
-</div>
-
-
-<div class="field">
-
-<label>
-    Stone Value
-</label>
-
-<input
-    type="number"
-    step="0.01"
-    name="Stone_Value"
-    placeholder="12000">
-
-</div>
-
-
-<div class="field">
-
-<label>
-    Other Charges
-</label>
-
-<input
-    type="number"
-    step="0.01"
-    name="Other_Charges"
-    placeholder="500">
-
-</div>
-
-
-<div class="field">
-
-<label>
-    Selling Price
-</label>
-
-<input
-    type="number"
-    step="0.01"
-    name="Selling_Price"
-    placeholder="760000">
-
-</div>
-
-
-<div class="field">
-
-<label>
-    GST Rate %
-</label>
-
-<select name="GST_Rate">
-
-<option value="3">
-    3%
-</option>
-
-<option value="5">
-    5%
-</option>
-
-<option value="18">
-    18%
-</option>
-
-</select>
-
-</div>
-
-
-</div>
-
-</div>
-
-
-
-<!-- OTHER -->
-
-<div class="form-section">
-
-<div class="form-section-title">
-    ADDITIONAL INFORMATION
-</div>
-
-
-<div class="form-grid">
-
-
-<div class="field full">
-
-<label>
-    Image URL
-</label>
-
-<input
-    name="Image_URL"
-    placeholder="https://...">
-
-</div>
-
-
-<div class="field full">
-
-<label>
-    Remarks
-</label>
-
-<textarea
-    name="Remarks"
-    placeholder="Additional notes..."></textarea>
-
-</div>
-
-
-</div>
-
-</div>
-
-
-</form>
-
-
-
-<div class="modal-footer">
-
-<button
-    class="cancel-btn"
-    id="cancelBtn">
-
-    Cancel
-
-</button>
-
-
-<button
-    class="save-btn"
-    id="saveBtn">
-
-    Save Design
-
-</button>
-
-</div>
-
-
-</div>
-
-</div>
-
-
-
-<!-- TOAST -->
-
-<div
-    class="toast"
-    id="toast">
-
-</div>
-
 
 
 <script>
 
+/* =========================
+   MOBILE SIDEBAR
+========================= */
 
-/* =========================================
-   GOOGLE APPS SCRIPT URL
-========================================= */
-
-
-/*
-   IMPORTANT:
-
-   Replace this with your deployed
-   Google Apps Script Web App URL.
-*/
-
-const API_URL =
-    "https://script.google.com/macros/s/AKfycbztZD8xpihRAH_T3VeF-hV0XKum9effhIt8RVxZWCT2F1aspI7JkIVRPOFz1Lb0juWwmw/exec";
-
-
-/* =========================================
-   GLOBAL DATA
-========================================= */
-
-let products = [];
-
-
-
-/* =========================================
-   ELEMENTS
-========================================= */
-
-const modal =
-    document.getElementById("modalOverlay");
-
-const newDesignBtn =
-    document.getElementById("newDesignBtn");
-
-const closeModal =
-    document.getElementById("closeModal");
-
-const cancelBtn =
-    document.getElementById("cancelBtn");
-
-const productForm =
-    document.getElementById("productForm");
-
-const saveBtn =
-    document.getElementById("saveBtn");
-
-const syncBtn =
-    document.getElementById("syncBtn");
-
-const searchInput =
-    document.getElementById("searchInput");
-
-
-
-/* =========================================
-   DATE
-========================================= */
-
-function updateDate(){
-
-    const now = new Date();
-
-    document.getElementById(
-        "currentDate"
-    ).textContent =
-        now.toLocaleDateString(
-            "en-IN",
-            {
-                day:"2-digit",
-                month:"short",
-                year:"numeric"
-            }
-        );
-
-}
-
-updateDate();
-
-
-
-/* =========================================
-   MODAL
-========================================= */
-
-newDesignBtn.addEventListener(
-    "click",
-    openModal
-);
-
-
-closeModal.addEventListener(
-    "click",
-    closeModalWindow
-);
-
-
-cancelBtn.addEventListener(
-    "click",
-    closeModalWindow
-);
-
-
-modal.addEventListener(
-    "click",
-    function(e){
-
-        if(e.target === modal){
-
-            closeModalWindow();
-
-        }
-
-    }
-);
-
-
-function openModal(){
-
-    modal.classList.add("show");
-
+function toggleSidebar(){
+    document.getElementById("sidebar").classList.toggle("open");
 }
 
 
-function closeModalWindow(){
+/* =========================
+   NAVIGATION
+========================= */
 
-    modal.classList.remove("show");
+document.querySelectorAll(".nav-item").forEach(item => {
 
-}
+    item.addEventListener("click", function(){
 
+        document.querySelectorAll(".nav-item")
+            .forEach(nav => nav.classList.remove("active"));
 
-
-/* =========================================
-   TOAST
-========================================= */
-
-function showToast(
-    message,
-    type = "success"
-){
-
-    const toast =
-        document.getElementById("toast");
-
-    toast.textContent = message;
-
-    toast.className =
-        "toast show " + type;
-
-    setTimeout(
-        function(){
-
-            toast.classList.remove("show");
-
-        },
-        3500
-    );
-
-}
-
-
-
-/* =========================================
-   LOAD PRODUCTS
-========================================= */
-
-function jsonpRequest(params, timeoutMs = 15000){
-
-    return new Promise((resolve, reject) => {
-
-        if(!API_URL || API_URL.includes("PASTE_YOUR")){
-            reject(new Error("Apps Script URL is not configured"));
-            return;
-        }
-
-        const callbackName =
-            "aureliaCallback_" +
-            Date.now() + "_" +
-            Math.floor(Math.random() * 100000);
-
-        const script = document.createElement("script");
-        let finished = false;
-
-        const cleanup = () => {
-            finished = true;
-            clearTimeout(timer);
-            delete window[callbackName];
-            if(script.parentNode){
-                script.parentNode.removeChild(script);
-            }
-        };
-
-        const timer = setTimeout(() => {
-            if(finished) return;
-            cleanup();
-            reject(new Error("Google Apps Script request timed out. Please check the deployment and access settings."));
-        }, timeoutMs);
-
-        window[callbackName] = (result) => {
-            if(finished) return;
-            cleanup();
-            resolve(result);
-        };
-
-        script.onerror = () => {
-            if(finished) return;
-            cleanup();
-            reject(new Error("Could not connect to the AURELIA Google Apps Script."));
-        };
-
-        const query = new URLSearchParams(params);
-        query.set("callback", callbackName);
-        query.set("_", Date.now().toString());
-
-        script.src = API_URL + "?" + query.toString();
-        document.body.appendChild(script);
+        this.classList.add("active");
 
     });
-}
-
-
-async function loadProducts(){
-
-    const table =
-        document.getElementById("tableContainer");
-
-    table.innerHTML =
-        '<div class="loading">Loading product data...</div>';
-
-    try{
-
-        const result = await jsonpRequest({
-            action: "products"
-        });
-
-        if(!result || !result.success){
-            throw new Error(
-                (result && result.message) ||
-                "Unable to load products"
-            );
-        }
-
-        products = result.data || [];
-
-        renderProducts(products);
-        updateStats(products);
-
-        document.getElementById("lastSync").textContent =
-            new Date().toLocaleTimeString("en-IN", {
-                hour:"2-digit",
-                minute:"2-digit"
-            });
-
-    }
-    catch(error){
-
-        table.innerHTML = `
-            <div class="empty">
-                Unable to load Google Sheets data.<br><br>
-                ${escapeHtml(error.message)}
-            </div>
-        `;
-
-        showToast(error.message, "error");
-
-    }
-}
-
-
-/* =========================================
-   RENDER PRODUCTS
-========================================= */
-
-function renderProducts(
-    data
-){
-
-    const table =
-        document.getElementById(
-            "tableContainer"
-        );
-
-
-    if(!data.length){
-
-        table.innerHTML = `
-            <div class="empty">
-                No jewellery products found.
-            </div>
-        `;
-
-        return;
-
-    }
-
-
-    let html = `
-
-    <table>
-
-    <thead>
-
-    <tr>
-
-        <th>ITEM ID</th>
-        <th>DESIGN</th>
-        <th>PRODUCT</th>
-        <th>CATEGORY</th>
-        <th>PURITY</th>
-        <th>GROSS WT.</th>
-        <th>NET WT.</th>
-        <th>BRANCH</th>
-        <th>STATUS</th>
-
-    </tr>
-
-    </thead>
-
-    <tbody>
-    `;
-
-
-    data.forEach(
-        function(item){
-
-            html += `
-
-            <tr>
-
-                <td class="item-id">
-                    ${escapeHtml(
-                        item.Item_ID
-                    )}
-                </td>
-
-                <td>
-                    ${escapeHtml(
-                        item.Design_Code
-                    )}
-                </td>
-
-                <td>
-                    ${escapeHtml(
-                        item.Product_Name
-                    )}
-                </td>
-
-                <td>
-                    ${escapeHtml(
-                        item.Category
-                    )}
-                </td>
-
-                <td>
-                    ${escapeHtml(
-                        item.Purity
-                    )}
-                </td>
-
-                <td>
-                    ${formatWeight(
-                        item.Gross_Weight_g
-                    )}
-                </td>
-
-                <td>
-                    <strong>
-                        ${formatWeight(
-                            item.Net_Weight_g
-                        )}
-                    </strong>
-                </td>
-
-                <td>
-                    ${escapeHtml(
-                        item.Branch
-                    )}
-                </td>
-
-                <td>
-                    <span class="status">
-                        ${escapeHtml(
-                            item.Status ||
-                            "AVAILABLE"
-                        )}
-                    </span>
-                </td>
-
-            </tr>
-
-            `;
-
-        }
-    );
-
-
-    html += `
-
-    </tbody>
-
-    </table>
-
-    `;
-
-
-    table.innerHTML = html;
-
-}
-
-
-
-/* =========================================
-   STATS
-========================================= */
-
-function updateStats(
-    data
-){
-
-    const active =
-        data.filter(
-            item =>
-                String(
-                    item.Status
-                ).toUpperCase() !== "SOLD"
-        ).length;
-
-
-    const gold =
-        data.filter(
-            item =>
-                String(
-                    item.Metal
-                ).toLowerCase() === "gold"
-        ).length;
-
-
-    const diamond =
-        data.filter(
-            item =>
-                String(
-                    item.Metal
-                ).toLowerCase() === "diamond" ||
-                String(
-                    item.Category
-                ).toLowerCase() === "diamond"
-        ).length;
-
-
-    const currentMonth =
-        new Date().getMonth();
-
-
-    const currentYear =
-        new Date().getFullYear();
-
-
-    const newThisMonth =
-        data.filter(
-            item => {
-
-                if(!item.Created_Date){
-                    return false;
-                }
-
-                const d =
-                    new Date(
-                        item.Created_Date
-                    );
-
-                return (
-                    d.getMonth() ===
-                    currentMonth
-                    &&
-                    d.getFullYear() ===
-                    currentYear
-                );
-
-            }
-        ).length;
-
-
-    document.getElementById(
-        "activeCount"
-    ).textContent = active;
-
-
-    document.getElementById(
-        "goldCount"
-    ).textContent = gold;
-
-
-    document.getElementById(
-        "diamondCount"
-    ).textContent = diamond;
-
-
-    document.getElementById(
-        "newCount"
-    ).textContent = newThisMonth;
-
-}
-
-
-
-/* =========================================
-   SEARCH
-========================================= */
-
-searchInput.addEventListener(
-    "input",
-    function(){
-
-        const q =
-            this.value
-                .trim()
-                .toLowerCase();
-
-
-        if(!q){
-
-            renderProducts(
-                products
-            );
-
-            return;
-
-        }
-
-
-        const filtered =
-            products.filter(
-                item => {
-
-                    return [
-
-                        item.Item_ID,
-
-                        item.Barcode,
-
-                        item.Design_Code,
-
-                        item.Product_Name,
-
-                        item.Category,
-
-                        item.Sub_Category,
-
-                        item.Purity,
-
-                        item.HUID
-
-                    ]
-                    .join(" ")
-                    .toLowerCase()
-                    .includes(q);
-
-                }
-            );
-
-
-        renderProducts(
-            filtered
-        );
-
-    }
-);
-
-
-
-/* =========================================
-   SYNC
-========================================= */
-
-syncBtn.addEventListener(
-    "click",
-    async function(){
-
-        syncBtn.disabled = true;
-
-        syncBtn.textContent =
-            "↻ SYNCING...";
-
-
-        await loadProducts();
-
-
-        syncBtn.disabled = false;
-
-        syncBtn.textContent =
-            "↻ SYNC NOW";
-
-    }
-);
-
-
-
-/* =========================================
-   SAVE NEW DESIGN
-========================================= */
-
-saveBtn.addEventListener(
-    "click",
-    saveProduct
-);
-
-
-async function saveProduct(){
-
-    if(!productForm.checkValidity()){
-        productForm.reportValidity();
-        return;
-    }
-
-    const formData = new FormData(productForm);
-    const params = {};
-
-    for(const [key, value] of formData.entries()){
-        params[key] = value;
-    }
-
-    params.action = "createProduct";
-
-    saveBtn.disabled = true;
-    saveBtn.textContent = "Saving...";
-
-    try{
-
-        const result = await jsonpRequest(params, 20000);
-
-        if(!result || !result.success){
-            throw new Error(
-                (result && result.message) ||
-                "Could not save design"
-            );
-        }
-
-        showToast(
-            "✓ Design saved to PRODUCT_MASTER",
-            "success"
-        );
-
-        productForm.reset();
-
-        // Restore sensible defaults after reset.
-        const status = productForm.elements["Status"];
-        const branch = productForm.elements["Branch"];
-        const location = productForm.elements["Location"];
-        const gst = productForm.elements["GST_Rate"];
-
-        if(status) status.value = "AVAILABLE";
-        if(branch) branch.value = "Main Showroom";
-        if(location) location.value = "Gold Counter";
-        if(gst) gst.value = "3";
-
-        closeModalWindow();
-
-        // Pull the newly written row back from Google Sheets.
-        await loadProducts();
-
-    }
-    catch(error){
-
-        showToast(error.message, "error");
-
-    }
-    finally{
-
-        saveBtn.disabled = false;
-        saveBtn.textContent = "Save Design";
-
-    }
-}
-
-
-/* =========================================
-   FORMAT WEIGHT
-========================================= */
-
-function formatWeight(
-    value
-){
-
-    if(
-        value === undefined ||
-        value === null ||
-        value === ""
-    ){
-
-        return "-";
-
-    }
-
-
-    const n =
-        Number(value);
-
-
-    if(
-        Number.isNaN(n)
-    ){
-
-        return escapeHtml(
-            value
-        );
-
-    }
-
-
-    return (
-        n.toFixed(3) +
-        " g"
-    );
-
-}
-
-
-
-/* =========================================
-   HTML ESCAPE
-========================================= */
-
-function escapeHtml(
-    value
-){
-
-    if(
-        value === undefined ||
-        value === null
-    ){
-
-        return "";
-
-    }
-
-
-    return String(value)
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
-
-
-
-/* =========================================
-   AUTO CALCULATE NET WEIGHT
-========================================= */
-
-function calculateNetWeight(){
-
-    const gross = Number(
-        productForm.elements["Gross_Weight_g"].value
-    ) || 0;
-
-    const stone = Number(
-        productForm.elements["Stone_Weight_g"].value
-    ) || 0;
-
-    const other = Number(
-        productForm.elements["Other_Weight_g"].value
-    ) || 0;
-
-    const net = Math.max(
-        0,
-        gross - stone - other
-    );
-
-    productForm.elements["Net_Weight_g"].value =
-        net ? net.toFixed(3) : "";
-}
-
-[
-    "Gross_Weight_g",
-    "Stone_Weight_g",
-    "Other_Weight_g"
-].forEach(name => {
-
-    productForm.elements[name].addEventListener(
-        "input",
-        calculateNetWeight
-    );
 
 });
 
 
-/* =========================================
-   START
-========================================= */
+/* =========================
+   DATE FILTER
+========================= */
 
-loadProducts();
+document.querySelectorAll(".date-filter button").forEach(button => {
+
+    button.addEventListener("click", function(){
+
+        document.querySelectorAll(".date-filter button")
+            .forEach(btn => btn.classList.remove("active"));
+
+        this.classList.add("active");
+
+    });
+
+});
+
+
+/* =========================
+   CHART CONTROLS
+========================= */
+
+document.querySelectorAll(".chart-controls button").forEach(button => {
+
+    button.addEventListener("click", function(){
+
+        document.querySelectorAll(".chart-controls button")
+            .forEach(btn => btn.classList.remove("active"));
+
+        this.classList.add("active");
+
+    });
+
+});
+
+
+/* =========================
+   GOLD RATE DEMO
+========================= */
+
+const goldRates = {
+    "22K": "₹13,285",
+    "24K": "₹14,493",
+    "18K": "₹10,867"
+};
 
 </script>
 
-
 </body>
-
 </html>
