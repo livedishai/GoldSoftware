@@ -1,0 +1,2019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AURELIA ERP — Jewellery Retail System</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Inter, Arial, sans-serif;
+    background: #f6f6f4;
+    color: #171717;
+}
+
+button,
+input,
+select {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 218px;
+    background: #171715;
+    color: white;
+    padding: 25px 14px;
+    z-index: 10;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 0 8px 25px;
+    border-bottom: 1px solid #30302d;
+}
+
+.brand-icon {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #b99954;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d2b56b;
+    font-size: 19px;
+}
+
+.brand-name {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: .5px;
+}
+
+.brand-sub {
+    font-size: 8px;
+    color: #888;
+    margin-top: 4px;
+    letter-spacing: .6px;
+}
+
+.section-title {
+    color: #666662;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    margin: 29px 5px 10px;
+}
+
+.nav-item {
+    height: 38px;
+    padding: 0 13px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: #a9a9a5;
+    border-radius: 9px;
+    font-size: 12px;
+    margin-bottom: 3px;
+    transition: .2s;
+}
+
+.nav-item:hover {
+    background: #252522;
+    color: white;
+}
+
+.nav-item.active {
+    background: #2a2a27;
+    color: white;
+}
+
+.nav-icon {
+    width: 12px;
+    text-align: center;
+    color: #a5a5a0;
+}
+
+.nav-arrow {
+    margin-left: auto;
+    font-size: 10px;
+}
+
+.user-box {
+    position: absolute;
+    bottom: 18px;
+    left: 14px;
+    right: 14px;
+    border-top: 1px solid #30302d;
+    padding-top: 14px;
+    display: flex;
+    gap: 9px;
+    align-items: center;
+}
+
+.avatar {
+    width: 31px;
+    height: 31px;
+    border-radius: 50%;
+    background: #282823;
+    color: #b99954;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+}
+
+.user-name {
+    font-size: 11px;
+    color: white;
+}
+
+.user-role {
+    font-size: 9px;
+    color: #777;
+    margin-top: 3px;
+}
+
+/* ================= MAIN ================= */
+
+.main {
+    margin-left: 218px;
+    min-height: 100vh;
+}
+
+.topbar {
+    height: 72px;
+    background: white;
+    border-bottom: 1px solid #e5e5e2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 27px;
+}
+
+.location {
+    font-size: 10px;
+    color: #888;
+}
+
+.location strong {
+    color: #1d1d1d;
+    margin-left: 8px;
+    font-size: 11px;
+}
+
+.top-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 12px;
+    color: #777;
+}
+
+.content {
+    padding: 28px;
+}
+
+.page-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 23px;
+}
+
+.eyebrow {
+    color: #a0844b;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 25px;
+    letter-spacing: -1px;
+}
+
+.subtitle {
+    color: #888;
+    font-size: 11px;
+    margin-top: 7px;
+}
+
+.new-btn {
+    background: #050505;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    padding: 11px 17px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.new-btn:hover {
+    background: #292929;
+}
+
+/* ================= CONNECTION ================= */
+
+.connection {
+    background: white;
+    border: 1px solid #e6e6e3;
+    border-radius: 11px;
+    padding: 13px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 17px;
+}
+
+.connection-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #aaa;
+}
+
+.status-dot.connected {
+    background: #3c9b62;
+}
+
+.status-dot.error {
+    background: #c94d4d;
+}
+
+.connection-text {
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.sync-time {
+    color: #999;
+    font-size: 10px;
+    margin-left: 7px;
+}
+
+.sync-btn {
+    border: 1px solid #deded9;
+    background: white;
+    border-radius: 6px;
+    padding: 8px 13px;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.sync-btn:hover {
+    background: #f5f5f2;
+}
+
+.sync-btn.loading {
+    opacity: .6;
+    pointer-events: none;
+}
+
+/* ================= STATS ================= */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.stat {
+    background: white;
+    border: 1px solid #e6e6e3;
+    border-radius: 11px;
+    padding: 19px 17px;
+}
+
+.stat-label {
+    font-size: 9px;
+    color: #888;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+}
+
+.stat-number {
+    font-size: 21px;
+    font-weight: 700;
+    margin-top: 9px;
+}
+
+/* ================= TABLE ================= */
+
+.panel {
+    background: white;
+    border: 1px solid #e5e5e2;
+    border-radius: 11px;
+    overflow: hidden;
+}
+
+.panel-head {
+    padding: 18px 17px;
+    border-bottom: 1px solid #e9e9e6;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.panel-title {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.panel-sub {
+    font-size: 9px;
+    color: #999;
+    margin-top: 4px;
+}
+
+.search {
+    border: 1px solid #deded9;
+    border-radius: 6px;
+    padding: 8px 10px;
+    width: 220px;
+    font-size: 10px;
+    outline: none;
+}
+
+.search:focus {
+    border-color: #a8894f;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1000px;
+}
+
+th {
+    background: #fafaf8;
+    text-align: left;
+    padding: 11px 13px;
+    color: #777;
+    font-size: 9px;
+    font-weight: 600;
+    border-bottom: 1px solid #e7e7e4;
+}
+
+td {
+    padding: 13px;
+    font-size: 10px;
+    border-bottom: 1px solid #eeeeeb;
+}
+
+tr:hover td {
+    background: #fcfcfa;
+}
+
+.item-id {
+    font-weight: 700;
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 7px;
+    border-radius: 20px;
+    font-size: 8px;
+    font-weight: 600;
+}
+
+.badge.available {
+    background: #edf7f0;
+    color: #31804e;
+}
+
+.badge.reserved {
+    background: #fff7e8;
+    color: #9a711e;
+}
+
+.badge.sold {
+    background: #f7eeee;
+    color: #a24747;
+}
+
+.empty {
+    text-align: center;
+    padding: 45px;
+    color: #999;
+    font-size: 11px;
+}
+
+/* ================= MODAL ================= */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.55);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 25px;
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.modal {
+    width: min(950px, 100%);
+    max-height: 92vh;
+    overflow-y: auto;
+    background: white;
+    border-radius: 13px;
+    box-shadow: 0 25px 80px rgba(0,0,0,.25);
+}
+
+.modal-head {
+    padding: 20px 23px;
+    border-bottom: 1px solid #e7e7e4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modal-title {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.modal-subtitle {
+    font-size: 10px;
+    color: #999;
+    margin-top: 4px;
+}
+
+.close {
+    border: none;
+    background: #f3f3f0;
+    width: 31px;
+    height: 31px;
+    border-radius: 50%;
+    font-size: 17px;
+}
+
+.form {
+    padding: 23px;
+}
+
+.form-section {
+    margin-bottom: 24px;
+}
+
+.form-section-title {
+    color: #a0844b;
+    font-size: 9px;
+    letter-spacing: 1.3px;
+    font-weight: 700;
+    margin-bottom: 13px;
+    text-transform: uppercase;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 13px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.field.full {
+    grid-column: span 2;
+}
+
+.field label {
+    font-size: 9px;
+    color: #666;
+    font-weight: 600;
+}
+
+.field input,
+.field select {
+    width: 100%;
+    border: 1px solid #dcdcd8;
+    border-radius: 6px;
+    padding: 9px 10px;
+    font-size: 10px;
+    outline: none;
+    background: white;
+}
+
+.field input:focus,
+.field select:focus {
+    border-color: #a8894f;
+}
+
+.net-weight {
+    background: #f7f4ec !important;
+    font-weight: 700;
+}
+
+.modal-footer {
+    border-top: 1px solid #e7e7e4;
+    padding: 16px 23px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 9px;
+}
+
+.cancel-btn {
+    background: white;
+    border: 1px solid #dcdcd8;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 10px;
+}
+
+.save-btn {
+    background: #050505;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.save-btn:hover {
+    background: #282828;
+}
+
+/* ================= TOAST ================= */
+
+.toast {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    background: #171715;
+    color: white;
+    padding: 13px 17px;
+    border-radius: 8px;
+    font-size: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.2);
+    transform: translateY(100px);
+    opacity: 0;
+    transition: .3s;
+    z-index: 200;
+}
+
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.toast.success {
+    border-left: 3px solid #56a76e;
+}
+
+.toast.error {
+    border-left: 3px solid #c95151;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px) {
+
+    .sidebar {
+        width: 180px;
+    }
+
+    .main {
+        margin-left: 180px;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .form-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media(max-width:650px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    .main {
+        margin-left: 0;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .field.full {
+        grid-column: span 1;
+    }
+
+    .content {
+        padding: 16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+        <div class="brand-icon">✦</div>
+
+        <div>
+            <div class="brand-name">AURELIA ERP</div>
+            <div class="brand-sub">JEWELLERY RETAIL SYSTEM</div>
+        </div>
+    </div>
+
+    <div class="section-title">MAIN</div>
+
+    <div class="nav-item">
+        <span class="nav-icon">⌂</span>
+        Dashboard
+    </div>
+
+    <div class="nav-item active">
+        <span class="nav-icon">◇</span>
+        Inventory
+        <span class="nav-arrow">›</span>
+    </div>
+
+    <div class="nav-item">
+        <span class="nav-icon">◇</span>
+        Products & Designs
+    </div>
+
+    <div class="nav-item">
+        <span class="nav-icon">⇄</span>
+        Stock Transfers
+    </div>
+
+    <div class="nav-item">
+        <span class="nav-icon">⌕</span>
+        Stock Verification
+    </div>
+
+    <div class="section-title">CONTROL</div>
+
+    <div class="nav-item">
+        <span class="nav-icon">▣</span>
+        Stock Adjustments
+    </div>
+
+    <div class="nav-item">
+        <span class="nav-icon">₹</span>
+        Stock Valuation
+    </div>
+
+    <div class="nav-item">
+        <span class="nav-icon">▤</span>
+        Reports
+    </div>
+
+    <div class="user-box">
+
+        <div class="avatar">NP</div>
+
+        <div>
+            <div class="user-name">Nishanth Prabhu</div>
+            <div class="user-role">Administrator</div>
+        </div>
+
+    </div>
+
+</aside>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+    <header class="topbar">
+
+        <div class="location">
+            Location
+            <strong>Main Showroom</strong>
+            ˅
+        </div>
+
+        <div class="top-actions">
+            <span>⌕</span>
+            <span>♢</span>
+            <span>29 Aug 2026</span>
+        </div>
+
+    </header>
+
+
+    <section class="content">
+
+        <div class="page-head">
+
+            <div>
+                <div class="eyebrow">PRODUCT MASTER</div>
+                <h1>Products & Designs</h1>
+                <div class="subtitle">
+                    Jewellery designs and product masters.
+                </div>
+            </div>
+
+            <button class="new-btn" id="newDesignBtn">
+                + New Design
+            </button>
+
+        </div>
+
+
+        <!-- CONNECTION -->
+
+        <div class="connection">
+
+            <div class="connection-left">
+
+                <span class="status-dot" id="statusDot"></span>
+
+                <span class="connection-text" id="connectionText">
+                    Checking Google Sheets...
+                </span>
+
+                <span class="sync-time" id="syncTime">
+                    Last Sync: Never
+                </span>
+
+            </div>
+
+            <button class="sync-btn" id="syncBtn">
+                ↻ SYNC NOW
+            </button>
+
+        </div>
+
+
+        <!-- STATS -->
+
+        <div class="stats">
+
+            <div class="stat">
+                <div class="stat-label">Active Designs</div>
+                <div class="stat-number" id="activeCount">0</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-label">Gold Designs</div>
+                <div class="stat-number" id="goldCount">0</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-label">Diamond Designs</div>
+                <div class="stat-number" id="diamondCount">0</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-label">New This Month</div>
+                <div class="stat-number" id="newCount">0</div>
+            </div>
+
+        </div>
+
+
+        <!-- TABLE -->
+
+        <div class="panel">
+
+            <div class="panel-head">
+
+                <div>
+                    <div class="panel-title">Product Master</div>
+                    <div class="panel-sub">
+                        Live data from Google Sheets
+                    </div>
+                </div>
+
+                <input
+                    class="search"
+                    id="searchInput"
+                    placeholder="Search item, design, product..."
+                >
+
+            </div>
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>ITEM ID</th>
+                            <th>DESIGN</th>
+                            <th>PRODUCT</th>
+                            <th>CATEGORY</th>
+                            <th>PURITY</th>
+                            <th>GROSS WT.</th>
+                            <th>NET WT.</th>
+                            <th>BRANCH</th>
+                            <th>STATUS</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="inventoryTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- ================= NEW DESIGN MODAL ================= -->
+
+<div class="modal-overlay" id="modalOverlay">
+
+    <div class="modal">
+
+        <div class="modal-head">
+
+            <div>
+                <div class="modal-title">
+                    New Jewellery Design
+                </div>
+
+                <div class="modal-subtitle">
+                    Create a new product master record
+                </div>
+            </div>
+
+            <button class="close" id="closeModal">
+                ×
+            </button>
+
+        </div>
+
+
+        <form class="form" id="designForm">
+
+            <!-- BASIC INFORMATION -->
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    Basic Information
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="field">
+                        <label>Item ID *</label>
+                        <input id="Item_ID" required placeholder="AU-BG-0004">
+                    </div>
+
+                    <div class="field">
+                        <label>Barcode *</label>
+                        <input id="Barcode" required placeholder="890000000004">
+                    </div>
+
+                    <div class="field">
+                        <label>Design Code *</label>
+                        <input id="Design_Code" required placeholder="BG-543">
+                    </div>
+
+                    <div class="field">
+                        <label>Product Name *</label>
+                        <input id="Product_Name" required placeholder="Gold Bangle">
+                    </div>
+
+                    <div class="field">
+                        <label>Category *</label>
+                        <select id="Category" required>
+                            <option value="">Select</option>
+                            <option>Necklace</option>
+                            <option>Ring</option>
+                            <option>Bangle</option>
+                            <option>Bracelet</option>
+                            <option>Earring</option>
+                            <option>Chain</option>
+                            <option>Pendant</option>
+                            <option>Nose Pin</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Sub Category</label>
+                        <input id="Sub_Category" placeholder="Traditional">
+                    </div>
+
+                    <div class="field">
+                        <label>Metal</label>
+                        <select id="Metal">
+                            <option>Gold</option>
+                            <option>Silver</option>
+                            <option>Platinum</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Purity</label>
+                        <select id="Purity">
+                            <option>22K</option>
+                            <option>18K</option>
+                            <option>24K</option>
+                            <option>916</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- WEIGHT -->
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    Weight Details
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="field">
+                        <label>Gross Weight (g) *</label>
+                        <input
+                            type="number"
+                            step="0.001"
+                            id="Gross_Weight_g"
+                            required
+                            placeholder="42.800"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label>Stone Weight (g)</label>
+                        <input
+                            type="number"
+                            step="0.001"
+                            id="Stone_Weight_g"
+                            value="0"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label>Other Weight (g)</label>
+                        <input
+                            type="number"
+                            step="0.001"
+                            id="Other_Weight_g"
+                            value="0"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label>Net Weight (g)</label>
+                        <input
+                            class="net-weight"
+                            type="number"
+                            step="0.001"
+                            id="Net_Weight_g"
+                            readonly
+                        >
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- IDENTIFICATION -->
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    Identification & Location
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="field">
+                        <label>HUID</label>
+                        <input id="HUID" placeholder="ABC123456789">
+                    </div>
+
+                    <div class="field">
+                        <label>Certificate No.</label>
+                        <input id="Certificate_No" placeholder="CERT-004">
+                    </div>
+
+                    <div class="field">
+                        <label>Branch</label>
+                        <input id="Branch" value="Main Showroom">
+                    </div>
+
+                    <div class="field">
+                        <label>Location</label>
+                        <input id="Location" value="Gold Counter">
+                    </div>
+
+                    <div class="field">
+                        <label>Rack</label>
+                        <input id="Rack" placeholder="R3">
+                    </div>
+
+                    <div class="field">
+                        <label>Tray</label>
+                        <input id="Tray" placeholder="T2">
+                    </div>
+
+                    <div class="field">
+                        <label>Status</label>
+                        <select id="Status">
+                            <option>AVAILABLE</option>
+                            <option>RESERVED</option>
+                            <option>SOLD</option>
+                            <option>TRANSFERRED</option>
+                            <option>HOLD</option>
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRICING -->
+
+            <div class="form-section">
+
+                <div class="form-section-title">
+                    Pricing
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="field">
+                        <label>Gold Rate</label>
+                        <input
+                            type="number"
+                            step="0.01"
+                            id="Gold_Rate"
+                            value="12500"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label>Making Charge</label>
+                        <input
+                            type="number"
+                            step="0.01"
+                            id="Making_Charge"
+                            value="0"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label>Wastage %</label>
+                        <input
+                            type="number"
+                            step="0.01"
+                            id="Wastage_Percent"
+                            value="0"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label>Stone Value</label>
+                        <input
+                            type="number"
+                            step="0.01"
+                            id="Stone_Value"
+                            value="0"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label>Other Charges</label>
+                        <input
+                            type="number"
+                            step="0.01"
+                            id="Other_Charges"
+                            value="0"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label>Selling Price</label>
+                        <input
+                            type="number"
+                            step="0.01"
+                            id="Selling_Price"
+                            value="0"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label>GST Rate %</label>
+                        <input
+                            type="number"
+                            step="0.01"
+                            id="GST_Rate"
+                            value="3"
+                        >
+                    </div>
+
+                    <div class="field full">
+                        <label>Remarks</label>
+                        <input
+                            id="Remarks"
+                            placeholder="Additional information..."
+                        >
+                    </div>
+
+                </div>
+
+            </div>
+
+        </form>
+
+
+        <div class="modal-footer">
+
+            <button class="cancel-btn" id="cancelBtn">
+                Cancel
+            </button>
+
+            <button class="save-btn" id="saveBtn">
+                Save Design
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* =========================================================
+   AURELIA ERP
+   GOOGLE SHEETS CONNECTION
+========================================================= */
+
+const GOOGLE_SHEET_API =
+"https://script.google.com/macros/s/AKfycbztZD8xpihRAH_T3VeF-hV0XKum9effhIt8RVxZWCT2F1aspI7JkIVRPOFz1Lb0juWwmw/exec";
+
+
+let products = [];
+
+
+/* =========================================================
+   DOM ELEMENTS
+========================================================= */
+
+const modalOverlay =
+    document.getElementById("modalOverlay");
+
+const newDesignBtn =
+    document.getElementById("newDesignBtn");
+
+const closeModal =
+    document.getElementById("closeModal");
+
+const cancelBtn =
+    document.getElementById("cancelBtn");
+
+const saveBtn =
+    document.getElementById("saveBtn");
+
+const designForm =
+    document.getElementById("designForm");
+
+const syncBtn =
+    document.getElementById("syncBtn");
+
+const searchInput =
+    document.getElementById("searchInput");
+
+const inventoryTable =
+    document.getElementById("inventoryTable");
+
+const statusDot =
+    document.getElementById("statusDot");
+
+const connectionText =
+    document.getElementById("connectionText");
+
+const syncTime =
+    document.getElementById("syncTime");
+
+const toast =
+    document.getElementById("toast");
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+newDesignBtn.addEventListener("click", () => {
+
+    designForm.reset();
+
+    document.getElementById("Metal").value = "Gold";
+    document.getElementById("Purity").value = "22K";
+    document.getElementById("Status").value = "AVAILABLE";
+    document.getElementById("Branch").value = "Main Showroom";
+    document.getElementById("Location").value = "Gold Counter";
+    document.getElementById("Gold_Rate").value = "12500";
+    document.getElementById("GST_Rate").value = "3";
+
+    calculateNetWeight();
+
+    modalOverlay.classList.add("show");
+
+});
+
+
+function closeDesignModal() {
+
+    modalOverlay.classList.remove("show");
+
+}
+
+
+closeModal.addEventListener(
+    "click",
+    closeDesignModal
+);
+
+cancelBtn.addEventListener(
+    "click",
+    closeDesignModal
+);
+
+modalOverlay.addEventListener(
+    "click",
+    function(e) {
+
+        if (e.target === modalOverlay) {
+            closeDesignModal();
+        }
+
+    }
+);
+
+
+/* =========================================================
+   NET WEIGHT CALCULATION
+========================================================= */
+
+[
+    "Gross_Weight_g",
+    "Stone_Weight_g",
+    "Other_Weight_g"
+].forEach(id => {
+
+    document.getElementById(id)
+        .addEventListener(
+            "input",
+            calculateNetWeight
+        );
+
+});
+
+
+function calculateNetWeight() {
+
+    const gross =
+        parseFloat(
+            document.getElementById(
+                "Gross_Weight_g"
+            ).value
+        ) || 0;
+
+    const stone =
+        parseFloat(
+            document.getElementById(
+                "Stone_Weight_g"
+            ).value
+        ) || 0;
+
+    const other =
+        parseFloat(
+            document.getElementById(
+                "Other_Weight_g"
+            ).value
+        ) || 0;
+
+    const net =
+        Math.max(
+            0,
+            gross - stone - other
+        );
+
+    document.getElementById(
+        "Net_Weight_g"
+    ).value = net.toFixed(3);
+
+}
+
+
+/* =========================================================
+   GOOGLE SHEETS SYNC
+========================================================= */
+
+async function syncFromGoogleSheets() {
+
+    syncBtn.classList.add("loading");
+
+    syncBtn.textContent = "SYNCING...";
+
+    connectionText.textContent =
+        "Connecting to Google Sheets...";
+
+    statusDot.className = "status-dot";
+
+
+    try {
+
+        const response =
+            await fetch(
+                GOOGLE_SHEET_API + "?t=" + Date.now()
+            );
+
+        if (!response.ok) {
+            throw new Error(
+                "HTTP " + response.status
+            );
+        }
+
+        const result =
+            await response.json();
+
+
+        if (!result.success) {
+
+            throw new Error(
+                result.error ||
+                "Google Sheets returned an error"
+            );
+
+        }
+
+
+        products = Array.isArray(result.data)
+            ? result.data
+            : [];
+
+
+        /* Merge locally-created demo records */
+
+        const localProducts =
+            JSON.parse(
+                localStorage.getItem(
+                    "aurelia_local_products"
+                ) || "[]"
+            );
+
+
+        localProducts.forEach(localItem => {
+
+            const exists =
+                products.some(
+                    p =>
+                    String(p.Item_ID) ===
+                    String(localItem.Item_ID)
+                );
+
+            if (!exists) {
+                products.push(localItem);
+            }
+
+        });
+
+
+        statusDot.className =
+            "status-dot connected";
+
+        connectionText.textContent =
+            "Google Sheets Connected";
+
+        syncTime.textContent =
+            "Last Sync: " +
+            new Date().toLocaleTimeString(
+                [],
+                {
+                    hour: "2-digit",
+                    minute: "2-digit"
+                }
+            );
+
+
+        renderProducts();
+
+        updateStats();
+
+
+        showToast(
+            "✓ " +
+            products.length +
+            " products synced",
+            "success"
+        );
+
+    }
+
+    catch(error) {
+
+        console.error(error);
+
+        statusDot.className =
+            "status-dot error";
+
+        connectionText.textContent =
+            "Google Sheets Connection Error";
+
+
+        showToast(
+            "Google Sheets connection failed",
+            "error"
+        );
+
+    }
+
+    finally {
+
+        syncBtn.classList.remove(
+            "loading"
+        );
+
+        syncBtn.textContent =
+            "↻ SYNC NOW";
+
+    }
+
+}
+
+
+syncBtn.addEventListener(
+    "click",
+    syncFromGoogleSheets
+);
+
+
+/* =========================================================
+   RENDER TABLE
+========================================================= */
+
+function renderProducts() {
+
+    const search =
+        searchInput.value
+            .toLowerCase()
+            .trim();
+
+
+    const filtered =
+        products.filter(item => {
+
+            const text = [
+
+                item.Item_ID,
+                item.Barcode,
+                item.Design_Code,
+                item.Product_Name,
+                item.Category,
+                item.Sub_Category,
+                item.Purity,
+                item.Branch,
+                item.Location,
+                item.Status
+
+            ]
+            .join(" ")
+            .toLowerCase();
+
+            return text.includes(search);
+
+        });
+
+
+    if (filtered.length === 0) {
+
+        inventoryTable.innerHTML = `
+            <tr>
+                <td colspan="9" class="empty">
+                    No products found
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    inventoryTable.innerHTML =
+        filtered.map(item => {
+
+            const status =
+                String(
+                    item.Status || "AVAILABLE"
+                ).toUpperCase();
+
+
+            let badgeClass =
+                "available";
+
+            if (status === "RESERVED") {
+                badgeClass = "reserved";
+            }
+
+            if (
+                status === "SOLD" ||
+                status === "HOLD"
+            ) {
+                badgeClass = "sold";
+            }
+
+
+            return `
+
+                <tr>
+
+                    <td class="item-id">
+                        ${safe(item.Item_ID)}
+                    </td>
+
+                    <td>
+                        ${safe(item.Design_Code)}
+                    </td>
+
+                    <td>
+                        ${safe(item.Product_Name)}
+                    </td>
+
+                    <td>
+                        ${safe(item.Category)}
+                    </td>
+
+                    <td>
+                        ${safe(item.Purity)}
+                    </td>
+
+                    <td>
+                        ${formatNumber(
+                            item.Gross_Weight_g
+                        )} g
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${formatNumber(
+                                item.Net_Weight_g
+                            )} g
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${safe(item.Branch)}
+                    </td>
+
+                    <td>
+                        <span class="badge ${badgeClass}">
+                            ${safe(status)}
+                        </span>
+                    </td>
+
+                </tr>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+searchInput.addEventListener(
+    "input",
+    renderProducts
+);
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+function updateStats() {
+
+    const active =
+        products.filter(
+            p =>
+            String(p.Status || "")
+                .toUpperCase() !== "SOLD"
+        ).length;
+
+
+    const gold =
+        products.filter(
+            p =>
+            String(p.Metal || "")
+                .toLowerCase() === "gold"
+        ).length;
+
+
+    const diamond =
+        products.filter(
+            p =>
+            String(p.Category || "")
+                .toLowerCase()
+                .includes("diamond")
+        ).length;
+
+
+    const currentMonth =
+        new Date().getMonth();
+
+
+    const newThisMonth =
+        products.filter(p => {
+
+            if (!p.Created_Date) {
+                return false;
+            }
+
+            const d =
+                new Date(p.Created_Date);
+
+            return (
+                !isNaN(d) &&
+                d.getMonth() === currentMonth
+            );
+
+        }).length;
+
+
+    document.getElementById(
+        "activeCount"
+    ).textContent = active;
+
+
+    document.getElementById(
+        "goldCount"
+    ).textContent = gold;
+
+
+    document.getElementById(
+        "diamondCount"
+    ).textContent = diamond;
+
+
+    document.getElementById(
+        "newCount"
+    ).textContent = newThisMonth;
+
+}
+
+
+/* =========================================================
+   SAVE NEW DESIGN
+========================================================= */
+
+saveBtn.addEventListener(
+    "click",
+    saveNewDesign
+);
+
+
+async function saveNewDesign() {
+
+    if (!designForm.reportValidity()) {
+        return;
+    }
+
+
+    calculateNetWeight();
+
+
+    const item = {
+
+        Item_ID:
+            value("Item_ID"),
+
+        Barcode:
+            value("Barcode"),
+
+        Design_Code:
+            value("Design_Code"),
+
+        Product_Name:
+            value("Product_Name"),
+
+        Category:
+            value("Category"),
+
+        Sub_Category:
+            value("Sub_Category"),
+
+        Metal:
+            value("Metal"),
+
+        Purity:
+            value("Purity"),
+
+        Gross_Weight_g:
+            numberValue("Gross_Weight_g"),
+
+        Stone_Weight_g:
+            numberValue("Stone_Weight_g"),
+
+        Other_Weight_g:
+            numberValue("Other_Weight_g"),
+
+        Net_Weight_g:
+            numberValue("Net_Weight_g"),
+
+        HUID:
+            value("HUID"),
+
+        Certificate_No:
+            value("Certificate_No"),
+
+        Branch:
+            value("Branch"),
+
+        Location:
+            value("Location"),
+
+        Rack:
+            value("Rack"),
+
+        Tray:
+            value("Tray"),
+
+        Status:
+            value("Status"),
+
+        Gold_Rate:
+            numberValue("Gold_Rate"),
+
+        Making_Charge:
+            numberValue("Making_Charge"),
+
+        Wastage_Percent:
+            numberValue("Wastage_Percent"),
+
+        Stone_Value:
+            numberValue("Stone_Value"),
+
+        Other_Charges:
+            numberValue("Other_Charges"),
+
+        Selling_Price:
+            numberValue("Selling_Price"),
+
+        GST_Rate:
+            numberValue("GST_Rate"),
+
+        Image_URL: "",
+
+        Created_Date:
+            new Date()
+                .toISOString()
+                .slice(0,10),
+
+        Remarks:
+            value("Remarks")
+
+    };
+
+
+    /* Check duplicate Item ID */
+
+    const duplicate =
+        products.some(
+            p =>
+            String(p.Item_ID).toLowerCase() ===
+            String(item.Item_ID).toLowerCase()
+        );
+
+
+    if (duplicate) {
+
+        showToast(
+            "Item ID already exists",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    /* Add immediately to UI */
+
+    products.unshift(item);
+
+    renderProducts();
+
+    updateStats();
+
+
+    /* Save locally */
+
+    const localProducts =
+        JSON.parse(
+            localStorage.getItem(
+                "aurelia_local_products"
+            ) || "[]"
+        );
+
+    localProducts.push(item);
+
+    localStorage.setItem(
+        "aurelia_local_products",
+        JSON.stringify(localProducts)
+    );
+
+
+    closeDesignModal();
+
+    showToast(
+        "✓ Design created successfully",
+        "success"
+    );
+
+
+    /*
+       IMPORTANT:
+       The current Apps Script is GET-only.
+       Therefore the new record is currently stored
+       locally and displayed immediately.
+
+       Once we add doPost() to Apps Script,
+       this same button can write directly
+       into PRODUCT_MASTER.
+    */
+
+}
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function value(id) {
+
+    return document
+        .getElementById(id)
+        .value
+        .trim();
+
+}
+
+
+function numberValue(id) {
+
+    const n =
+        parseFloat(
+            document.getElementById(id).value
+        );
+
+    return isNaN(n) ? 0 : n;
+
+}
+
+
+function formatNumber(value) {
+
+    const n =
+        parseFloat(value);
+
+    if (isNaN(n)) {
+        return "0.000";
+    }
+
+    return n.toFixed(3);
+
+}
+
+
+function safe(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+        return "";
+    }
+
+    return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(
+    message,
+    type = "success"
+) {
+
+    toast.textContent = message;
+
+    toast.className =
+        "toast " +
+        type +
+        " show";
+
+
+    setTimeout(() => {
+
+        toast.classList.remove(
+            "show"
+        );
+
+    }, 3000);
+
+}
+
+
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
+
+window.addEventListener(
+    "load",
+    () => {
+
+        syncFromGoogleSheets();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
