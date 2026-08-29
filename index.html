@@ -1,1198 +1,1276 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
 <title>AURELIA ERP — Jewellery Retail System</title>
 
+
 <style>
-* {
-    box-sizing: border-box;
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-body {
-    margin: 0;
-    font-family: Inter, Arial, sans-serif;
-    background: #f6f6f4;
-    color: #171717;
+body{
+    font-family:
+        Inter,
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:#f7f7f5;
+    color:#181818;
 }
 
-button,
+
+/* =========================================
+   LAYOUT
+========================================= */
+
+.app{
+    display:flex;
+    min-height:100vh;
+}
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.sidebar{
+
+    width:218px;
+
+    background:#151515;
+
+    color:white;
+
+    padding:20px 14px;
+
+    position:fixed;
+
+    left:0;
+    top:0;
+    bottom:0;
+
+    z-index:100;
+}
+
+
+.brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:0 8px 22px;
+
+    border-bottom:1px solid #2b2b2b;
+
+}
+
+
+.brand-icon{
+
+    width:38px;
+    height:38px;
+
+    border:1px solid #b9954b;
+
+    border-radius:10px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    color:#d1ad63;
+
+    font-size:18px;
+
+}
+
+
+.brand-title{
+
+    font-size:14px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+}
+
+
+.brand-sub{
+
+    font-size:8px;
+
+    color:#888;
+
+    margin-top:3px;
+
+    letter-spacing:.7px;
+
+}
+
+
+.menu-section{
+
+    margin-top:28px;
+
+}
+
+
+.menu-title{
+
+    font-size:9px;
+
+    color:#666;
+
+    letter-spacing:1.5px;
+
+    margin:0 8px 10px;
+
+}
+
+
+.menu-item{
+
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:0 14px;
+
+    border-radius:9px;
+
+    color:#aaa;
+
+    cursor:pointer;
+
+    font-size:12px;
+
+    margin-bottom:3px;
+
+}
+
+
+.menu-item:hover{
+
+    background:#232320;
+
+    color:#fff;
+
+}
+
+
+.menu-item.active{
+
+    background:#292925;
+
+    color:#fff;
+
+}
+
+
+.menu-icon{
+
+    width:14px;
+
+    text-align:center;
+
+    font-size:12px;
+
+}
+
+
+.menu-arrow{
+
+    margin-left:auto;
+
+    font-size:10px;
+
+}
+
+
+.user-box{
+
+    position:absolute;
+
+    bottom:18px;
+
+    left:14px;
+    right:14px;
+
+    border-top:1px solid #2b2b2b;
+
+    padding-top:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+}
+
+
+.user-avatar{
+
+    width:31px;
+    height:31px;
+
+    border-radius:50%;
+
+    background:#28251e;
+
+    border:1px solid #3e3a2f;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    color:#c8a75d;
+
+    font-size:10px;
+
+}
+
+
+.user-name{
+
+    font-size:11px;
+    color:#eee;
+
+}
+
+
+.user-role{
+
+    font-size:9px;
+    color:#777;
+
+    margin-top:2px;
+
+}
+
+
+/* =========================================
+   MAIN
+========================================= */
+
+.main{
+
+    margin-left:218px;
+
+    width:calc(100% - 218px);
+
+}
+
+
+/* =========================================
+   TOP BAR
+========================================= */
+
+.topbar{
+
+    height:62px;
+
+    background:#fff;
+
+    border-bottom:1px solid #e8e8e5;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 28px;
+
+}
+
+
+.location{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    font-size:11px;
+
+    color:#999;
+
+}
+
+
+.location strong{
+
+    color:#252525;
+
+    font-size:12px;
+
+}
+
+
+.top-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+
+.top-icon{
+
+    color:#777;
+
+    cursor:pointer;
+
+    font-size:13px;
+
+}
+
+
+.date{
+
+    font-size:11px;
+
+    color:#777;
+
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.content{
+
+    padding:25px 28px 50px;
+
+}
+
+
+.page-header{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    justify-content:space-between;
+
+    margin-bottom:20px;
+
+}
+
+
+.eyebrow{
+
+    font-size:10px;
+
+    color:#a3844c;
+
+    letter-spacing:1.5px;
+
+    font-weight:600;
+
+    margin-bottom:5px;
+
+}
+
+
+.page-title{
+
+    font-size:25px;
+
+    font-weight:700;
+
+    letter-spacing:-.7px;
+
+}
+
+
+.page-subtitle{
+
+    font-size:11px;
+
+    color:#888;
+
+    margin-top:6px;
+
+}
+
+
+.primary-btn{
+
+    border:0;
+
+    background:#050505;
+
+    color:#fff;
+
+    padding:10px 17px;
+
+    border-radius:8px;
+
+    font-size:11px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+}
+
+
+.primary-btn:hover{
+
+    background:#282828;
+
+}
+
+
+/* =========================================
+   SYNC BAR
+========================================= */
+
+.sync-bar{
+
+    background:#fff;
+
+    border:1px solid #e8e8e5;
+
+    border-radius:10px;
+
+    padding:13px 15px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:18px;
+
+}
+
+
+.sync-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+}
+
+
+.status-dot{
+
+    width:8px;
+    height:8px;
+
+    background:#38a169;
+
+    border-radius:50%;
+
+}
+
+
+.sync-text{
+
+    font-size:11px;
+
+    font-weight:600;
+
+}
+
+
+.sync-time{
+
+    font-size:9px;
+
+    color:#999;
+
+    margin-left:8px;
+
+}
+
+
+.sync-btn{
+
+    background:#fff;
+
+    border:1px solid #ddd;
+
+    border-radius:7px;
+
+    padding:7px 12px;
+
+    font-size:10px;
+
+    cursor:pointer;
+
+}
+
+
+.sync-btn:hover{
+
+    background:#f5f5f5;
+
+}
+
+
+/* =========================================
+   STATS
+========================================= */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:12px;
+
+    margin-bottom:18px;
+
+}
+
+
+.stat-card{
+
+    background:#fff;
+
+    border:1px solid #e8e8e5;
+
+    border-radius:10px;
+
+    padding:17px;
+
+}
+
+
+.stat-label{
+
+    color:#999;
+
+    font-size:9px;
+
+    letter-spacing:.7px;
+
+}
+
+
+.stat-value{
+
+    margin-top:8px;
+
+    font-size:21px;
+
+    font-weight:700;
+
+}
+
+
+/* =========================================
+   TABLE CARD
+========================================= */
+
+.table-card{
+
+    background:#fff;
+
+    border:1px solid #e5e5e2;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+}
+
+
+.table-header{
+
+    padding:15px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    border-bottom:1px solid #e9e9e6;
+
+}
+
+
+.table-title{
+
+    font-size:12px;
+
+    font-weight:700;
+
+}
+
+
+.table-sub{
+
+    font-size:9px;
+
+    color:#999;
+
+    margin-top:3px;
+
+}
+
+
+.search{
+
+    width:190px;
+
+    border:1px solid #ddd;
+
+    border-radius:7px;
+
+    padding:8px 10px;
+
+    font-size:10px;
+
+    outline:none;
+
+}
+
+
+.search:focus{
+
+    border-color:#b89a5c;
+
+}
+
+
+.table-wrap{
+
+    overflow-x:auto;
+
+}
+
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+
+th{
+
+    background:#fafaf8;
+
+    color:#777;
+
+    font-size:8px;
+
+    font-weight:600;
+
+    text-align:left;
+
+    padding:11px;
+
+    white-space:nowrap;
+
+    border-bottom:1px solid #e5e5e2;
+
+}
+
+
+td{
+
+    font-size:9px;
+
+    padding:12px 11px;
+
+    border-bottom:1px solid #eeeeeb;
+
+    white-space:nowrap;
+
+}
+
+
+tr:hover td{
+
+    background:#fcfcfa;
+
+}
+
+
+.status{
+
+    display:inline-block;
+
+    background:#edf8f0;
+
+    color:#368151;
+
+    border-radius:20px;
+
+    padding:4px 7px;
+
+    font-size:7px;
+
+    font-weight:600;
+
+}
+
+
+.item-id{
+
+    font-weight:700;
+
+}
+
+
+.empty{
+
+    padding:35px;
+
+    text-align:center;
+
+    color:#999;
+
+    font-size:11px;
+
+}
+
+
+/* =========================================
+   MODAL
+========================================= */
+
+.modal-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.55);
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:1000;
+
+    padding:20px;
+
+}
+
+
+.modal-overlay.show{
+
+    display:flex;
+
+}
+
+
+.modal{
+
+    width:min(900px,100%);
+
+    max-height:92vh;
+
+    overflow-y:auto;
+
+    background:#fff;
+
+    border-radius:14px;
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.25);
+
+}
+
+
+.modal-header{
+
+    padding:20px 22px;
+
+    border-bottom:1px solid #eee;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    position:sticky;
+
+    top:0;
+
+    background:#fff;
+
+    z-index:2;
+
+}
+
+
+.modal-title{
+
+    font-size:17px;
+
+    font-weight:700;
+
+}
+
+
+.modal-subtitle{
+
+    font-size:10px;
+
+    color:#999;
+
+    margin-top:4px;
+
+}
+
+
+.close-btn{
+
+    width:32px;
+    height:32px;
+
+    border:0;
+
+    border-radius:7px;
+
+    background:#f3f3f1;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+}
+
+
+.form{
+
+    padding:22px;
+
+}
+
+
+.form-section{
+
+    margin-bottom:22px;
+
+}
+
+
+.form-section-title{
+
+    font-size:10px;
+
+    color:#a3844c;
+
+    letter-spacing:1.2px;
+
+    font-weight:700;
+
+    margin-bottom:12px;
+
+    padding-bottom:7px;
+
+    border-bottom:1px solid #eee;
+
+}
+
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:12px;
+
+}
+
+
+.field{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:5px;
+
+}
+
+
+.field.full{
+
+    grid-column:1/-1;
+
+}
+
+
+label{
+
+    font-size:9px;
+
+    color:#666;
+
+    font-weight:600;
+
+}
+
+
 input,
-select {
-    font-family: inherit;
-}
+select,
+textarea{
 
-button {
-    cursor: pointer;
-}
+    width:100%;
 
-/* ================= SIDEBAR ================= */
-
-.sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 218px;
-    background: #171715;
-    color: white;
-    padding: 25px 14px;
-    z-index: 10;
-}
+    border:1px solid #ddd;
 
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 11px;
-    padding: 0 8px 25px;
-    border-bottom: 1px solid #30302d;
-}
+    border-radius:7px;
 
-.brand-icon {
-    width: 40px;
-    height: 40px;
-    border: 1px solid #b99954;
-    border-radius: 11px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #d2b56b;
-    font-size: 19px;
-}
+    padding:9px 10px;
 
-.brand-name {
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: .5px;
-}
+    font-size:10px;
 
-.brand-sub {
-    font-size: 8px;
-    color: #888;
-    margin-top: 4px;
-    letter-spacing: .6px;
-}
+    outline:none;
 
-.section-title {
-    color: #666662;
-    font-size: 9px;
-    letter-spacing: 1.5px;
-    margin: 29px 5px 10px;
-}
+    background:#fff;
 
-.nav-item {
-    height: 38px;
-    padding: 0 13px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    color: #a9a9a5;
-    border-radius: 9px;
-    font-size: 12px;
-    margin-bottom: 3px;
-    transition: .2s;
 }
 
-.nav-item:hover {
-    background: #252522;
-    color: white;
-}
 
-.nav-item.active {
-    background: #2a2a27;
-    color: white;
-}
+input:focus,
+select:focus,
+textarea:focus{
 
-.nav-icon {
-    width: 12px;
-    text-align: center;
-    color: #a5a5a0;
-}
+    border-color:#b8995a;
 
-.nav-arrow {
-    margin-left: auto;
-    font-size: 10px;
-}
+    box-shadow:
+        0 0 0 2px rgba(184,153,90,.08);
 
-.user-box {
-    position: absolute;
-    bottom: 18px;
-    left: 14px;
-    right: 14px;
-    border-top: 1px solid #30302d;
-    padding-top: 14px;
-    display: flex;
-    gap: 9px;
-    align-items: center;
 }
 
-.avatar {
-    width: 31px;
-    height: 31px;
-    border-radius: 50%;
-    background: #282823;
-    color: #b99954;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-}
 
-.user-name {
-    font-size: 11px;
-    color: white;
-}
+textarea{
 
-.user-role {
-    font-size: 9px;
-    color: #777;
-    margin-top: 3px;
-}
+    min-height:70px;
 
-/* ================= MAIN ================= */
+    resize:vertical;
 
-.main {
-    margin-left: 218px;
-    min-height: 100vh;
 }
 
-.topbar {
-    height: 72px;
-    background: white;
-    border-bottom: 1px solid #e5e5e2;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 27px;
-}
 
-.location {
-    font-size: 10px;
-    color: #888;
-}
+.required{
 
-.location strong {
-    color: #1d1d1d;
-    margin-left: 8px;
-    font-size: 11px;
-}
+    color:#b23a3a;
 
-.top-actions {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    font-size: 12px;
-    color: #777;
 }
 
-.content {
-    padding: 28px;
-}
 
-.page-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 23px;
-}
+.modal-footer{
 
-.eyebrow {
-    color: #a0844b;
-    font-size: 9px;
-    letter-spacing: 1.5px;
-    font-weight: 600;
-    margin-bottom: 7px;
-}
+    border-top:1px solid #eee;
 
-h1 {
-    margin: 0;
-    font-size: 25px;
-    letter-spacing: -1px;
-}
+    padding:15px 22px;
 
-.subtitle {
-    color: #888;
-    font-size: 11px;
-    margin-top: 7px;
-}
+    display:flex;
 
-.new-btn {
-    background: #050505;
-    color: white;
-    border: none;
-    border-radius: 7px;
-    padding: 11px 17px;
-    font-size: 11px;
-    font-weight: 600;
-}
+    justify-content:flex-end;
 
-.new-btn:hover {
-    background: #292929;
-}
+    gap:9px;
 
-/* ================= CONNECTION ================= */
-
-.connection {
-    background: white;
-    border: 1px solid #e6e6e3;
-    border-radius: 11px;
-    padding: 13px 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 17px;
-}
+    position:sticky;
 
-.connection-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+    bottom:0;
 
-.status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #aaa;
-}
+    background:#fff;
 
-.status-dot.connected {
-    background: #3c9b62;
 }
 
-.status-dot.error {
-    background: #c94d4d;
-}
 
-.connection-text {
-    font-size: 11px;
-    font-weight: 600;
-}
+.cancel-btn{
 
-.sync-time {
-    color: #999;
-    font-size: 10px;
-    margin-left: 7px;
-}
+    border:1px solid #ddd;
 
-.sync-btn {
-    border: 1px solid #deded9;
-    background: white;
-    border-radius: 6px;
-    padding: 8px 13px;
-    font-size: 10px;
-    font-weight: 600;
-}
+    background:#fff;
 
-.sync-btn:hover {
-    background: #f5f5f2;
-}
+    padding:10px 16px;
 
-.sync-btn.loading {
-    opacity: .6;
-    pointer-events: none;
-}
+    border-radius:7px;
 
-/* ================= STATS ================= */
+    font-size:10px;
 
-.stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-    margin-bottom: 18px;
-}
+    cursor:pointer;
 
-.stat {
-    background: white;
-    border: 1px solid #e6e6e3;
-    border-radius: 11px;
-    padding: 19px 17px;
 }
 
-.stat-label {
-    font-size: 9px;
-    color: #888;
-    letter-spacing: .5px;
-    text-transform: uppercase;
-}
 
-.stat-number {
-    font-size: 21px;
-    font-weight: 700;
-    margin-top: 9px;
-}
+.save-btn{
 
-/* ================= TABLE ================= */
+    border:0;
 
-.panel {
-    background: white;
-    border: 1px solid #e5e5e2;
-    border-radius: 11px;
-    overflow: hidden;
-}
+    background:#050505;
 
-.panel-head {
-    padding: 18px 17px;
-    border-bottom: 1px solid #e9e9e6;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+    color:white;
 
-.panel-title {
-    font-size: 12px;
-    font-weight: 700;
-}
+    padding:10px 18px;
 
-.panel-sub {
-    font-size: 9px;
-    color: #999;
-    margin-top: 4px;
-}
+    border-radius:7px;
 
-.search {
-    border: 1px solid #deded9;
-    border-radius: 6px;
-    padding: 8px 10px;
-    width: 220px;
-    font-size: 10px;
-    outline: none;
-}
+    font-size:10px;
 
-.search:focus {
-    border-color: #a8894f;
-}
+    font-weight:600;
 
-.table-wrap {
-    overflow-x: auto;
-}
+    cursor:pointer;
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 1000px;
 }
 
-th {
-    background: #fafaf8;
-    text-align: left;
-    padding: 11px 13px;
-    color: #777;
-    font-size: 9px;
-    font-weight: 600;
-    border-bottom: 1px solid #e7e7e4;
-}
 
-td {
-    padding: 13px;
-    font-size: 10px;
-    border-bottom: 1px solid #eeeeeb;
-}
+.save-btn:disabled{
 
-tr:hover td {
-    background: #fcfcfa;
-}
+    opacity:.5;
 
-.item-id {
-    font-weight: 700;
-}
+    cursor:not-allowed;
 
-.badge {
-    display: inline-block;
-    padding: 4px 7px;
-    border-radius: 20px;
-    font-size: 8px;
-    font-weight: 600;
 }
 
-.badge.available {
-    background: #edf7f0;
-    color: #31804e;
-}
 
-.badge.reserved {
-    background: #fff7e8;
-    color: #9a711e;
-}
+/* =========================================
+   TOAST
+========================================= */
 
-.badge.sold {
-    background: #f7eeee;
-    color: #a24747;
-}
+.toast{
 
-.empty {
-    text-align: center;
-    padding: 45px;
-    color: #999;
-    font-size: 11px;
-}
+    position:fixed;
 
-/* ================= MODAL ================= */
-
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.55);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
-    padding: 25px;
-}
+    right:25px;
 
-.modal-overlay.show {
-    display: flex;
-}
+    bottom:25px;
 
-.modal {
-    width: min(950px, 100%);
-    max-height: 92vh;
-    overflow-y: auto;
-    background: white;
-    border-radius: 13px;
-    box-shadow: 0 25px 80px rgba(0,0,0,.25);
-}
+    min-width:260px;
 
-.modal-head {
-    padding: 20px 23px;
-    border-bottom: 1px solid #e7e7e4;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+    background:#161616;
 
-.modal-title {
-    font-size: 16px;
-    font-weight: 700;
-}
+    color:white;
 
-.modal-subtitle {
-    font-size: 10px;
-    color: #999;
-    margin-top: 4px;
-}
+    padding:13px 16px;
 
-.close {
-    border: none;
-    background: #f3f3f0;
-    width: 31px;
-    height: 31px;
-    border-radius: 50%;
-    font-size: 17px;
-}
+    border-radius:9px;
 
-.form {
-    padding: 23px;
-}
+    font-size:10px;
 
-.form-section {
-    margin-bottom: 24px;
-}
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
 
-.form-section-title {
-    color: #a0844b;
-    font-size: 9px;
-    letter-spacing: 1.3px;
-    font-weight: 700;
-    margin-bottom: 13px;
-    text-transform: uppercase;
-}
+    transform:
+        translateY(100px);
 
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 13px;
-}
+    opacity:0;
 
-.field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
+    transition:.25s;
 
-.field.full {
-    grid-column: span 2;
-}
+    z-index:2000;
 
-.field label {
-    font-size: 9px;
-    color: #666;
-    font-weight: 600;
 }
 
-.field input,
-.field select {
-    width: 100%;
-    border: 1px solid #dcdcd8;
-    border-radius: 6px;
-    padding: 9px 10px;
-    font-size: 10px;
-    outline: none;
-    background: white;
-}
 
-.field input:focus,
-.field select:focus {
-    border-color: #a8894f;
-}
+.toast.show{
 
-.net-weight {
-    background: #f7f4ec !important;
-    font-weight: 700;
-}
+    transform:
+        translateY(0);
 
-.modal-footer {
-    border-top: 1px solid #e7e7e4;
-    padding: 16px 23px;
-    display: flex;
-    justify-content: flex-end;
-    gap: 9px;
-}
+    opacity:1;
 
-.cancel-btn {
-    background: white;
-    border: 1px solid #dcdcd8;
-    padding: 10px 16px;
-    border-radius: 6px;
-    font-size: 10px;
 }
 
-.save-btn {
-    background: #050505;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 6px;
-    font-size: 10px;
-    font-weight: 600;
-}
 
-.save-btn:hover {
-    background: #282828;
-}
+.toast.success{
 
-/* ================= TOAST ================= */
-
-.toast {
-    position: fixed;
-    right: 25px;
-    bottom: 25px;
-    background: #171715;
-    color: white;
-    padding: 13px 17px;
-    border-radius: 8px;
-    font-size: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.2);
-    transform: translateY(100px);
-    opacity: 0;
-    transition: .3s;
-    z-index: 200;
-}
+    border-left:3px solid #4ca66c;
 
-.toast.show {
-    transform: translateY(0);
-    opacity: 1;
 }
+
+
+.toast.error{
 
-.toast.success {
-    border-left: 3px solid #56a76e;
+    border-left:3px solid #d25b5b;
+
 }
+
+
+/* =========================================
+   LOADING
+========================================= */
+
+.loading{
+
+    text-align:center;
 
-.toast.error {
-    border-left: 3px solid #c95151;
+    padding:30px;
+
+    color:#999;
+
+    font-size:10px;
+
 }
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:900px){
 
-/* ================= RESPONSIVE ================= */
+    .stats{
 
-@media(max-width:900px) {
+        grid-template-columns:
+            repeat(2,1fr);
 
-    .sidebar {
-        width: 180px;
     }
 
-    .main {
-        margin-left: 180px;
+    .form-grid{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
     }
 
-    .stats {
-        grid-template-columns: repeat(2,1fr);
-    }
-
-    .form-grid {
-        grid-template-columns: repeat(2,1fr);
-    }
 }
 
-@media(max-width:650px) {
 
-    .sidebar {
-        display: none;
+@media(max-width:700px){
+
+    .sidebar{
+
+        width:70px;
+
     }
 
-    .main {
-        margin-left: 0;
+    .brand-title,
+    .brand-sub,
+    .menu-title,
+    .menu-item span:not(.menu-icon),
+    .menu-arrow,
+    .user-name,
+    .user-role{
+
+        display:none;
+
     }
 
-    .stats {
-        grid-template-columns: 1fr;
+    .main{
+
+        margin-left:70px;
+
+        width:calc(100% - 70px);
+
     }
 
-    .form-grid {
-        grid-template-columns: 1fr;
+    .menu-item{
+
+        justify-content:center;
+
     }
 
-    .field.full {
-        grid-column: span 1;
+    .user-box{
+
+        justify-content:center;
+
     }
 
-    .content {
-        padding: 16px;
+    .content{
+
+        padding:18px;
+
     }
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .stats{
+
+        grid-template-columns:1fr 1fr;
+
+    }
+
+    .page-title{
+
+        font-size:21px;
+
+    }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
-<!-- ================= SIDEBAR ================= -->
+
+<div class="app">
+
+
+<!-- ======================================
+     SIDEBAR
+======================================= -->
 
 <aside class="sidebar">
 
-    <div class="brand">
-        <div class="brand-icon">✦</div>
 
-        <div>
-            <div class="brand-name">AURELIA ERP</div>
-            <div class="brand-sub">JEWELLERY RETAIL SYSTEM</div>
-        </div>
+<div class="brand">
+
+    <div class="brand-icon">
+        ✦
     </div>
 
-    <div class="section-title">MAIN</div>
+    <div>
 
-    <div class="nav-item">
-        <span class="nav-icon">⌂</span>
-        Dashboard
-    </div>
-
-    <div class="nav-item active">
-        <span class="nav-icon">◇</span>
-        Inventory
-        <span class="nav-arrow">›</span>
-    </div>
-
-    <div class="nav-item">
-        <span class="nav-icon">◇</span>
-        Products & Designs
-    </div>
-
-    <div class="nav-item">
-        <span class="nav-icon">⇄</span>
-        Stock Transfers
-    </div>
-
-    <div class="nav-item">
-        <span class="nav-icon">⌕</span>
-        Stock Verification
-    </div>
-
-    <div class="section-title">CONTROL</div>
-
-    <div class="nav-item">
-        <span class="nav-icon">▣</span>
-        Stock Adjustments
-    </div>
-
-    <div class="nav-item">
-        <span class="nav-icon">₹</span>
-        Stock Valuation
-    </div>
-
-    <div class="nav-item">
-        <span class="nav-icon">▤</span>
-        Reports
-    </div>
-
-    <div class="user-box">
-
-        <div class="avatar">NP</div>
-
-        <div>
-            <div class="user-name">Nishanth Prabhu</div>
-            <div class="user-role">Administrator</div>
+        <div class="brand-title">
+            AURELIA ERP
         </div>
 
-    </div>
-
-</aside>
-
-
-<!-- ================= MAIN ================= -->
-
-<main class="main">
-
-    <header class="topbar">
-
-        <div class="location">
-            Location
-            <strong>Main Showroom</strong>
-            ˅
-        </div>
-
-        <div class="top-actions">
-            <span>⌕</span>
-            <span>♢</span>
-            <span>29 Aug 2026</span>
-        </div>
-
-    </header>
-
-
-    <section class="content">
-
-        <div class="page-head">
-
-            <div>
-                <div class="eyebrow">PRODUCT MASTER</div>
-                <h1>Products & Designs</h1>
-                <div class="subtitle">
-                    Jewellery designs and product masters.
-                </div>
-            </div>
-
-            <button class="new-btn" id="newDesignBtn">
-                + New Design
-            </button>
-
-        </div>
-
-
-        <!-- CONNECTION -->
-
-        <div class="connection">
-
-            <div class="connection-left">
-
-                <span class="status-dot" id="statusDot"></span>
-
-                <span class="connection-text" id="connectionText">
-                    Checking Google Sheets...
-                </span>
-
-                <span class="sync-time" id="syncTime">
-                    Last Sync: Never
-                </span>
-
-            </div>
-
-            <button class="sync-btn" id="syncBtn">
-                ↻ SYNC NOW
-            </button>
-
-        </div>
-
-
-        <!-- STATS -->
-
-        <div class="stats">
-
-            <div class="stat">
-                <div class="stat-label">Active Designs</div>
-                <div class="stat-number" id="activeCount">0</div>
-            </div>
-
-            <div class="stat">
-                <div class="stat-label">Gold Designs</div>
-                <div class="stat-number" id="goldCount">0</div>
-            </div>
-
-            <div class="stat">
-                <div class="stat-label">Diamond Designs</div>
-                <div class="stat-number" id="diamondCount">0</div>
-            </div>
-
-            <div class="stat">
-                <div class="stat-label">New This Month</div>
-                <div class="stat-number" id="newCount">0</div>
-            </div>
-
-        </div>
-
-
-        <!-- TABLE -->
-
-        <div class="panel">
-
-            <div class="panel-head">
-
-                <div>
-                    <div class="panel-title">Product Master</div>
-                    <div class="panel-sub">
-                        Live data from Google Sheets
-                    </div>
-                </div>
-
-                <input
-                    class="search"
-                    id="searchInput"
-                    placeholder="Search item, design, product..."
-                >
-
-            </div>
-
-            <div class="table-wrap">
-
-                <table>
-
-                    <thead>
-                        <tr>
-                            <th>ITEM ID</th>
-                            <th>DESIGN</th>
-                            <th>PRODUCT</th>
-                            <th>CATEGORY</th>
-                            <th>PURITY</th>
-                            <th>GROSS WT.</th>
-                            <th>NET WT.</th>
-                            <th>BRANCH</th>
-                            <th>STATUS</th>
-                        </tr>
-                    </thead>
-
-                    <tbody id="inventoryTable"></tbody>
-
-                </table>
-
-            </div>
-
-        </div>
-
-    </section>
-
-</main>
-
-
-<!-- ================= NEW DESIGN MODAL ================= -->
-
-<div class="modal-overlay" id="modalOverlay">
-
-    <div class="modal">
-
-        <div class="modal-head">
-
-            <div>
-                <div class="modal-title">
-                    New Jewellery Design
-                </div>
-
-                <div class="modal-subtitle">
-                    Create a new product master record
-                </div>
-            </div>
-
-            <button class="close" id="closeModal">
-                ×
-            </button>
-
-        </div>
-
-
-        <form class="form" id="designForm">
-
-            <!-- BASIC INFORMATION -->
-
-            <div class="form-section">
-
-                <div class="form-section-title">
-                    Basic Information
-                </div>
-
-                <div class="form-grid">
-
-                    <div class="field">
-                        <label>Item ID *</label>
-                        <input id="Item_ID" required placeholder="AU-BG-0004">
-                    </div>
-
-                    <div class="field">
-                        <label>Barcode *</label>
-                        <input id="Barcode" required placeholder="890000000004">
-                    </div>
-
-                    <div class="field">
-                        <label>Design Code *</label>
-                        <input id="Design_Code" required placeholder="BG-543">
-                    </div>
-
-                    <div class="field">
-                        <label>Product Name *</label>
-                        <input id="Product_Name" required placeholder="Gold Bangle">
-                    </div>
-
-                    <div class="field">
-                        <label>Category *</label>
-                        <select id="Category" required>
-                            <option value="">Select</option>
-                            <option>Necklace</option>
-                            <option>Ring</option>
-                            <option>Bangle</option>
-                            <option>Bracelet</option>
-                            <option>Earring</option>
-                            <option>Chain</option>
-                            <option>Pendant</option>
-                            <option>Nose Pin</option>
-                            <option>Other</option>
-                        </select>
-                    </div>
-
-                    <div class="field">
-                        <label>Sub Category</label>
-                        <input id="Sub_Category" placeholder="Traditional">
-                    </div>
-
-                    <div class="field">
-                        <label>Metal</label>
-                        <select id="Metal">
-                            <option>Gold</option>
-                            <option>Silver</option>
-                            <option>Platinum</option>
-                            <option>Other</option>
-                        </select>
-                    </div>
-
-                    <div class="field">
-                        <label>Purity</label>
-                        <select id="Purity">
-                            <option>22K</option>
-                            <option>18K</option>
-                            <option>24K</option>
-                            <option>916</option>
-                            <option>Other</option>
-                        </select>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- WEIGHT -->
-
-            <div class="form-section">
-
-                <div class="form-section-title">
-                    Weight Details
-                </div>
-
-                <div class="form-grid">
-
-                    <div class="field">
-                        <label>Gross Weight (g) *</label>
-                        <input
-                            type="number"
-                            step="0.001"
-                            id="Gross_Weight_g"
-                            required
-                            placeholder="42.800"
-                        >
-                    </div>
-
-                    <div class="field">
-                        <label>Stone Weight (g)</label>
-                        <input
-                            type="number"
-                            step="0.001"
-                            id="Stone_Weight_g"
-                            value="0"
-                        >
-                    </div>
-
-                    <div class="field">
-                        <label>Other Weight (g)</label>
-                        <input
-                            type="number"
-                            step="0.001"
-                            id="Other_Weight_g"
-                            value="0"
-                        >
-                    </div>
-
-                    <div class="field">
-                        <label>Net Weight (g)</label>
-                        <input
-                            class="net-weight"
-                            type="number"
-                            step="0.001"
-                            id="Net_Weight_g"
-                            readonly
-                        >
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- IDENTIFICATION -->
-
-            <div class="form-section">
-
-                <div class="form-section-title">
-                    Identification & Location
-                </div>
-
-                <div class="form-grid">
-
-                    <div class="field">
-                        <label>HUID</label>
-                        <input id="HUID" placeholder="ABC123456789">
-                    </div>
-
-                    <div class="field">
-                        <label>Certificate No.</label>
-                        <input id="Certificate_No" placeholder="CERT-004">
-                    </div>
-
-                    <div class="field">
-                        <label>Branch</label>
-                        <input id="Branch" value="Main Showroom">
-                    </div>
-
-                    <div class="field">
-                        <label>Location</label>
-                        <input id="Location" value="Gold Counter">
-                    </div>
-
-                    <div class="field">
-                        <label>Rack</label>
-                        <input id="Rack" placeholder="R3">
-                    </div>
-
-                    <div class="field">
-                        <label>Tray</label>
-                        <input id="Tray" placeholder="T2">
-                    </div>
-
-                    <div class="field">
-                        <label>Status</label>
-                        <select id="Status">
-                            <option>AVAILABLE</option>
-                            <option>RESERVED</option>
-                            <option>SOLD</option>
-                            <option>TRANSFERRED</option>
-                            <option>HOLD</option>
-                        </select>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- PRICING -->
-
-            <div class="form-section">
-
-                <div class="form-section-title">
-                    Pricing
-                </div>
-
-                <div class="form-grid">
-
-                    <div class="field">
-                        <label>Gold Rate</label>
-                        <input
-                            type="number"
-                            step="0.01"
-                            id="Gold_Rate"
-                            value="12500"
-                        >
-                    </div>
-
-                    <div class="field">
-                        <label>Making Charge</label>
-                        <input
-                            type="number"
-                            step="0.01"
-                            id="Making_Charge"
-                            value="0"
-                        >
-                    </div>
-
-                    <div class="field">
-                        <label>Wastage %</label>
-                        <input
-                            type="number"
-                            step="0.01"
-                            id="Wastage_Percent"
-                            value="0"
-                        >
-                    </div>
-
-                    <div class="field">
-                        <label>Stone Value</label>
-                        <input
-                            type="number"
-                            step="0.01"
-                            id="Stone_Value"
-                            value="0"
-                        >
-                    </div>
-
-                    <div class="field">
-                        <label>Other Charges</label>
-                        <input
-                            type="number"
-                            step="0.01"
-                            id="Other_Charges"
-                            value="0"
-                        >
-                    </div>
-
-                    <div class="field">
-                        <label>Selling Price</label>
-                        <input
-                            type="number"
-                            step="0.01"
-                            id="Selling_Price"
-                            value="0"
-                        >
-                    </div>
-
-                    <div class="field">
-                        <label>GST Rate %</label>
-                        <input
-                            type="number"
-                            step="0.01"
-                            id="GST_Rate"
-                            value="3"
-                        >
-                    </div>
-
-                    <div class="field full">
-                        <label>Remarks</label>
-                        <input
-                            id="Remarks"
-                            placeholder="Additional information..."
-                        >
-                    </div>
-
-                </div>
-
-            </div>
-
-        </form>
-
-
-        <div class="modal-footer">
-
-            <button class="cancel-btn" id="cancelBtn">
-                Cancel
-            </button>
-
-            <button class="save-btn" id="saveBtn">
-                Save Design
-            </button>
-
+        <div class="brand-sub">
+            JEWELLERY RETAIL SYSTEM
         </div>
 
     </div>
@@ -1200,30 +1278,1065 @@ tr:hover td {
 </div>
 
 
+<div class="menu-section">
+
+    <div class="menu-title">
+        MAIN
+    </div>
+
+
+    <div class="menu-item">
+
+        <span class="menu-icon">⌂</span>
+        <span>Dashboard</span>
+
+    </div>
+
+
+    <div class="menu-item active">
+
+        <span class="menu-icon">◇</span>
+        <span>Inventory</span>
+
+        <span class="menu-arrow">›</span>
+
+    </div>
+
+
+    <div class="menu-item">
+
+        <span class="menu-icon">◇</span>
+        <span>Products & Designs</span>
+
+    </div>
+
+
+    <div class="menu-item">
+
+        <span class="menu-icon">⇄</span>
+        <span>Stock Transfers</span>
+
+    </div>
+
+
+    <div class="menu-item">
+
+        <span class="menu-icon">⌕</span>
+        <span>Stock Verification</span>
+
+    </div>
+
+</div>
+
+
+<div class="menu-section">
+
+    <div class="menu-title">
+        CONTROL
+    </div>
+
+
+    <div class="menu-item">
+
+        <span class="menu-icon">▣</span>
+        <span>Stock Adjustments</span>
+
+    </div>
+
+
+    <div class="menu-item">
+
+        <span class="menu-icon">₹</span>
+        <span>Stock Valuation</span>
+
+    </div>
+
+
+    <div class="menu-item">
+
+        <span class="menu-icon">▤</span>
+        <span>Reports</span>
+
+    </div>
+
+</div>
+
+
+<div class="user-box">
+
+    <div class="user-avatar">
+        NP
+    </div>
+
+    <div>
+
+        <div class="user-name">
+            Nishanth Prabhu
+        </div>
+
+        <div class="user-role">
+            Administrator
+        </div>
+
+    </div>
+
+</div>
+
+
+</aside>
+
+
+
+<!-- ======================================
+     MAIN
+======================================= -->
+
+<main class="main">
+
+
+<header class="topbar">
+
+    <div class="location">
+
+        <span>Location</span>
+
+        <strong>
+            Main Showroom
+        </strong>
+
+        <span>⌄</span>
+
+    </div>
+
+
+    <div class="top-actions">
+
+        <span class="top-icon">
+            ⌕
+        </span>
+
+        <span class="top-icon">
+            ♢
+        </span>
+
+        <span class="date"
+              id="currentDate">
+        </span>
+
+    </div>
+
+</header>
+
+
+
+<div class="content">
+
+
+<!-- PAGE HEADER -->
+
+<div class="page-header">
+
+    <div>
+
+        <div class="eyebrow">
+            PRODUCT MASTER
+        </div>
+
+        <h1 class="page-title">
+            Products & Designs
+        </h1>
+
+        <div class="page-subtitle">
+            Jewellery designs and product masters.
+        </div>
+
+    </div>
+
+
+    <button
+        class="primary-btn"
+        id="newDesignBtn">
+
+        + New Design
+
+    </button>
+
+</div>
+
+
+
+<!-- SYNC -->
+
+<div class="sync-bar">
+
+    <div class="sync-left">
+
+        <span class="status-dot"></span>
+
+        <span class="sync-text">
+            Google Sheets Connected
+        </span>
+
+        <span class="sync-time">
+            Last Sync:
+            <span id="lastSync">
+                Never
+            </span>
+        </span>
+
+    </div>
+
+
+    <button
+        class="sync-btn"
+        id="syncBtn">
+
+        ↻ SYNC NOW
+
+    </button>
+
+</div>
+
+
+
+<!-- STATS -->
+
+<div class="stats">
+
+
+<div class="stat-card">
+
+    <div class="stat-label">
+        ACTIVE DESIGNS
+    </div>
+
+    <div
+        class="stat-value"
+        id="activeCount">
+
+        0
+
+    </div>
+
+</div>
+
+
+<div class="stat-card">
+
+    <div class="stat-label">
+        GOLD DESIGNS
+    </div>
+
+    <div
+        class="stat-value"
+        id="goldCount">
+
+        0
+
+    </div>
+
+</div>
+
+
+<div class="stat-card">
+
+    <div class="stat-label">
+        DIAMOND DESIGNS
+    </div>
+
+    <div
+        class="stat-value"
+        id="diamondCount">
+
+        0
+
+    </div>
+
+</div>
+
+
+<div class="stat-card">
+
+    <div class="stat-label">
+        NEW THIS MONTH
+    </div>
+
+    <div
+        class="stat-value"
+        id="newCount">
+
+        0
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- PRODUCT TABLE -->
+
+<div class="table-card">
+
+
+<div class="table-header">
+
+    <div>
+
+        <div class="table-title">
+            Product Master
+        </div>
+
+        <div class="table-sub">
+            Live data from Google Sheets
+        </div>
+
+    </div>
+
+
+    <input
+        type="text"
+        id="searchInput"
+        class="search"
+        placeholder="Search item, design, product...">
+
+</div>
+
+
+
+<div
+    class="table-wrap"
+    id="tableContainer">
+
+    <div class="loading">
+        Loading product data...
+    </div>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</main>
+
+
+</div>
+
+
+
+<!-- ======================================
+     NEW DESIGN MODAL
+======================================= -->
+
+<div
+    class="modal-overlay"
+    id="modalOverlay">
+
+
+<div class="modal">
+
+
+<div class="modal-header">
+
+    <div>
+
+        <div class="modal-title">
+            Create New Design
+        </div>
+
+        <div class="modal-subtitle">
+            Add a new jewellery item to Product Master
+        </div>
+
+    </div>
+
+
+    <button
+        class="close-btn"
+        id="closeModal">
+
+        ×
+
+    </button>
+
+</div>
+
+
+
+<form
+    class="form"
+    id="productForm">
+
+
+<!-- BASIC INFORMATION -->
+
+<div class="form-section">
+
+<div class="form-section-title">
+    BASIC INFORMATION
+</div>
+
+
+<div class="form-grid">
+
+
+<div class="field">
+
+<label>
+    Item ID <span class="required">*</span>
+</label>
+
+<input
+    name="Item_ID"
+    required
+    placeholder="AU-NK-0004">
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Barcode <span class="required">*</span>
+</label>
+
+<input
+    name="Barcode"
+    required
+    placeholder="890000000004">
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Design Code
+</label>
+
+<input
+    name="Design_Code"
+    placeholder="NK-246">
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Product Name
+</label>
+
+<input
+    name="Product_Name"
+    placeholder="Gold Necklace">
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Category
+</label>
+
+<select name="Category">
+
+<option value="Necklace">
+    Necklace
+</option>
+
+<option value="Ring">
+    Ring
+</option>
+
+<option value="Bangle">
+    Bangle
+</option>
+
+<option value="Earring">
+    Earring
+</option>
+
+<option value="Chain">
+    Chain
+</option>
+
+<option value="Pendant">
+    Pendant
+</option>
+
+<option value="Bracelet">
+    Bracelet
+</option>
+
+<option value="Other">
+    Other
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Sub Category
+</label>
+
+<input
+    name="Sub_Category"
+    placeholder="Traditional">
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Metal
+</label>
+
+<select name="Metal">
+
+<option value="Gold">
+    Gold
+</option>
+
+<option value="Silver">
+    Silver
+</option>
+
+<option value="Platinum">
+    Platinum
+</option>
+
+<option value="Diamond">
+    Diamond
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Purity
+</label>
+
+<select name="Purity">
+
+<option value="22K">
+    22K
+</option>
+
+<option value="18K">
+    18K
+</option>
+
+<option value="14K">
+    14K
+</option>
+
+<option value="24K">
+    24K
+</option>
+
+</select>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- WEIGHT -->
+
+<div class="form-section">
+
+<div class="form-section-title">
+    WEIGHT DETAILS — GRAMS
+</div>
+
+
+<div class="form-grid">
+
+
+<div class="field">
+
+<label>
+    Gross Weight
+</label>
+
+<input
+    type="number"
+    step="0.001"
+    name="Gross_Weight_g"
+    placeholder="52.350">
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Stone Weight
+</label>
+
+<input
+    type="number"
+    step="0.001"
+    name="Stone_Weight_g"
+    placeholder="1.850">
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Other Weight
+</label>
+
+<input
+    type="number"
+    step="0.001"
+    name="Other_Weight_g"
+    placeholder="0.000">
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Net Weight
+</label>
+
+<input
+    type="number"
+    step="0.001"
+    name="Net_Weight_g"
+    placeholder="50.500">
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- IDENTIFICATION -->
+
+<div class="form-section">
+
+<div class="form-section-title">
+    IDENTIFICATION & CERTIFICATION
+</div>
+
+
+<div class="form-grid">
+
+
+<div class="field">
+
+<label>
+    HUID
+</label>
+
+<input
+    name="HUID"
+    placeholder="ABC123456789">
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Certificate No.
+</label>
+
+<input
+    name="Certificate_No"
+    placeholder="CERT-004">
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Status
+</label>
+
+<select name="Status">
+
+<option value="AVAILABLE">
+    AVAILABLE
+</option>
+
+<option value="RESERVED">
+    RESERVED
+</option>
+
+<option value="SOLD">
+    SOLD
+</option>
+
+<option value="HOLD">
+    HOLD
+</option>
+
+<option value="REPAIR">
+    REPAIR
+</option>
+
+</select>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- LOCATION -->
+
+<div class="form-section">
+
+<div class="form-section-title">
+    STOCK LOCATION
+</div>
+
+
+<div class="form-grid">
+
+
+<div class="field">
+
+<label>
+    Branch
+</label>
+
+<input
+    name="Branch"
+    value="Main Showroom">
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Location
+</label>
+
+<input
+    name="Location"
+    value="Gold Counter">
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Rack
+</label>
+
+<input
+    name="Rack"
+    placeholder="R1">
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Tray
+</label>
+
+<input
+    name="Tray"
+    placeholder="T1">
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- PRICING -->
+
+<div class="form-section">
+
+<div class="form-section-title">
+    PRICING & GST
+</div>
+
+
+<div class="form-grid">
+
+
+<div class="field">
+
+<label>
+    Gold Rate / gram
+</label>
+
+<input
+    type="number"
+    step="0.01"
+    name="Gold_Rate"
+    placeholder="12500">
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Making Charge
+</label>
+
+<input
+    type="number"
+    step="0.01"
+    name="Making_Charge"
+    placeholder="8500">
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Wastage %
+</label>
+
+<input
+    type="number"
+    step="0.01"
+    name="Wastage_Percent"
+    placeholder="3">
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Stone Value
+</label>
+
+<input
+    type="number"
+    step="0.01"
+    name="Stone_Value"
+    placeholder="12000">
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Other Charges
+</label>
+
+<input
+    type="number"
+    step="0.01"
+    name="Other_Charges"
+    placeholder="500">
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Selling Price
+</label>
+
+<input
+    type="number"
+    step="0.01"
+    name="Selling_Price"
+    placeholder="760000">
+
+</div>
+
+
+<div class="field">
+
+<label>
+    GST Rate %
+</label>
+
+<select name="GST_Rate">
+
+<option value="3">
+    3%
+</option>
+
+<option value="5">
+    5%
+</option>
+
+<option value="18">
+    18%
+</option>
+
+</select>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- OTHER -->
+
+<div class="form-section">
+
+<div class="form-section-title">
+    ADDITIONAL INFORMATION
+</div>
+
+
+<div class="form-grid">
+
+
+<div class="field full">
+
+<label>
+    Image URL
+</label>
+
+<input
+    name="Image_URL"
+    placeholder="https://...">
+
+</div>
+
+
+<div class="field full">
+
+<label>
+    Remarks
+</label>
+
+<textarea
+    name="Remarks"
+    placeholder="Additional notes..."></textarea>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+</form>
+
+
+
+<div class="modal-footer">
+
+<button
+    class="cancel-btn"
+    id="cancelBtn">
+
+    Cancel
+
+</button>
+
+
+<button
+    class="save-btn"
+    id="saveBtn">
+
+    Save Design
+
+</button>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
 <!-- TOAST -->
 
-<div class="toast" id="toast"></div>
+<div
+    class="toast"
+    id="toast">
+
+</div>
+
 
 
 <script>
 
-/* =========================================================
-   AURELIA ERP
-   GOOGLE SHEETS CONNECTION
-========================================================= */
 
-const GOOGLE_SHEET_API =
-"https://script.google.com/macros/s/AKfycbztZD8xpihRAH_T3VeF-hV0XKum9effhIt8RVxZWCT2F1aspI7JkIVRPOFz1Lb0juWwmw/exec";
+/* =========================================
+   GOOGLE APPS SCRIPT URL
+========================================= */
 
+
+/*
+   IMPORTANT:
+
+   Replace this with your deployed
+   Google Apps Script Web App URL.
+*/
+
+const API_URL =
+    "https://script.google.com/macros/s/AKfycbztZD8xpihRAH_T3VeF-hV0XKum9effhIt8RVxZWCT2F1aspI7JkIVRPOFz1Lb0juWwmw/exec";
+
+
+/* =========================================
+   GLOBAL DATA
+========================================= */
 
 let products = [];
 
 
-/* =========================================================
-   DOM ELEMENTS
-========================================================= */
 
-const modalOverlay =
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const modal =
     document.getElementById("modalOverlay");
 
 const newDesignBtn =
@@ -1235,11 +2348,11 @@ const closeModal =
 const cancelBtn =
     document.getElementById("cancelBtn");
 
+const productForm =
+    document.getElementById("productForm");
+
 const saveBtn =
     document.getElementById("saveBtn");
-
-const designForm =
-    document.getElementById("designForm");
 
 const syncBtn =
     document.getElementById("syncBtn");
@@ -1247,442 +2360,391 @@ const syncBtn =
 const searchInput =
     document.getElementById("searchInput");
 
-const inventoryTable =
-    document.getElementById("inventoryTable");
-
-const statusDot =
-    document.getElementById("statusDot");
-
-const connectionText =
-    document.getElementById("connectionText");
-
-const syncTime =
-    document.getElementById("syncTime");
-
-const toast =
-    document.getElementById("toast");
 
 
-/* =========================================================
-   MODAL
-========================================================= */
+/* =========================================
+   DATE
+========================================= */
 
-newDesignBtn.addEventListener("click", () => {
+function updateDate(){
 
-    designForm.reset();
+    const now = new Date();
 
-    document.getElementById("Metal").value = "Gold";
-    document.getElementById("Purity").value = "22K";
-    document.getElementById("Status").value = "AVAILABLE";
-    document.getElementById("Branch").value = "Main Showroom";
-    document.getElementById("Location").value = "Gold Counter";
-    document.getElementById("Gold_Rate").value = "12500";
-    document.getElementById("GST_Rate").value = "3";
-
-    calculateNetWeight();
-
-    modalOverlay.classList.add("show");
-
-});
-
-
-function closeDesignModal() {
-
-    modalOverlay.classList.remove("show");
+    document.getElementById(
+        "currentDate"
+    ).textContent =
+        now.toLocaleDateString(
+            "en-IN",
+            {
+                day:"2-digit",
+                month:"short",
+                year:"numeric"
+            }
+        );
 
 }
+
+updateDate();
+
+
+
+/* =========================================
+   MODAL
+========================================= */
+
+newDesignBtn.addEventListener(
+    "click",
+    openModal
+);
 
 
 closeModal.addEventListener(
     "click",
-    closeDesignModal
+    closeModalWindow
 );
+
 
 cancelBtn.addEventListener(
     "click",
-    closeDesignModal
+    closeModalWindow
 );
 
-modalOverlay.addEventListener(
-    "click",
-    function(e) {
 
-        if (e.target === modalOverlay) {
-            closeDesignModal();
+modal.addEventListener(
+    "click",
+    function(e){
+
+        if(e.target === modal){
+
+            closeModalWindow();
+
         }
 
     }
 );
 
 
-/* =========================================================
-   NET WEIGHT CALCULATION
-========================================================= */
+function openModal(){
 
-[
-    "Gross_Weight_g",
-    "Stone_Weight_g",
-    "Other_Weight_g"
-].forEach(id => {
-
-    document.getElementById(id)
-        .addEventListener(
-            "input",
-            calculateNetWeight
-        );
-
-});
-
-
-function calculateNetWeight() {
-
-    const gross =
-        parseFloat(
-            document.getElementById(
-                "Gross_Weight_g"
-            ).value
-        ) || 0;
-
-    const stone =
-        parseFloat(
-            document.getElementById(
-                "Stone_Weight_g"
-            ).value
-        ) || 0;
-
-    const other =
-        parseFloat(
-            document.getElementById(
-                "Other_Weight_g"
-            ).value
-        ) || 0;
-
-    const net =
-        Math.max(
-            0,
-            gross - stone - other
-        );
-
-    document.getElementById(
-        "Net_Weight_g"
-    ).value = net.toFixed(3);
+    modal.classList.add("show");
 
 }
 
 
-/* =========================================================
-   GOOGLE SHEETS SYNC
-========================================================= */
+function closeModalWindow(){
 
-async function syncFromGoogleSheets() {
+    modal.classList.remove("show");
 
-    syncBtn.classList.add("loading");
-
-    syncBtn.textContent = "SYNCING...";
-
-    connectionText.textContent =
-        "Connecting to Google Sheets...";
-
-    statusDot.className = "status-dot";
+}
 
 
-    try {
+
+/* =========================================
+   TOAST
+========================================= */
+
+function showToast(
+    message,
+    type = "success"
+){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.className =
+        "toast show " + type;
+
+    setTimeout(
+        function(){
+
+            toast.classList.remove("show");
+
+        },
+        3500
+    );
+
+}
+
+
+
+/* =========================================
+   LOAD PRODUCTS
+========================================= */
+
+async function loadProducts(){
+
+    const table =
+        document.getElementById(
+            "tableContainer"
+        );
+
+    table.innerHTML =
+        '<div class="loading">Loading product data...</div>';
+
+
+    try{
+
+        if(
+            !API_URL ||
+            API_URL.includes(
+                "PASTE_YOUR"
+            )
+        ){
+
+            throw new Error(
+                "Apps Script URL is not configured"
+            );
+
+        }
+
 
         const response =
             await fetch(
-                GOOGLE_SHEET_API + "?t=" + Date.now()
+                API_URL +
+                "?action=products"
             );
 
-        if (!response.ok) {
-            throw new Error(
-                "HTTP " + response.status
-            );
-        }
 
         const result =
             await response.json();
 
 
-        if (!result.success) {
+        if(!result.success){
 
             throw new Error(
-                result.error ||
-                "Google Sheets returned an error"
+                result.message ||
+                "Unable to load products"
             );
 
         }
 
 
-        products = Array.isArray(result.data)
-            ? result.data
-            : [];
+        products =
+            result.data || [];
 
 
-        /* Merge locally-created demo records */
-
-        const localProducts =
-            JSON.parse(
-                localStorage.getItem(
-                    "aurelia_local_products"
-                ) || "[]"
-            );
+        renderProducts(
+            products
+        );
 
 
-        localProducts.forEach(localItem => {
-
-            const exists =
-                products.some(
-                    p =>
-                    String(p.Item_ID) ===
-                    String(localItem.Item_ID)
-                );
-
-            if (!exists) {
-                products.push(localItem);
-            }
-
-        });
+        updateStats(
+            products
+        );
 
 
-        statusDot.className =
-            "status-dot connected";
-
-        connectionText.textContent =
-            "Google Sheets Connected";
-
-        syncTime.textContent =
-            "Last Sync: " +
+        document.getElementById(
+            "lastSync"
+        ).textContent =
             new Date().toLocaleTimeString(
-                [],
+                "en-IN",
                 {
-                    hour: "2-digit",
-                    minute: "2-digit"
+                    hour:"2-digit",
+                    minute:"2-digit"
                 }
             );
 
 
-        renderProducts();
-
-        updateStats();
-
-
-        showToast(
-            "✓ " +
-            products.length +
-            " products synced",
-            "success"
-        );
-
     }
+    catch(error){
 
-    catch(error) {
-
-        console.error(error);
-
-        statusDot.className =
-            "status-dot error";
-
-        connectionText.textContent =
-            "Google Sheets Connection Error";
-
+        table.innerHTML = `
+            <div class="empty">
+                Unable to load Google Sheets data.<br><br>
+                ${escapeHtml(error.message)}
+            </div>
+        `;
 
         showToast(
-            "Google Sheets connection failed",
+            error.message,
             "error"
         );
 
     }
 
-    finally {
-
-        syncBtn.classList.remove(
-            "loading"
-        );
-
-        syncBtn.textContent =
-            "↻ SYNC NOW";
-
-    }
-
 }
 
 
-syncBtn.addEventListener(
-    "click",
-    syncFromGoogleSheets
-);
+
+/* =========================================
+   RENDER PRODUCTS
+========================================= */
+
+function renderProducts(
+    data
+){
+
+    const table =
+        document.getElementById(
+            "tableContainer"
+        );
 
 
-/* =========================================================
-   RENDER TABLE
-========================================================= */
+    if(!data.length){
 
-function renderProducts() {
-
-    const search =
-        searchInput.value
-            .toLowerCase()
-            .trim();
-
-
-    const filtered =
-        products.filter(item => {
-
-            const text = [
-
-                item.Item_ID,
-                item.Barcode,
-                item.Design_Code,
-                item.Product_Name,
-                item.Category,
-                item.Sub_Category,
-                item.Purity,
-                item.Branch,
-                item.Location,
-                item.Status
-
-            ]
-            .join(" ")
-            .toLowerCase();
-
-            return text.includes(search);
-
-        });
-
-
-    if (filtered.length === 0) {
-
-        inventoryTable.innerHTML = `
-            <tr>
-                <td colspan="9" class="empty">
-                    No products found
-                </td>
-            </tr>
+        table.innerHTML = `
+            <div class="empty">
+                No jewellery products found.
+            </div>
         `;
 
         return;
+
     }
 
 
-    inventoryTable.innerHTML =
-        filtered.map(item => {
+    let html = `
 
-            const status =
-                String(
-                    item.Status || "AVAILABLE"
-                ).toUpperCase();
+    <table>
+
+    <thead>
+
+    <tr>
+
+        <th>ITEM ID</th>
+        <th>DESIGN</th>
+        <th>PRODUCT</th>
+        <th>CATEGORY</th>
+        <th>PURITY</th>
+        <th>GROSS WT.</th>
+        <th>NET WT.</th>
+        <th>BRANCH</th>
+        <th>STATUS</th>
+
+    </tr>
+
+    </thead>
+
+    <tbody>
+    `;
 
 
-            let badgeClass =
-                "available";
+    data.forEach(
+        function(item){
 
-            if (status === "RESERVED") {
-                badgeClass = "reserved";
-            }
+            html += `
 
-            if (
-                status === "SOLD" ||
-                status === "HOLD"
-            ) {
-                badgeClass = "sold";
-            }
+            <tr>
 
+                <td class="item-id">
+                    ${escapeHtml(
+                        item.Item_ID
+                    )}
+                </td>
 
-            return `
+                <td>
+                    ${escapeHtml(
+                        item.Design_Code
+                    )}
+                </td>
 
-                <tr>
+                <td>
+                    ${escapeHtml(
+                        item.Product_Name
+                    )}
+                </td>
 
-                    <td class="item-id">
-                        ${safe(item.Item_ID)}
-                    </td>
+                <td>
+                    ${escapeHtml(
+                        item.Category
+                    )}
+                </td>
 
-                    <td>
-                        ${safe(item.Design_Code)}
-                    </td>
+                <td>
+                    ${escapeHtml(
+                        item.Purity
+                    )}
+                </td>
 
-                    <td>
-                        ${safe(item.Product_Name)}
-                    </td>
+                <td>
+                    ${formatWeight(
+                        item.Gross_Weight_g
+                    )}
+                </td>
 
-                    <td>
-                        ${safe(item.Category)}
-                    </td>
+                <td>
+                    <strong>
+                        ${formatWeight(
+                            item.Net_Weight_g
+                        )}
+                    </strong>
+                </td>
 
-                    <td>
-                        ${safe(item.Purity)}
-                    </td>
+                <td>
+                    ${escapeHtml(
+                        item.Branch
+                    )}
+                </td>
 
-                    <td>
-                        ${formatNumber(
-                            item.Gross_Weight_g
-                        )} g
-                    </td>
+                <td>
+                    <span class="status">
+                        ${escapeHtml(
+                            item.Status ||
+                            "AVAILABLE"
+                        )}
+                    </span>
+                </td>
 
-                    <td>
-                        <strong>
-                            ${formatNumber(
-                                item.Net_Weight_g
-                            )} g
-                        </strong>
-                    </td>
-
-                    <td>
-                        ${safe(item.Branch)}
-                    </td>
-
-                    <td>
-                        <span class="badge ${badgeClass}">
-                            ${safe(status)}
-                        </span>
-                    </td>
-
-                </tr>
+            </tr>
 
             `;
 
-        }).join("");
+        }
+    );
+
+
+    html += `
+
+    </tbody>
+
+    </table>
+
+    `;
+
+
+    table.innerHTML = html;
 
 }
 
 
-/* =========================================================
-   SEARCH
-========================================================= */
 
-searchInput.addEventListener(
-    "input",
-    renderProducts
-);
+/* =========================================
+   STATS
+========================================= */
 
-
-/* =========================================================
-   STATISTICS
-========================================================= */
-
-function updateStats() {
+function updateStats(
+    data
+){
 
     const active =
-        products.filter(
-            p =>
-            String(p.Status || "")
-                .toUpperCase() !== "SOLD"
+        data.filter(
+            item =>
+                String(
+                    item.Status
+                ).toUpperCase() !== "SOLD"
         ).length;
 
 
     const gold =
-        products.filter(
-            p =>
-            String(p.Metal || "")
-                .toLowerCase() === "gold"
+        data.filter(
+            item =>
+                String(
+                    item.Metal
+                ).toLowerCase() === "gold"
         ).length;
 
 
     const diamond =
-        products.filter(
-            p =>
-            String(p.Category || "")
-                .toLowerCase()
-                .includes("diamond")
+        data.filter(
+            item =>
+                String(
+                    item.Metal
+                ).toLowerCase() === "diamond" ||
+                String(
+                    item.Category
+                ).toLowerCase() === "diamond"
         ).length;
 
 
@@ -1690,22 +2752,33 @@ function updateStats() {
         new Date().getMonth();
 
 
+    const currentYear =
+        new Date().getFullYear();
+
+
     const newThisMonth =
-        products.filter(p => {
+        data.filter(
+            item => {
 
-            if (!p.Created_Date) {
-                return false;
+                if(!item.Created_Date){
+                    return false;
+                }
+
+                const d =
+                    new Date(
+                        item.Created_Date
+                    );
+
+                return (
+                    d.getMonth() ===
+                    currentMonth
+                    &&
+                    d.getFullYear() ===
+                    currentYear
+                );
+
             }
-
-            const d =
-                new Date(p.Created_Date);
-
-            return (
-                !isNaN(d) &&
-                d.getMonth() === currentMonth
-            );
-
-        }).length;
+        ).length;
 
 
     document.getElementById(
@@ -1730,133 +2803,129 @@ function updateStats() {
 }
 
 
-/* =========================================================
-   SAVE NEW DESIGN
-========================================================= */
 
-saveBtn.addEventListener(
-    "click",
-    saveNewDesign
+/* =========================================
+   SEARCH
+========================================= */
+
+searchInput.addEventListener(
+    "input",
+    function(){
+
+        const q =
+            this.value
+                .trim()
+                .toLowerCase();
+
+
+        if(!q){
+
+            renderProducts(
+                products
+            );
+
+            return;
+
+        }
+
+
+        const filtered =
+            products.filter(
+                item => {
+
+                    return [
+
+                        item.Item_ID,
+
+                        item.Barcode,
+
+                        item.Design_Code,
+
+                        item.Product_Name,
+
+                        item.Category,
+
+                        item.Sub_Category,
+
+                        item.Purity,
+
+                        item.HUID
+
+                    ]
+                    .join(" ")
+                    .toLowerCase()
+                    .includes(q);
+
+                }
+            );
+
+
+        renderProducts(
+            filtered
+        );
+
+    }
 );
 
 
-async function saveNewDesign() {
 
-    if (!designForm.reportValidity()) {
+/* =========================================
+   SYNC
+========================================= */
+
+syncBtn.addEventListener(
+    "click",
+    async function(){
+
+        syncBtn.disabled = true;
+
+        syncBtn.textContent =
+            "↻ SYNCING...";
+
+
+        await loadProducts();
+
+
+        syncBtn.disabled = false;
+
+        syncBtn.textContent =
+            "↻ SYNC NOW";
+
+    }
+);
+
+
+
+/* =========================================
+   SAVE NEW DESIGN
+========================================= */
+
+saveBtn.addEventListener(
+    "click",
+    saveProduct
+);
+
+
+async function saveProduct(){
+
+    if(!productForm.checkValidity()){
+
+        productForm.reportValidity();
+
         return;
+
     }
 
 
-    calculateNetWeight();
-
-
-    const item = {
-
-        Item_ID:
-            value("Item_ID"),
-
-        Barcode:
-            value("Barcode"),
-
-        Design_Code:
-            value("Design_Code"),
-
-        Product_Name:
-            value("Product_Name"),
-
-        Category:
-            value("Category"),
-
-        Sub_Category:
-            value("Sub_Category"),
-
-        Metal:
-            value("Metal"),
-
-        Purity:
-            value("Purity"),
-
-        Gross_Weight_g:
-            numberValue("Gross_Weight_g"),
-
-        Stone_Weight_g:
-            numberValue("Stone_Weight_g"),
-
-        Other_Weight_g:
-            numberValue("Other_Weight_g"),
-
-        Net_Weight_g:
-            numberValue("Net_Weight_g"),
-
-        HUID:
-            value("HUID"),
-
-        Certificate_No:
-            value("Certificate_No"),
-
-        Branch:
-            value("Branch"),
-
-        Location:
-            value("Location"),
-
-        Rack:
-            value("Rack"),
-
-        Tray:
-            value("Tray"),
-
-        Status:
-            value("Status"),
-
-        Gold_Rate:
-            numberValue("Gold_Rate"),
-
-        Making_Charge:
-            numberValue("Making_Charge"),
-
-        Wastage_Percent:
-            numberValue("Wastage_Percent"),
-
-        Stone_Value:
-            numberValue("Stone_Value"),
-
-        Other_Charges:
-            numberValue("Other_Charges"),
-
-        Selling_Price:
-            numberValue("Selling_Price"),
-
-        GST_Rate:
-            numberValue("GST_Rate"),
-
-        Image_URL: "",
-
-        Created_Date:
-            new Date()
-                .toISOString()
-                .slice(0,10),
-
-        Remarks:
-            value("Remarks")
-
-    };
-
-
-    /* Check duplicate Item ID */
-
-    const duplicate =
-        products.some(
-            p =>
-            String(p.Item_ID).toLowerCase() ===
-            String(item.Item_ID).toLowerCase()
-        );
-
-
-    if (duplicate) {
+    if(
+        !API_URL ||
+        API_URL.includes(
+            "PASTE_YOUR"
+        )
+    ){
 
         showToast(
-            "Item ID already exists",
+            "Please configure the Apps Script URL first.",
             "error"
         );
 
@@ -1865,155 +2934,201 @@ async function saveNewDesign() {
     }
 
 
-    /* Add immediately to UI */
-
-    products.unshift(item);
-
-    renderProducts();
-
-    updateStats();
-
-
-    /* Save locally */
-
-    const localProducts =
-        JSON.parse(
-            localStorage.getItem(
-                "aurelia_local_products"
-            ) || "[]"
+    const formData =
+        new FormData(
+            productForm
         );
 
-    localProducts.push(item);
 
-    localStorage.setItem(
-        "aurelia_local_products",
-        JSON.stringify(localProducts)
-    );
+    const params =
+        new URLSearchParams();
 
 
-    closeDesignModal();
+    for(
+        const [
+            key,
+            value
+        ]
+        of formData.entries()
+    ){
 
-    showToast(
-        "✓ Design created successfully",
-        "success"
-    );
-
-
-    /*
-       IMPORTANT:
-       The current Apps Script is GET-only.
-       Therefore the new record is currently stored
-       locally and displayed immediately.
-
-       Once we add doPost() to Apps Script,
-       this same button can write directly
-       into PRODUCT_MASTER.
-    */
-
-}
-
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
-function value(id) {
-
-    return document
-        .getElementById(id)
-        .value
-        .trim();
-
-}
-
-
-function numberValue(id) {
-
-    const n =
-        parseFloat(
-            document.getElementById(id).value
+        params.append(
+            key,
+            value
         );
 
-    return isNaN(n) ? 0 : n;
-
-}
-
-
-function formatNumber(value) {
-
-    const n =
-        parseFloat(value);
-
-    if (isNaN(n)) {
-        return "0.000";
     }
 
-    return n.toFixed(3);
+
+    params.append(
+        "action",
+        "createProduct"
+    );
+
+
+    saveBtn.disabled = true;
+
+    saveBtn.textContent =
+        "Saving...";
+
+
+    try{
+
+        const response =
+            await fetch(
+                API_URL +
+                "?" +
+                params.toString()
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if(!result.success){
+
+            throw new Error(
+                result.message ||
+                "Could not save design"
+            );
+
+        }
+
+
+        showToast(
+            "✓ Design added to Google Sheets",
+            "success"
+        );
+
+
+        productForm.reset();
+
+
+        closeModalWindow();
+
+
+        await loadProducts();
+
+
+    }
+    catch(error){
+
+        showToast(
+            error.message,
+            "error"
+        );
+
+    }
+    finally{
+
+        saveBtn.disabled = false;
+
+        saveBtn.textContent =
+            "Save Design";
+
+    }
 
 }
 
 
-function safe(value) {
 
-    if (
+/* =========================================
+   FORMAT WEIGHT
+========================================= */
+
+function formatWeight(
+    value
+){
+
+    if(
+        value === undefined ||
         value === null ||
-        value === undefined
-    ) {
-        return "";
+        value === ""
+    ){
+
+        return "-";
+
     }
+
+
+    const n =
+        Number(value);
+
+
+    if(
+        Number.isNaN(n)
+    ){
+
+        return escapeHtml(
+            value
+        );
+
+    }
+
+
+    return (
+        n.toFixed(3) +
+        " g"
+    );
+
+}
+
+
+
+/* =========================================
+   HTML ESCAPE
+========================================= */
+
+function escapeHtml(
+    value
+){
+
+    if(
+        value === undefined ||
+        value === null
+    ){
+
+        return "";
+
+    }
+
 
     return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-function showToast(
-    message,
-    type = "success"
-) {
-
-    toast.textContent = message;
-
-    toast.className =
-        "toast " +
-        type +
-        " show";
-
-
-    setTimeout(() => {
-
-        toast.classList.remove(
-            "show"
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
         );
 
-    }, 3000);
-
 }
 
 
-/* =========================================================
-   INITIAL LOAD
-========================================================= */
 
-window.addEventListener(
-    "load",
-    () => {
+/* =========================================
+   START
+========================================= */
 
-        syncFromGoogleSheets();
-
-    }
-);
+loadProducts();
 
 </script>
 
+
 </body>
+
 </html>
