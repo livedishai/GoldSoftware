@@ -6,221 +6,238 @@
 <title>New Sheeba Jewellery – Owner Dashboard</title>
 <style>
 :root{
-  --maroon:#4a0027;
-  --maroon-deep:#33001a;
-  --maroon2:#6e0038;
-  --gold:#e8b93f;
-  --gold-bright:#f8d976;
+  --maroon:#5d0030;
+  --maroon2:#79003f;
+  --gold:#f4c542;
   --green:#0b8f3c;
-  --green-deep:#087532;
   --blue:#2366d1;
-  --orange:#d9720a;
-  --bg:#f7f3ee;
-  --text:#2a1620;
-  --muted:#867a80;
+  --orange:#ff6a00;
+  --bg:#f8f6f3;
+  --text:#231f20;
+  --muted:#756d70;
   --card:#fffdfb;
-  --line:#ece3de;
-  --ease: cubic-bezier(.22,.9,.32,1);
+  --line:#e7e1df;
 }
 *{box-sizing:border-box}
+
 @media (prefers-reduced-motion: reduce){
-  *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important;}
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
 }
-body{margin:0;background:#e9e3df;font-family:'Segoe UI',Arial,Helvetica,sans-serif;color:var(--text)}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 15% 15%, rgba(244,197,66,.10), transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(93,0,48,.10), transparent 45%),
+    linear-gradient(120deg,#efe9e5,#e8e2df,#f1ece8,#e6e0dc);
+  background-size:200% 200%, 200% 200%, 300% 300%;
+  animation: bgdrift 22s ease-in-out infinite;
+}
+@keyframes bgdrift{
+  0%{background-position:0% 0%, 100% 100%, 0% 50%}
+  50%{background-position:60% 40%, 40% 60%, 100% 50%}
+  100%{background-position:0% 0%, 100% 100%, 0% 50%}
+}
+
 .phone{
   max-width:480px; min-height:100vh; margin:auto; background:var(--bg);
-  box-shadow:0 0 40px rgba(0,0,0,.2); overflow:hidden; position:relative;
+  box-shadow:0 0 35px rgba(0,0,0,.18); overflow:hidden;
+  position:relative;
 }
 
-/* ---------- Topbar ---------- */
 .topbar{
-  background:linear-gradient(135deg,var(--maroon-deep),var(--maroon2) 60%,var(--maroon));
-  background-size:200% 200%;
+  background:linear-gradient(120deg,#4d0028,#79003f,#5d0030,#8a0047);
+  background-size:300% 300%;
+  animation:topbarshift 10s ease infinite;
   color:white;
-  padding:20px 18px 22px; position:sticky; top:0; z-index:5;
-  overflow:hidden;
-  animation:gradientShift 12s ease-in-out infinite;
+  padding:18px 18px 14px; position:sticky; top:0; z-index:5;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);
 }
-@keyframes gradientShift{
-  0%,100%{background-position:0% 50%}
+@keyframes topbarshift{
+  0%{background-position:0% 50%}
   50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
-.topbar::before{
-  content:"";
-  position:absolute; inset:-40% -10% auto -10%; height:180%;
-  background:radial-gradient(circle at 30% 20%, rgba(248,217,118,.14), transparent 55%),
-             radial-gradient(circle at 80% 60%, rgba(248,217,118,.10), transparent 50%);
-  pointer-events:none;
-}
-.toprow{display:flex;align-items:center;gap:14px; position:relative}
+
+.toprow{display:flex;align-items:center;gap:14px}
 .menu,.profile{
-  width:40px;height:40px;display:grid;place-items:center;font-size:24px;color:white;
-  border-radius:50%; transition:background .25s var(--ease), transform .2s var(--ease);
+  width:40px;height:40px;display:grid;place-items:center;font-size:27px;color:white;
+  border-radius:50%; transition:background .2s ease, transform .15s ease; cursor:pointer;
 }
-.menu:active,.profile:active{transform:scale(.9); background:rgba(255,255,255,.12)}
+.menu:hover,.profile:hover{background:rgba(255,255,255,.14); transform:scale(1.08)}
+.menu:active,.profile:active{transform:scale(.92)}
+
 .brand{flex:1;text-align:center}
 .brand .name{
-  font-family:Georgia,'Times New Roman',serif; letter-spacing:.02em;
-  background:linear-gradient(90deg, var(--gold) 0%, var(--gold-bright) 45%, var(--gold) 90%);
-  background-size:220% auto;
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-  font-size:20px;font-weight:700;white-space:nowrap;
-  animation:shine 5s linear infinite, riseIn .6s var(--ease) both;
+  font-family:Georgia,serif;color:var(--gold);font-size:21px;font-weight:700;white-space:nowrap;
+  text-shadow:0 0 14px rgba(244,197,66,.35);
+  animation:shine 5s ease-in-out infinite;
 }
-@keyframes shine{ to{ background-position:-220% center; } }
-@keyframes riseIn{ from{opacity:0; transform:translateY(-6px)} to{opacity:1; transform:none} }
-.brand .sub{
-  font-size:12.5px;margin-top:5px; letter-spacing:.08em; color:#e9cfa9; opacity:.85;
-  animation:riseIn .6s .1s var(--ease) both;
+@keyframes shine{
+  0%,100%{text-shadow:0 0 8px rgba(244,197,66,.25)}
+  50%{text-shadow:0 0 20px rgba(244,197,66,.55)}
 }
+.brand .sub{font-size:14px;margin-top:4px;opacity:.9}
 
-/* ---------- Content ---------- */
-.content{padding:20px 14px 30px}
-.label{font-weight:700;color:#5c2740;font-size:15.5px;margin:2px 4px 9px}
-.searchrow{display:flex;gap:10px;margin-bottom:6px}
+.content{padding:18px 14px 28px}
+
+.label{font-weight:700;color:#4d2437;font-size:16px;margin:3px 4px 8px}
+
+.searchrow{display:flex;gap:10px;margin-bottom:18px}
 .searchrow input{
-  flex:1;border:1.5px solid #ddd4d0;border-radius:12px;padding:14px 16px;
-  font-size:17px;background:white;outline:none;
-  transition:border-color .2s var(--ease), box-shadow .2s var(--ease);
+  flex:1;border:1px solid #d9d3d1;border-radius:10px;padding:14px 16px;
+  font-size:18px;background:white;outline:none;
+  transition:border-color .2s ease, box-shadow .2s ease;
 }
 .searchrow input:focus{
   border-color:var(--maroon2);
-  box-shadow:0 0 0 4px rgba(110,0,56,.10);
+  box-shadow:0 0 0 3px rgba(121,0,63,.15);
 }
 .searchrow button{
-  width:58px;border:0;border-radius:12px;background:var(--maroon);color:white;font-size:24px;cursor:pointer;
+  width:62px;border:0;border-radius:10px;background:var(--maroon);color:white;font-size:27px;cursor:pointer;
   position:relative; overflow:hidden;
-  transition:transform .15s var(--ease), background .2s var(--ease);
+  transition:transform .15s ease, box-shadow .2s ease, background .2s ease;
+  box-shadow:0 3px 10px rgba(93,0,48,.35);
 }
-.searchrow button:active{transform:scale(.92); background:var(--maroon2)}
-.hint{font-size:12px;color:var(--muted);margin:2px 6px 18px}
+.searchrow button:hover{background:var(--maroon2); transform:translateY(-2px); box-shadow:0 6px 16px rgba(93,0,48,.4)}
+.searchrow button:active{transform:translateY(0) scale(.94)}
 
-/* status */
-#status{
-  border-radius:12px;padding:14px 16px;margin-bottom:16px;font-size:14px;
-  display:flex; align-items:center; gap:10px;
-  animation:fadeSlide .35s var(--ease) both;
+/* generic ripple for all interactive buttons */
+.ripple{
+  position:absolute; border-radius:50%; transform:scale(0);
+  background:rgba(255,255,255,.55); pointer-events:none;
+  animation:rippleAnim .55s ease-out forwards;
 }
-@keyframes fadeSlide{ from{opacity:0; transform:translateY(-6px)} to{opacity:1; transform:none} }
-#status.loading{background:#fbf7ee;color:#8a6d1f;border:1px solid #f0e2bb}
-#status.error{background:#fdf0ef;color:#9c2a20;border:1px solid #f4cfcb}
-.spinner{
-  width:16px;height:16px;border-radius:50%;
-  border:2.5px solid rgba(138,109,31,.25); border-top-color:#8a6d1f;
-  animation:spin .7s linear infinite; flex:none;
+@keyframes rippleAnim{
+  to{transform:scale(3.2); opacity:0}
 }
-@keyframes spin{ to{transform:rotate(360deg)} }
-.hidden{display:none !important}
 
-/* ---------- Cards ---------- */
 .card{
-  background:var(--card);border:1px solid var(--line);border-radius:16px;
-  box-shadow:0 3px 14px rgba(74,0,39,.06);padding:14px;margin-bottom:14px;
+  background:var(--card);border:1px solid #eee8e5;border-radius:14px;
+  box-shadow:0 2px 8px rgba(0,0,0,.05);padding:13px;margin-bottom:14px;
   opacity:0; transform:translateY(14px);
-  animation:cardIn .5s var(--ease) forwards;
+  animation:cardIn .5s ease forwards;
 }
-@keyframes cardIn{ to{opacity:1; transform:none} }
-.cardtitle{display:flex;align-items:center;gap:9px;color:#5b1637;font-weight:800;font-size:16.5px;margin:2px 4px 10px}
-.cardtitle .ico{
-  width:28px;height:28px;border-radius:8px;display:grid;place-items:center;
-  background:linear-gradient(135deg,var(--maroon2),var(--maroon)); color:var(--gold-bright); font-size:14px;
+.card:nth-of-type(1){animation-delay:.03s}
+.card:nth-of-type(2){animation-delay:.13s}
+@keyframes cardIn{
+  to{opacity:1; transform:translateY(0)}
 }
+
+.cardtitle{display:flex;align-items:center;gap:9px;color:#5b1637;font-weight:800;font-size:17px;margin:2px 4px 10px}
 .detailrow{
-  display:grid;grid-template-columns:1fr 1.5fr;gap:4px;align-items:baseline;
-  padding:10px 4px;border-bottom:1px solid #efe8e5;font-size:14.5px;
-  opacity:0; animation:rowIn .4s var(--ease) forwards;
+  display:grid;grid-template-columns:34px 1fr 12px 1.45fr;gap:4px;align-items:center;padding:10px 3px;
+  border-bottom:1px solid #e8e2df;font-size:15px;
+  transition:background .2s ease;
 }
+.detailrow:hover{background:#faf6f2}
 .detailrow:last-child{border-bottom:0}
-.detailrow .k{color:var(--muted); font-size:13px}
-.value{font-weight:600;word-break:break-word}
+.icon{font-size:19px;color:#765e66;text-align:center}
+.value{font-weight:500;word-break:break-word}
 .whatsapp-mini{color:#149447;font-weight:800;white-space:nowrap}
-@keyframes rowIn{ from{opacity:0; transform:translateX(-6px)} to{opacity:1; transform:none} }
 
-.tablewrap{overflow-x:auto; border-radius:10px}
-table{width:100%;border-collapse:collapse;min-width:380px;background:white}
-th{background:linear-gradient(135deg,var(--maroon2),var(--maroon));color:var(--gold-bright);padding:10px 5px;font-size:12.5px; font-weight:700}
-td{border:1px solid #efe8e5;padding:8px 4px;text-align:center;font-size:12.5px}
-tbody tr{opacity:0; transform:translateY(6px); animation:rowIn .35s var(--ease) forwards;}
-tr.latest td{color:var(--green-deep);font-weight:800;background:#f0f9f1; position:relative}
-tr.latest td:first-child::before{
-  content:"●"; color:var(--green); font-size:8px; margin-right:5px; position:relative; top:-1px;
-  animation:pulse 1.6s ease-in-out infinite;
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:390px;background:white}
+th{background:var(--maroon);color:white;padding:9px 5px;font-size:13px}
+td{border:1px solid #e7e1df;padding:8px 4px;text-align:center;font-size:12.5px; transition:background .2s ease}
+tr:hover td{background:#fbf2f6}
+tr:last-child td{font-weight:800}
+tr.latest td{color:#087f35;font-weight:800;background:#f1f8f1}
+tr.latest{animation:latestGlow 1.6s ease-in-out 1}
+@keyframes latestGlow{
+  0%{background:#dcf3e1}
+  100%{background:transparent}
 }
-@keyframes pulse{ 0%,100%{opacity:1} 50%{opacity:.3} }
-.empty-mini{text-align:center; color:var(--muted); font-size:13px; padding:14px}
 
-/* ---------- Stats ---------- */
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:4px 0 20px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:4px 0 18px}
 .stat{
-  border:1px solid #e0e7df;border-radius:14px;padding:15px 6px;text-align:center;background:#fbfffb;
-  opacity:0; transform:translateY(14px) scale(.96);
-  animation:cardIn .5s var(--ease) forwards;
-  transition:transform .2s var(--ease), box-shadow .2s var(--ease);
+  border:1px solid #e0e7df;border-radius:12px;padding:14px 7px;text-align:center;background:#fbfffb;
+  opacity:0; transform:translateY(10px) scale(.96);
+  animation:statIn .45s ease forwards;
+  transition:transform .2s ease, box-shadow .2s ease;
 }
-.stat:active{transform:scale(.97)}
+.stat:nth-child(1){animation-delay:.18s}
+.stat:nth-child(2){animation-delay:.26s}
+.stat:nth-child(3){animation-delay:.34s}
+@keyframes statIn{
+  to{opacity:1; transform:translateY(0) scale(1)}
+}
+.stat:hover{transform:translateY(-3px); box-shadow:0 6px 16px rgba(0,0,0,.08)}
 .stat:nth-child(2){background:#f8fbff;border-color:#dce6f8}
 .stat:nth-child(3){background:#fffaf4;border-color:#f2e2d2}
 .stat .circle{
-  width:44px;height:44px;border-radius:50%;margin:0 auto 9px;display:grid;place-items:center;color:white;font-size:20px;font-weight:800;
-  box-shadow:0 4px 10px rgba(0,0,0,.12);
+  width:48px;height:48px;border-radius:50%;margin:0 auto 10px;display:grid;place-items:center;
+  color:white;font-size:23px;font-weight:800;
+  transition:transform .25s ease;
 }
-.stat:nth-child(1) .circle{background:linear-gradient(135deg,#0fb04c,#0b8f3c)}
-.stat:nth-child(2) .circle{background:linear-gradient(135deg,#4a8bf0,#2366d1)}
-.stat:nth-child(3) .circle{background:linear-gradient(135deg,#ff8a2e,#d9720a)}
-.stat .stitle{font-size:11.5px;font-weight:700;line-height:1.25;color:#5c5257}
-.stat .svalue{font-size:19px;font-weight:800;margin-top:7px}
+.stat:hover .circle{transform:scale(1.1) rotate(6deg)}
+.stat:nth-child(1) .circle{background:#0b9a40; box-shadow:0 0 0 0 rgba(11,154,64,.5); animation:pulseGreen 2.6s ease-out infinite}
+.stat:nth-child(2) .circle{background:#3d7be0}
+.stat:nth-child(3) .circle{background:#ff7200}
+@keyframes pulseGreen{
+  0%{box-shadow:0 0 0 0 rgba(11,154,64,.35)}
+  70%{box-shadow:0 0 0 10px rgba(11,154,64,0)}
+  100%{box-shadow:0 0 0 0 rgba(11,154,64,0)}
+}
+.stat .stitle{font-size:12px;font-weight:700;line-height:1.25}
+.stat .svalue{font-size:20px;font-weight:800;margin-top:7px}
 .stat:nth-child(1) .svalue{color:#167c31}
 .stat:nth-child(2) .svalue{color:#1c55a8}
-.stat:nth-child(3) .svalue{color:#c4550a}
+.stat:nth-child(3) .svalue{color:#e65c00}
 
-.sectionlabel{display:flex;align-items:center;gap:10px;color:#5a1736;font-weight:800;justify-content:center;margin:16px 0; font-size:13.5px; letter-spacing:.03em}
+.sectionlabel{display:flex;align-items:center;gap:10px;color:#5a1736;font-weight:800;justify-content:center;margin:14px 0}
 .sectionlabel:before,.sectionlabel:after{content:"";height:1px;background:#ddd;flex:1}
 
-/* ---------- Actions ---------- */
 .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .action{
-  border:0;border-radius:14px;color:white;padding:14px 10px;min-height:92px;cursor:pointer;
-  font-weight:800;font-size:13.5px; text-align:left; position:relative; overflow:hidden;
-  transition:transform .18s var(--ease), box-shadow .2s var(--ease);
-  opacity:0; transform:translateY(14px);
-  animation:cardIn .5s var(--ease) forwards;
+  border:0;border-radius:12px;color:white;padding:13px 8px;min-height:92px;cursor:pointer;
+  font-weight:800;font-size:14px;
+  position:relative; overflow:hidden;
+  transition:transform .18s ease, box-shadow .25s ease, filter .2s ease;
+  background-size:200% 200%;
+  animation:actionGrad 6s ease infinite;
 }
-.action:active{transform:scale(.96)}
-.action .glyph{font-size:19px; display:block; margin-bottom:6px}
-.action small{display:block;font-weight:500;font-size:11.5px;margin-top:6px;line-height:1.35; opacity:.9}
-.receipt{background:linear-gradient(135deg,#0aa243,#087532); box-shadow:0 6px 16px rgba(10,162,67,.28)}
-.statement{background:linear-gradient(135deg,#8b46c9,#6e2fa3); box-shadow:0 6px 16px rgba(110,47,163,.28)}
-
-/* ripple */
-.ripple{
-  position:absolute; border-radius:50%; background:rgba(255,255,255,.5);
-  transform:scale(0); animation:rippleAnim .55s ease-out; pointer-events:none;
+.action small{display:block;font-weight:500;font-size:12px;margin-top:7px;line-height:1.35}
+.action:hover{transform:translateY(-3px) scale(1.02); box-shadow:0 10px 22px rgba(0,0,0,.18); filter:brightness(1.05)}
+.action:active{transform:translateY(0) scale(.97)}
+@keyframes actionGrad{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
-@keyframes rippleAnim{ to{ transform:scale(3); opacity:0; } }
+.receipt{background-image:linear-gradient(120deg,#078b39,#0bc154,#079f3f)}
+.statement{background-image:linear-gradient(120deg,#66319e,#9b52e0,#7d3cc0)}
 
 .whatsappbox{
-  margin-top:14px;padding:14px;border:1px solid #dfe9df;background:#f7fbf7;border-radius:14px;
-  opacity:0; animation:cardIn .5s .1s var(--ease) forwards; font-size:13.5px;
+  margin-top:13px;padding:13px;border:1px solid #dfe9df;background:#f7fbf7;border-radius:12px;
+  opacity:0; transform:translateY(10px);
+  animation:cardIn .5s ease forwards .4s;
 }
-.whatsappbox b{color:#1d6a3a}
-.whatsappbox .tip{font-size:11.5px;color:#6e6568; margin-top:3px; display:block}
 
-/* ---------- Empty / Welcome ---------- */
-.empty{
-  text-align:center; padding:46px 20px; color:var(--muted);
+.empty,.loading,.error{text-align:center;padding:30px 15px;color:var(--muted)}
+.loading{position:relative}
+.loading::after{
+  content:"";
+  display:inline-block; width:16px; height:16px; margin-left:8px;
+  border:2px solid var(--maroon2); border-top-color:transparent; border-radius:50%;
+  vertical-align:middle;
+  animation:spin .7s linear infinite;
 }
-.empty .gem{
-  font-size:40px; display:block; margin-bottom:14px;
-  animation:float 3.2s ease-in-out infinite;
+@keyframes spin{ to{ transform:rotate(360deg) } }
+.error{color:#b3261e; animation:shake .35s ease}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-5px)}
+  75%{transform:translateX(5px)}
 }
-@keyframes float{ 0%,100%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-8px) rotate(4deg)} }
-.empty .msg{font-size:14.5px}
-
-.footer{font-size:11px;color:#9a8f93;text-align:center;padding:14px}
+.hidden{display:none}
+.footer{font-size:11px;color:#8a8083;text-align:center;padding:12px}
 
 @media(max-width:390px){
   .brand .name{font-size:17px}.detailrow{font-size:13px}.stats{gap:6px}.stat{padding:11px 4px}
-  .stat .svalue{font-size:16px}.action{font-size:12px}
+  .stat .svalue{font-size:17px}.action{font-size:12px}
 }
 </style>
 </head>
@@ -231,7 +248,7 @@ tr.latest td:first-child::before{
       <div class="menu">☰</div>
       <div class="brand">
         <div class="name">💎 NEW SHEEBA JEWELLERY</div>
-        <div class="sub">OWNER DASHBOARD</div>
+        <div class="sub">Owner Dashboard</div>
       </div>
       <div class="profile">♙</div>
     </div>
@@ -243,21 +260,20 @@ tr.latest td:first-child::before{
       <input id="accountInput" inputmode="numeric" placeholder="e.g. 3575" autocomplete="off">
       <button id="searchBtn" title="Search">⌕</button>
     </div>
-    <div class="hint">Tip: press Enter after typing to search instantly</div>
 
     <div id="status" class="hidden"></div>
 
     <section id="result" class="hidden">
-      <div class="card" style="animation-delay:.02s">
-        <div class="cardtitle"><span class="ico">♙</span> <span>Customer Details</span></div>
-        <div class="detailrow" style="animation-delay:.06s"><div class="k"># Customer Number</div><div class="value" id="accountNo">-</div></div>
-        <div class="detailrow" style="animation-delay:.11s"><div class="k">♙ Customer Name</div><div class="value" id="customerName">-</div></div>
-        <div class="detailrow" style="animation-delay:.16s"><div class="k">⌖ Address</div><div class="value" id="address">-</div></div>
-        <div class="detailrow" style="animation-delay:.21s"><div class="k">☎ Phone / WhatsApp</div><div class="value whatsapp-mini" id="phone">-</div></div>
+      <div class="card">
+        <div class="cardtitle">♙ <span>Customer Details</span></div>
+        <div class="detailrow"><div class="icon">#</div><div>Customer Number</div><div>:</div><div class="value" id="accountNo">-</div></div>
+        <div class="detailrow"><div class="icon">♙</div><div>Customer Name</div><div>:</div><div class="value" id="customerName">-</div></div>
+        <div class="detailrow"><div class="icon">⌖</div><div>Address</div><div>:</div><div class="value" id="address">-</div></div>
+        <div class="detailrow"><div class="icon">☎</div><div>Phone / WhatsApp</div><div>:</div><div class="value whatsapp-mini" id="phone">-</div></div>
       </div>
 
-      <div class="card" style="animation-delay:.1s">
-        <div class="cardtitle"><span class="ico">▤</span> <span>Payment History</span></div>
+      <div class="card">
+        <div class="cardtitle">▤ <span>Payment History</span></div>
         <div class="tablewrap">
           <table>
             <thead><tr><th>Date</th><th>Amount Paid (₹)</th><th>Total Paid (₹)</th><th>Inst. No.</th></tr></thead>
@@ -267,32 +283,23 @@ tr.latest td:first-child::before{
       </div>
 
       <div class="stats">
-        <div class="stat" style="animation-delay:.18s"><div class="circle">₹</div><div class="stitle">Total Amount Paid</div><div class="svalue" id="totalPaid">₹0</div></div>
-        <div class="stat" style="animation-delay:.24s"><div class="circle">☷</div><div class="stitle">Total Installments Paid</div><div class="svalue" id="installments">0</div></div>
-        <div class="stat" style="animation-delay:.3s"><div class="circle">▦</div><div class="stitle">Last Payment</div><div class="svalue" id="lastPayment">-</div></div>
+        <div class="stat"><div class="circle">₹</div><div class="stitle">Total Amount Paid</div><div class="svalue" id="totalPaid">₹0</div></div>
+        <div class="stat"><div class="circle">☷</div><div class="stitle">Total Installments Paid</div><div class="svalue" id="installments">0</div></div>
+        <div class="stat"><div class="circle">▦</div><div class="stitle">Last Payment</div><div class="svalue" id="lastPayment">-</div></div>
       </div>
 
       <div class="sectionlabel">WHATSAPP ACTIONS</div>
       <div class="actions">
-        <button class="action receipt" id="receiptBtn" style="animation-delay:.36s">
-          <span class="glyph">◉</span>SEND PAYMENT RECEIPT
-          <small>Send last payment receipt to customer</small>
-        </button>
-        <button class="action statement" id="statementBtn" style="animation-delay:.4s">
-          <span class="glyph">◉</span>SEND FULL STATEMENT
-          <small>Send complete statement to customer</small>
-        </button>
+        <button class="action receipt" id="receiptBtn">◉ &nbsp; SEND PAYMENT RECEIPT<small>Send last payment receipt to customer</small></button>
+        <button class="action statement" id="statementBtn">◉ &nbsp; SEND FULL STATEMENT<small>Send complete statement to customer</small></button>
       </div>
 
-      <div class="whatsappbox">◉ &nbsp; <b>WhatsApp Number:</b> <span id="waNumber">-</span>
-        <span class="tip">Click any button above to open WhatsApp with the customer message.</span>
+      <div class="whatsappbox">◉ &nbsp; <b>WhatsApp Number:</b> <span id="waNumber">-</span><br>
+        <span style="font-size:12px;color:#6e6568">Click any button above to open WhatsApp with the customer message.</span>
       </div>
     </section>
 
-    <div id="welcome" class="empty">
-      <span class="gem">💎</span>
-      <div class="msg">Enter a customer number and tap search.</div>
-    </div>
+    <div id="welcome" class="empty">Enter a customer number and tap search.</div>
     <div class="footer">New Sheeba Jewellery • Owner Portal</div>
   </main>
 </div>
@@ -317,67 +324,63 @@ function cleanPhone(p){
 function showStatus(msg, type="loading"){
   const el=document.getElementById("status");
   el.className=type;
-  el.innerHTML = (type==="loading" ? '<span class="spinner"></span>' : '') + '<span>'+escapeHtml(msg)+'</span>';
+  el.textContent=msg;
   el.classList.remove("hidden");
 }
 function hideStatus(){ document.getElementById("status").classList.add("hidden"); }
 
-// Animated count-up for numeric stat values
-function animateNumber(el, endValue, opts={}){
-  const {prefix="", suffix="", duration=650} = opts;
-  const start = 0;
-  const startTime = performance.now();
-  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(prefersReduced){
-    el.textContent = prefix + endValue.toLocaleString("en-IN") + suffix;
-    return;
-  }
-  function tick(now){
-    const p = Math.min(1, (now - startTime) / duration);
-    const eased = 1 - Math.pow(1 - p, 3);
-    const current = Math.round(start + (endValue - start) * eased);
-    el.textContent = prefix + current.toLocaleString("en-IN") + suffix;
-    if(p < 1) requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
+// ripple effect for any button with class .ripple-target
+function addRipple(e){
+  const btn=e.currentTarget;
+  const rect=btn.getBoundingClientRect();
+  const size=Math.max(rect.width, rect.height);
+  const span=document.createElement("span");
+  span.className="ripple";
+  span.style.width=span.style.height=size+"px";
+  span.style.left=(e.clientX - rect.left - size/2)+"px";
+  span.style.top=(e.clientY - rect.top - size/2)+"px";
+  btn.appendChild(span);
+  span.addEventListener("animationend",()=>span.remove());
+}
+document.querySelectorAll(".searchrow button, .action").forEach(b=>{
+  b.style.position = b.style.position || "relative";
+  b.addEventListener("click", addRipple);
+});
+
+// retrigger entrance animations each time a fresh result renders
+function replayEntrance(){
+  const el=document.getElementById("result");
+  el.querySelectorAll(".card, .stat, .whatsappbox").forEach(node=>{
+    node.style.animation="none";
+    // force reflow so the animation restarts
+    void node.offsetWidth;
+    node.style.animation="";
+  });
 }
 
 function renderCustomer(c){
   currentCustomer=c;
   document.getElementById("welcome").classList.add("hidden");
-  const resultEl = document.getElementById("result");
-  resultEl.classList.remove("hidden");
-
-  // restart card animations cleanly on every new search
-  resultEl.querySelectorAll(".card, .stat, .action, .whatsappbox, .detailrow").forEach(node=>{
-    node.style.animation = "none";
-    void node.offsetWidth; // reflow to restart animation
-    node.style.animation = "";
-  });
-
+  document.getElementById("result").classList.remove("hidden");
   document.getElementById("accountNo").textContent=c.accountNo || "-";
   document.getElementById("customerName").textContent=c.name || "-";
   document.getElementById("address").textContent=c.address || "-";
   document.getElementById("phone").textContent=c.phone || "Not available";
   document.getElementById("waNumber").textContent=c.phone || "Not available";
+  document.getElementById("totalPaid").textContent=money(c.totalPaid);
+  document.getElementById("installments").textContent=(c.payments||[]).length;
   document.getElementById("lastPayment").textContent=c.lastPaymentDate || "-";
-
-  animateNumber(document.getElementById("totalPaid"), Number(c.totalPaid||0), {prefix:"₹"});
-  animateNumber(document.getElementById("installments"), (c.payments||[]).length);
 
   const body=document.getElementById("paymentsBody");
   body.innerHTML="";
-  if(!(c.payments||[]).length){
-    body.innerHTML = '<tr><td colspan="4" class="empty-mini">No payments recorded yet.</td></tr>';
-  } else {
-    c.payments.forEach((p,i)=>{
-      const tr=document.createElement("tr");
-      if(i===c.payments.length-1) tr.className="latest";
-      tr.style.animationDelay = (i*0.05)+"s";
-      tr.innerHTML=`<td>${escapeHtml(p.date)}</td><td>${Number(p.amount||0).toLocaleString("en-IN")}</td><td>${Number(p.total||0).toLocaleString("en-IN")}</td><td>${i+1}</td>`;
-      body.appendChild(tr);
-    });
-  }
+  (c.payments||[]).forEach((p,i)=>{
+    const tr=document.createElement("tr");
+    if(i===c.payments.length-1) tr.className="latest";
+    tr.innerHTML=`<td>${escapeHtml(p.date)}</td><td>${Number(p.amount||0).toLocaleString("en-IN")}</td><td>${Number(p.total||0).toLocaleString("en-IN")}</td><td>${i+1}</td>`;
+    body.appendChild(tr);
+  });
+
+  replayEntrance();
 }
 
 function escapeHtml(v){
@@ -446,28 +449,10 @@ Payment History:
   window.open("https://wa.me/"+phone+"?text="+encodeURIComponent(text),"_blank");
 }
 
-// simple ripple effect on tap for buttons
-function attachRipple(btn){
-  btn.addEventListener("click", function(e){
-    const rect = btn.getBoundingClientRect();
-    const ripple = document.createElement("span");
-    ripple.className = "ripple";
-    const size = Math.max(rect.width, rect.height);
-    ripple.style.width = ripple.style.height = size + "px";
-    ripple.style.left = (e.clientX - rect.left - size/2) + "px";
-    ripple.style.top = (e.clientY - rect.top - size/2) + "px";
-    btn.appendChild(ripple);
-    setTimeout(()=>ripple.remove(), 600);
-  });
-}
-
 document.getElementById("searchBtn").addEventListener("click",searchCustomer);
 document.getElementById("accountInput").addEventListener("keydown",e=>{if(e.key==="Enter")searchCustomer()});
 document.getElementById("receiptBtn").addEventListener("click",()=>openWhatsApp("receipt"));
 document.getElementById("statementBtn").addEventListener("click",()=>openWhatsApp("statement"));
-
-[document.getElementById("searchBtn"), document.getElementById("receiptBtn"), document.getElementById("statementBtn")]
-  .forEach(btn=>{ btn.style.position="relative"; btn.style.overflow="hidden"; attachRipple(btn); });
 </script>
 </body>
 </html>
