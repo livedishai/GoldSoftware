@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>New Sheeba Jewellery – Owner Dashboard</title>
+<style>
+:root{
+  --maroon:#5d0030;
+  --maroon2:#79003f;
+  --gold:#f4c542;
+  --green:#0b8f3c;
+  --blue:#2366d1;
+  --orange:#ff6a00;
+  --bg:#f8f6f3;
+  --text:#231f20;
+  --muted:#756d70;
+  --card:#fffdfb;
+  --line:#e7e1df;
+}
+*{box-sizing:border-box}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 15% 15%, rgba(244,197,66,.10), transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(93,0,48,.10), transparent 45%),
+    linear-gradient(120deg,#efe9e5,#e8e2df,#f1ece8,#e6e0dc);
+  background-size:200% 200%, 200% 200%, 300% 300%;
+  animation: bgdrift 22s ease-in-out infinite;
+}
+@keyframes bgdrift{
+  0%{background-position:0% 0%, 100% 100%, 0% 50%}
+  50%{background-position:60% 40%, 40% 60%, 100% 50%}
+  100%{background-position:0% 0%, 100% 100%, 0% 50%}
+}
+
+.phone{
+  max-width:480px; min-height:100vh; margin:auto; background:var(--bg);
+  box-shadow:0 0 35px rgba(0,0,0,.18); overflow:hidden;
+  position:relative;
+}
+
+.topbar{
+  background:linear-gradient(120deg,#4d0028,#79003f,#5d0030,#8a0047);
+  background-size:300% 300%;
+  animation:topbarshift 10s ease infinite;
+  color:white;
+  padding:18px 18px 14px; position:sticky; top:0; z-index:5;
+  box-shadow:0 4px 18px rgba(0,0,0,.18);
+  overflow:hidden;
+}
+@keyframes topbarshift{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.sparkles{
+  position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:1;
+}
+.sparkle{
+  position:absolute;
+  border-radius:50%;
+  background:radial-gradient(circle, #ffffff 0%, var(--gold) 45%, rgba(244,197,66,0) 75%);
+  opacity:0;
+  animation-name:sparkleTwinkle;
+  animation-timing-function:ease-in-out;
+  animation-iteration-count:infinite;
+  filter:blur(.2px);
+}
+@keyframes sparkleTwinkle{
+  0%{opacity:0; transform:translateY(8px) scale(.3)}
+  45%{opacity:1; transform:translateY(-2px) scale(1)}
+  55%{opacity:1; transform:translateY(-4px) scale(1)}
+  100%{opacity:0; transform:translateY(-14px) scale(.3)}
+}
+
+.toprow{display:flex;align-items:center;gap:14px;position:relative;z-index:2}
+.menu,.profile{
+  width:40px;height:40px;display:grid;place-items:center;font-size:27px;color:white;
+  border-radius:50%; transition:background .2s ease, transform .15s ease; cursor:pointer;
+}
+.menu:hover,.profile:hover{background:rgba(255,255,255,.14); transform:scale(1.08)}
+.menu:active,.profile:active{transform:scale(.92)}
+
+.brand{flex:1;text-align:center}
+.brand .name{
+  font-family:Georgia,serif;color:var(--gold);font-size:21px;font-weight:700;white-space:nowrap;
+  text-shadow:0 0 14px rgba(244,197,66,.35);
+  animation:shine 5s ease-in-out infinite;
+}
+@keyframes shine{
+  0%,100%{text-shadow:0 0 8px rgba(244,197,66,.25)}
+  50%{text-shadow:0 0 20px rgba(244,197,66,.55)}
+}
+.brand .sub{font-size:14px;margin-top:4px;opacity:.9}
+
+.content{padding:18px 14px 28px}
+
+.label{font-weight:700;color:#4d2437;font-size:16px;margin:3px 4px 8px}
+
+.searchrow{display:flex;gap:10px;margin-bottom:18px}
+.searchrow input{
+  flex:1;border:1px solid #d9d3d1;border-radius:10px;padding:14px 16px;
+  font-size:18px;background:white;outline:none;
+  transition:border-color .2s ease, box-shadow .2s ease;
+}
+.searchrow input:focus{
+  border-color:var(--maroon2);
+  box-shadow:0 0 0 3px rgba(121,0,63,.15);
+}
+.searchrow button{
+  width:62px;border:0;border-radius:10px;background:var(--maroon);color:white;font-size:27px;cursor:pointer;
+  position:relative; overflow:hidden;
+  transition:transform .15s ease, box-shadow .2s ease, background .2s ease;
+  box-shadow:0 3px 10px rgba(93,0,48,.35);
+}
+.searchrow button:hover{background:var(--maroon2); transform:translateY(-2px); box-shadow:0 6px 16px rgba(93,0,48,.4)}
+.searchrow button:active{transform:translateY(0) scale(.94)}
+
+/* generic ripple for all interactive buttons */
+.ripple{
+  position:absolute; border-radius:50%; transform:scale(0);
+  background:rgba(255,255,255,.55); pointer-events:none;
+  animation:rippleAnim .55s ease-out forwards;
+}
+@keyframes rippleAnim{
+  to{transform:scale(3.2); opacity:0}
+}
+
+.card{
+  background:var(--card);border:1px solid #eee8e5;border-radius:14px;
+  box-shadow:0 2px 8px rgba(0,0,0,.05);padding:13px;margin-bottom:14px;
+  opacity:0; transform:translateY(14px);
+  animation:cardIn .5s ease forwards;
+}
+.card:nth-of-type(1){animation-delay:.03s}
+.card:nth-of-type(2){animation-delay:.13s}
+@keyframes cardIn{
+  to{opacity:1; transform:translateY(0)}
+}
+
+.cardtitle{display:flex;align-items:center;gap:9px;color:#5b1637;font-weight:800;font-size:17px;margin:2px 4px 10px}
+.detailrow{
+  display:grid;grid-template-columns:34px 1fr 12px 1.45fr;gap:4px;align-items:center;padding:10px 3px;
+  border-bottom:1px solid #e8e2df;font-size:15px;
+  transition:background .2s ease;
+}
+.detailrow:hover{background:#faf6f2}
+.detailrow:last-child{border-bottom:0}
+.icon{font-size:19px;color:#765e66;text-align:center}
+.value{font-weight:500;word-break:break-word}
+.whatsapp-mini{color:#149447;font-weight:800;white-space:nowrap}
+
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:390px;background:white}
+th{background:var(--maroon);color:white;padding:9px 5px;font-size:13px}
+td{border:1px solid #e7e1df;padding:8px 4px;text-align:center;font-size:12.5px; transition:background .2s ease}
+tr:hover td{background:#fbf2f6}
+tr:last-child td{font-weight:800}
+tr.latest td{color:#087f35;font-weight:800;background:#f1f8f1}
+tr.latest{animation:latestGlow 1.6s ease-in-out 1}
+@keyframes latestGlow{
+  0%{background:#dcf3e1}
+  100%{background:transparent}
+}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:4px 0 18px}
+.stat{
+  border:1px solid #e0e7df;border-radius:12px;padding:14px 7px;text-align:center;background:#fbfffb;
+  opacity:0; transform:translateY(10px) scale(.96);
+  animation:statIn .45s ease forwards;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.stat:nth-child(1){animation-delay:.18s}
+.stat:nth-child(2){animation-delay:.26s}
+.stat:nth-child(3){animation-delay:.34s}
+@keyframes statIn{
+  to{opacity:1; transform:translateY(0) scale(1)}
+}
+.stat:hover{transform:translateY(-3px); box-shadow:0 6px 16px rgba(0,0,0,.08)}
+.stat:nth-child(2){background:#f8fbff;border-color:#dce6f8}
+.stat:nth-child(3){background:#fffaf4;border-color:#f2e2d2}
+.stat .circle{
+  width:48px;height:48px;border-radius:50%;margin:0 auto 10px;display:grid;place-items:center;
+  color:white;font-size:23px;font-weight:800;
+  transition:transform .25s ease;
+}
+.stat:hover .circle{transform:scale(1.1) rotate(6deg)}
+.stat:nth-child(1) .circle{background:#0b9a40; box-shadow:0 0 0 0 rgba(11,154,64,.5); animation:pulseGreen 2.6s ease-out infinite}
+.stat:nth-child(2) .circle{background:#3d7be0}
+.stat:nth-child(3) .circle{background:#ff7200}
+@keyframes pulseGreen{
+  0%{box-shadow:0 0 0 0 rgba(11,154,64,.35)}
+  70%{box-shadow:0 0 0 10px rgba(11,154,64,0)}
+  100%{box-shadow:0 0 0 0 rgba(11,154,64,0)}
+}
+.stat .stitle{font-size:12px;font-weight:700;line-height:1.25}
+.stat .svalue{font-size:20px;font-weight:800;margin-top:7px}
+.stat:nth-child(1) .svalue{color:#167c31}
+.stat:nth-child(2) .svalue{color:#1c55a8}
+.stat:nth-child(3) .svalue{color:#e65c00}
+
+.sectionlabel{display:flex;align-items:center;gap:10px;color:#5a1736;font-weight:800;justify-content:center;margin:14px 0}
+.sectionlabel:before,.sectionlabel:after{content:"";height:1px;background:#ddd;flex:1}
+
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.action{
+  border:0;border-radius:12px;color:white;padding:13px 8px;min-height:92px;cursor:pointer;
+  font-weight:800;font-size:14px;
+  position:relative; overflow:hidden;
+  transition:transform .18s ease, box-shadow .25s ease, filter .2s ease;
+  background-size:200% 200%;
+  animation:actionGrad 6s ease infinite;
+}
+.action small{display:block;font-weight:500;font-size:12px;margin-top:7px;line-height:1.35}
+.action:hover{transform:translateY(-3px) scale(1.02); box-shadow:0 10px 22px rgba(0,0,0,.18); filter:brightness(1.05)}
+.action:active{transform:translateY(0) scale(.97)}
+@keyframes actionGrad{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+.receipt{background-image:linear-gradient(120deg,#078b39,#0bc154,#079f3f)}
+.statement{background-image:linear-gradient(120deg,#66319e,#9b52e0,#7d3cc0)}
+
+.whatsappbox{
+  margin-top:13px;padding:13px;border:1px solid #dfe9df;background:#f7fbf7;border-radius:12px;
+  opacity:0; transform:translateY(10px);
+  animation:cardIn .5s ease forwards .4s;
+}
+
+.empty,.loading,.error{text-align:center;padding:30px 15px;color:var(--muted)}
+.loading{position:relative}
+.loading::after{
+  content:"";
+  display:inline-block; width:16px; height:16px; margin-left:8px;
+  border:2px solid var(--maroon2); border-top-color:transparent; border-radius:50%;
+  vertical-align:middle;
+  animation:spin .7s linear infinite;
+}
+@keyframes spin{ to{ transform:rotate(360deg) } }
+.error{color:#b3261e; animation:shake .35s ease}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-5px)}
+  75%{transform:translateX(5px)}
+}
+.hidden{display:none}
+.footer{font-size:11px;color:#8a8083;text-align:center;padding:12px}
+
+@media(max-width:390px){
+  .brand .name{font-size:17px}.detailrow{font-size:13px}.stats{gap:6px}.stat{padding:11px 4px}
+  .stat .svalue{font-size:17px}.action{font-size:12px}
+}
+</style>
+</head>
+<body>
+<div class="phone">
+  <header class="topbar">
+    <div class="sparkles" id="sparkles"></div>
+    <div class="toprow">
+      <div class="menu">☰</div>
+      <div class="brand">
+        <div class="name">💎 NEW SHEEBA JEWELLERY</div>
+        <div class="sub">Owner Dashboard</div>
+      </div>
+      <div class="profile">♙</div>
+    </div>
+  </header>
+
+  <main class="content">
+    <div class="label">Enter Customer Number</div>
+    <div class="searchrow">
+      <input id="accountInput" inputmode="numeric" placeholder="e.g. 3575" autocomplete="off">
+      <button id="searchBtn" title="Search">⌕</button>
+    </div>
+
+    <div id="status" class="hidden"></div>
+
+    <section id="result" class="hidden">
+      <div class="card">
+        <div class="cardtitle">♙ <span>Customer Details</span></div>
+        <div class="detailrow"><div class="icon">#</div><div>Customer Number</div><div>:</div><div class="value" id="accountNo">-</div></div>
+        <div class="detailrow"><div class="icon">♙</div><div>Customer Name</div><div>:</div><div class="value" id="customerName">-</div></div>
+        <div class="detailrow"><div class="icon">⌖</div><div>Address</div><div>:</div><div class="value" id="address">-</div></div>
+        <div class="detailrow"><div class="icon">☎</div><div>Phone / WhatsApp</div><div>:</div><div class="value whatsapp-mini" id="phone">-</div></div>
+      </div>
+
+      <div class="card">
+        <div class="cardtitle">▤ <span>Payment History</span></div>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Date</th><th>Amount Paid (₹)</th><th>Total Paid (₹)</th><th>Inst. No.</th></tr></thead>
+            <tbody id="paymentsBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="circle">₹</div><div class="stitle">Total Amount Paid</div><div class="svalue" id="totalPaid">₹0</div></div>
+        <div class="stat"><div class="circle">☷</div><div class="stitle">Total Installments Paid</div><div class="svalue" id="installments">0</div></div>
+        <div class="stat"><div class="circle">▦</div><div class="stitle">Last Payment</div><div class="svalue" id="lastPayment">-</div></div>
+      </div>
+
+      <div class="sectionlabel">WHATSAPP ACTIONS</div>
+      <div class="actions">
+        <button class="action receipt" id="receiptBtn">◉ &nbsp; SEND PAYMENT RECEIPT<small>Send last payment receipt to customer</small></button>
+        <button class="action statement" id="statementBtn">◉ &nbsp; SEND FULL STATEMENT<small>Send complete statement to customer</small></button>
+      </div>
+
+      <div class="whatsappbox">◉ &nbsp; <b>WhatsApp Number:</b> <span id="waNumber">-</span><br>
+        <span style="font-size:12px;color:#6e6568">Click any button above to open WhatsApp with the customer message.</span>
+      </div>
+    </section>
+
+    <div id="welcome" class="empty">Enter a customer number and tap search.</div>
+    <div class="footer">New Sheeba Jewellery • Owner Portal</div>
+  </main>
+</div>
+
+<script>
+/*
+  IMPORTANT:
+  Replace API_URL with your deployed Google Apps Script Web App URL.
+  Example:
+  https://script.google.com/macros/s/XXXXXXXX/exec
+*/
+const API_URL = "https://script.google.com/macros/s/AKfycbzd7pJncxJAObQm1r1M2Ws03EdKSb1xtlq64KNeiF_MpiL5OvPCS8iT3lb8H1_K-dB3Gg/exec";
+
+let currentCustomer = null;
+
+// drifting gold sparkles behind the header, like light catching jewellery
+(function initSparkles(){
+  const container = document.getElementById("sparkles");
+  if(!container) return;
+  const count = 22;
+  for(let i=0;i<count;i++){
+    const s = document.createElement("span");
+    s.className = "sparkle";
+    const size = (Math.random()*3.2 + 1.8).toFixed(1);
+    s.style.width = s.style.height = size + "px";
+    s.style.left = (Math.random()*100).toFixed(1) + "%";
+    s.style.top = (Math.random()*100).toFixed(1) + "%";
+    s.style.animationDuration = (Math.random()*2.5 + 2.2).toFixed(2) + "s";
+    s.style.animationDelay = (Math.random()*4).toFixed(2) + "s";
+    container.appendChild(s);
+  }
+})();
+
+function money(n){
+  return "₹" + Number(n || 0).toLocaleString("en-IN");
+}
+function cleanPhone(p){
+  return String(p || "").replace(/\D/g,"");
+}
+function showStatus(msg, type="loading"){
+  const el=document.getElementById("status");
+  el.className=type;
+  el.textContent=msg;
+  el.classList.remove("hidden");
+}
+function hideStatus(){ document.getElementById("status").classList.add("hidden"); }
+
+// ripple effect for any button with class .ripple-target
+function addRipple(e){
+  const btn=e.currentTarget;
+  const rect=btn.getBoundingClientRect();
+  const size=Math.max(rect.width, rect.height);
+  const span=document.createElement("span");
+  span.className="ripple";
+  span.style.width=span.style.height=size+"px";
+  span.style.left=(e.clientX - rect.left - size/2)+"px";
+  span.style.top=(e.clientY - rect.top - size/2)+"px";
+  btn.appendChild(span);
+  span.addEventListener("animationend",()=>span.remove());
+}
+document.querySelectorAll(".searchrow button, .action").forEach(b=>{
+  b.style.position = b.style.position || "relative";
+  b.addEventListener("click", addRipple);
+});
+
+// retrigger entrance animations each time a fresh result renders
+function replayEntrance(){
+  const el=document.getElementById("result");
+  el.querySelectorAll(".card, .stat, .whatsappbox").forEach(node=>{
+    node.style.animation="none";
+    // force reflow so the animation restarts
+    void node.offsetWidth;
+    node.style.animation="";
+  });
+}
+
+function renderCustomer(c){
+  currentCustomer=c;
+  document.getElementById("welcome").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+  document.getElementById("accountNo").textContent=c.accountNo || "-";
+  document.getElementById("customerName").textContent=c.name || "-";
+  document.getElementById("address").textContent=c.address || "-";
+  document.getElementById("phone").textContent=c.phone || "Not available";
+  document.getElementById("waNumber").textContent=c.phone || "Not available";
+  document.getElementById("totalPaid").textContent=money(c.totalPaid);
+  document.getElementById("installments").textContent=(c.payments||[]).length;
+  document.getElementById("lastPayment").textContent=c.lastPaymentDate || "-";
+
+  const body=document.getElementById("paymentsBody");
+  body.innerHTML="";
+  (c.payments||[]).forEach((p,i)=>{
+    const tr=document.createElement("tr");
+    if(i===c.payments.length-1) tr.className="latest";
+    tr.innerHTML=`<td>${escapeHtml(p.date)}</td><td>${Number(p.amount||0).toLocaleString("en-IN")}</td><td>${Number(p.total||0).toLocaleString("en-IN")}</td><td>${i+1}</td>`;
+    body.appendChild(tr);
+  });
+
+  replayEntrance();
+}
+
+function escapeHtml(v){
+  return String(v ?? "").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+}
+
+async function searchCustomer(){
+  const account=document.getElementById("accountInput").value.trim();
+  if(!account){showStatus("Please enter a customer number.","error");return;}
+  if(API_URL.includes("PASTE_YOUR")){
+    showStatus("Connect the Google Apps Script Web App URL in index.html first.","error");
+    return;
+  }
+  showStatus("Loading customer data…","loading");
+  document.getElementById("result").classList.add("hidden");
+  try{
+    const res=await fetch(API_URL+"?action=getCustomer&account="+encodeURIComponent(account),{method:"GET"});
+    const data=await res.json();
+    hideStatus();
+    if(!data.ok){showStatus(data.message || "Customer not found.","error");return;}
+    renderCustomer(data.customer);
+  }catch(err){
+    showStatus("Could not connect to the Google Sheet backend.","error");
+  }
+}
+
+function openWhatsApp(kind){
+  if(!currentCustomer){return;}
+  const phone=cleanPhone(currentCustomer.phone);
+  if(!phone){
+    showStatus("No WhatsApp number is saved for this customer.","error");
+    return;
+  }
+  let text="";
+  if(kind==="receipt"){
+    const last=currentCustomer.payments?.[currentCustomer.payments.length-1];
+    text =
+`NEW SHEEBA JEWELLERY
+
+Payment Received ✓
+
+Account No: ${currentCustomer.accountNo}
+Customer: ${currentCustomer.name}
+Payment Date: ${last?.date || currentCustomer.lastPaymentDate || "-"}
+Amount Paid: ${money(last?.amount || 0)}
+Total Amount Paid: ${money(currentCustomer.totalPaid)}
+Installments Paid: ${(currentCustomer.payments||[]).length}
+
+Thank you.`;
+  }else{
+    text =
+`NEW SHEEBA JEWELLERY
+
+Customer Statement
+
+Account No: ${currentCustomer.accountNo}
+Customer: ${currentCustomer.name}
+Address: ${currentCustomer.address || "-"}
+Total Amount Paid: ${money(currentCustomer.totalPaid)}
+Total Installments Paid: ${(currentCustomer.payments||[]).length}
+Last Payment: ${currentCustomer.lastPaymentDate || "-"}
+
+Payment History:
+` + (currentCustomer.payments||[]).map((p,i)=>`${i+1}. ${p.date} - ${money(p.amount)}`).join("\n");
+  }
+  window.open("https://wa.me/"+phone+"?text="+encodeURIComponent(text),"_blank");
+}
+
+document.getElementById("searchBtn").addEventListener("click",searchCustomer);
+document.getElementById("accountInput").addEventListener("keydown",e=>{if(e.key==="Enter")searchCustomer()});
+document.getElementById("receiptBtn").addEventListener("click",()=>openWhatsApp("receipt"));
+document.getElementById("statementBtn").addEventListener("click",()=>openWhatsApp("statement"));
+</script>
+</body>
+</html>
