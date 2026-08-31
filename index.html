@@ -3,35 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>New Sheeba Jewellery – Owner Portal</title>
-<!-- Google Fonts for High-End Jewellery Aesthetic -->
+<title>New Sheeba Jewellery – Luxury Portal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --primary-deep: #1e020d;
-  --primary-maroon: #3b051b;
-  --primary-gradient: linear-gradient(135deg, #2b0414 0%, #460824 50%, #1e020d 100%);
+  --primary-deep: #160109;
+  --primary-maroon: #2e0415;
+  --primary-glow: rgba(212, 175, 55, 0.25);
   --gold-primary: #d4af37;
-  --gold-light: #f5e6a4;
-  --gold-dark: #aa820a;
-  --gold-gradient: linear-gradient(135deg, #d4af37 0%, #f9e9ad 50%, #b8860b 100%);
-  
-  --bg-sand: #fbf9f6;
-  --surface-card: #ffffff;
-  --text-main: #1d1819;
-  --text-muted: #786f72;
-  --border-subtle: #ece5e1;
-  --border-gold: rgba(212, 175, 55, 0.35);
-
-  --status-green: #0a803c;
-  --status-green-bg: #eaf6ee;
-  
-  --shadow-sm: 0 2px 8px rgba(30, 2, 13, 0.04);
-  --shadow-md: 0 8px 24px rgba(30, 2, 13, 0.08);
-  --shadow-lg: 0 16px 36px rgba(30, 2, 13, 0.12);
+  --gold-light: #fef0be;
+  --gold-accent: #f3c343;
+  --gold-gradient: linear-gradient(135deg, #caa028 0%, #fdeaa7 45%, #b3820a 100%);
+  --bg-velvet: #0d0106;
+  --surface-ivory: #fcfaf8;
+  --card-bg: #ffffff;
+  --text-main: #1c1517;
+  --text-muted: #827579;
+  --border-subtle: #ece5e2;
+  --green-emerald: #0b8f3c;
+  --green-bg: #eaf8ef;
 }
 
 * {
@@ -44,43 +37,65 @@
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
   color: var(--text-main);
-  background-color: #120108;
-  background-image: 
-    radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.06) 0%, transparent 40%),
-    radial-gradient(circle at 90% 80%, rgba(70, 8, 36, 0.15) 0%, transparent 50%),
-    linear-gradient(180deg, #18020b 0%, #0e0107 100%);
+  background: radial-gradient(circle at 50% 0%, #300318 0%, #0d0106 70%);
   min-height: 100vh;
   display: flex;
   justify-content: center;
+  overflow-x: hidden;
 }
 
 .phone {
   width: 100%;
-  max-width: 460px;
+  max-width: 450px;
   min-height: 100vh;
-  background: var(--bg-sand);
-  box-shadow: var(--shadow-lg);
+  background: var(--surface-ivory);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.6);
   position: relative;
   overflow-x: hidden;
-  padding-bottom: 30px;
+  padding-bottom: 35px;
 }
 
-/* Luxury Header Bar */
+/* Header & Animated Sparkles */
 .topbar {
-  background: var(--primary-gradient);
+  background: linear-gradient(135deg, #240210 0%, #420621 60%, #1a010c 100%);
   color: white;
-  padding: 24px 20px 20px;
+  padding: 22px 18px 18px;
   position: sticky;
   top: 0;
-  z-index: 20;
-  border-bottom: 1px solid var(--border-gold);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  z-index: 50;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  overflow: hidden;
+}
+
+.sparkle-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.sparkle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 10%, var(--gold-accent) 60%, transparent 80%);
+  opacity: 0;
+  animation: sparkleTwinkle ease-in-out infinite;
+}
+
+@keyframes sparkleTwinkle {
+  0% { opacity: 0; transform: translateY(10px) scale(0.2); }
+  50% { opacity: 1; transform: translateY(-4px) scale(1); filter: drop-shadow(0 0 6px var(--gold-light)); }
+  100% { opacity: 0; transform: translateY(-16px) scale(0.2); }
 }
 
 .toprow {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+  z-index: 2;
 }
 
 .brand {
@@ -93,60 +108,80 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 19px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
+  font-weight: 800;
+  letter-spacing: 2px;
   text-transform: uppercase;
+  animation: shineSweep 4s linear infinite;
+  background-size: 200% auto;
+}
+
+@keyframes shineSweep {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
 }
 
 .brand .sub {
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.75);
-  letter-spacing: 2px;
+  font-size: 10.5px;
+  color: #eed5df;
+  letter-spacing: 2.5px;
   margin-top: 3px;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 600;
+  opacity: 0.9;
 }
 
 .icon-btn {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(212, 175, 55, 0.25);
   color: var(--gold-light);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .icon-btn:hover {
-  background: rgba(212, 175, 55, 0.15);
-  transform: scale(1.05);
+  background: rgba(212, 175, 55, 0.2);
+  transform: scale(1.1) rotate(6deg);
+  border-color: var(--gold-primary);
 }
 
 .content {
-  padding: 22px 18px;
+  padding: 20px 16px;
 }
 
-/* Premium Search Input */
+/* Search Card */
 .search-card {
-  background: var(--surface-card);
-  padding: 16px;
-  border-radius: 16px;
+  background: var(--card-bg);
+  padding: 16px 18px;
+  border-radius: 20px;
   border: 1px solid var(--border-subtle);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 8px 24px rgba(35, 4, 18, 0.04);
   margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.search-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: var(--gold-gradient);
 }
 
 .input-label {
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--primary-maroon);
   letter-spacing: 0.8px;
   text-transform: uppercase;
-  margin-bottom: 10px;
-  display: block;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .searchrow {
@@ -157,12 +192,13 @@ body {
 .searchrow input {
   flex: 1;
   border: 1.5px solid var(--border-subtle);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 14px 16px;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
   color: var(--text-main);
-  background: #faf8f7;
+  background: #fdfbfb;
   outline: none;
   transition: all 0.25s ease;
 }
@@ -170,200 +206,188 @@ body {
 .searchrow input:focus {
   border-color: var(--gold-primary);
   background: #ffffff;
-  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.12);
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15);
+  transform: translateY(-1px);
 }
 
 .search-btn {
-  width: 52px;
+  width: 56px;
   border: none;
-  border-radius: 12px;
-  background: var(--primary-gradient);
+  border-radius: 14px;
+  background: linear-gradient(135deg, #320317 0%, #57072c 100%);
   color: var(--gold-light);
   display: grid;
   place-items: center;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(59, 5, 27, 0.25);
-  transition: all 0.2s ease;
+  box-shadow: 0 6px 18px rgba(50, 3, 23, 0.35);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   position: relative;
   overflow: hidden;
 }
 
 .search-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(59, 5, 27, 0.35);
+  transform: scale(1.06) translateY(-2px);
+  box-shadow: 0 10px 24px rgba(50, 3, 23, 0.45);
 }
 
 .search-btn:active {
-  transform: translateY(0);
+  transform: scale(0.95);
 }
 
-/* Status Notifications */
-.status-banner {
-  border-radius: 12px;
-  padding: 14px 16px;
-  font-size: 13.5px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.status-loading {
-  background: #fdf8eb;
-  color: #8c6809;
-  border: 1px solid rgba(212, 175, 55, 0.3);
-}
-
-.status-loading::after {
-  content: "";
-  width: 14px;
-  height: 14px;
-  border: 2px solid #8c6809;
-  border-top-color: transparent;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-.status-error {
-  background: #fdf2f2;
-  color: #b3261e;
-  border: 1px solid #f8d7da;
-}
-
-@keyframes spin { to { transform: rotate(360deg); } }
-
-/* Luxury Cards */
+/* Luxury Cards with Stagger Animation */
 .card {
-  background: var(--surface-card);
+  background: var(--card-bg);
   border: 1px solid var(--border-subtle);
-  border-radius: 18px;
-  padding: 18px;
-  box-shadow: var(--shadow-sm);
+  border-radius: 20px;
+  padding: 20px 18px;
+  box-shadow: 0 8px 24px rgba(40, 5, 22, 0.04);
   margin-bottom: 16px;
   position: relative;
   overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  opacity: 0;
+  transform: translateY(24px) scale(0.97);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card.animate-in {
+  animation: springCardIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes springCardIn {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .card:hover {
-  box-shadow: var(--shadow-md);
-}
-
-.card-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 14px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #f5efec;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(40, 5, 22, 0.07);
 }
 
 .card-title {
   font-family: 'Cinzel', serif;
   color: var(--primary-maroon);
   font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.8px;
+  font-weight: 800;
+  letter-spacing: 1px;
   text-transform: uppercase;
-}
-
-.card-badge {
-  background: var(--gold-light);
-  color: var(--gold-dark);
-  font-size: 11px;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 20px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f6f0ed;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 /* Detail Rows */
 .detail-grid {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .detail-item {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  font-size: 13.5px;
-  padding: 4px 0;
+  align-items: center;
+  font-size: 14px;
+  padding: 2px 0;
 }
 
 .detail-label {
   color: var(--text-muted);
   font-weight: 500;
-  flex: 1;
 }
 
 .detail-val {
   color: var(--text-main);
-  font-weight: 600;
-  text-align: right;
-  flex: 1.5;
-  word-break: break-word;
-}
-
-.detail-val.highlight {
-  color: var(--primary-maroon);
   font-weight: 700;
+  text-align: right;
+  max-width: 60%;
 }
 
 .detail-val.phone-link {
-  color: var(--status-green);
-  font-weight: 700;
+  color: var(--green-emerald);
+  font-weight: 800;
+  letter-spacing: 0.5px;
 }
 
-/* Stats Ribbon */
+/* Stats Section with Pop In */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .stat-box {
-  background: var(--surface-card);
+  background: var(--card-bg);
   border: 1px solid var(--border-subtle);
-  border-radius: 14px;
-  padding: 14px 10px;
+  border-radius: 16px;
+  padding: 16px 8px;
   text-align: center;
-  box-shadow: var(--shadow-sm);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  box-shadow: 0 6px 18px rgba(35, 4, 18, 0.03);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: transform 0.25s ease;
 }
 
+.stat-box.animate-in {
+  animation: springCardIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.stat-box:nth-child(1) { animation-delay: 0.1s; }
+.stat-box:nth-child(2) { animation-delay: 0.2s; }
+.stat-box:nth-child(3) { animation-delay: 0.3s; }
+
 .stat-box.primary {
-  background: linear-gradient(180deg, #ffffff 0%, #fdf8ee 100%);
-  border-color: rgba(212, 175, 55, 0.4);
+  background: linear-gradient(180deg, #ffffff 0%, #fdf8eb 100%);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-box.primary::after {
+  content: "";
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: linear-gradient(45deg, transparent 45%, rgba(255,255,255,0.7) 50%, transparent 55%);
+  transform: rotate(30deg);
+  animation: sheenEffect 4s ease-in-out infinite;
+}
+
+@keyframes sheenEffect {
+  0%, 70% { transform: translateX(-100%) rotate(30deg); }
+  100% { transform: translateX(100%) rotate(30deg); }
 }
 
 .stat-lbl {
   font-size: 11px;
   color: var(--text-muted);
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 6px;
-  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
 }
 
 .stat-num {
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 17px;
+  font-weight: 800;
   color: var(--text-main);
+  transition: transform 0.2s ease;
 }
 
 .stat-box.primary .stat-num {
   color: var(--primary-maroon);
-  font-size: 17px;
+  font-size: 18px;
 }
 
-/* Payment Table */
+/* Table Design */
 .table-container {
   overflow-x: auto;
-  border-radius: 12px;
+  border-radius: 14px;
   border: 1px solid var(--border-subtle);
 }
 
@@ -371,107 +395,95 @@ table {
   width: 100%;
   border-collapse: collapse;
   background: white;
-  font-size: 13px;
+  font-size: 13.5px;
 }
 
 th {
-  background: #f8f4f2;
+  background: #f7f2ef;
   color: var(--primary-maroon);
-  font-weight: 700;
+  font-weight: 800;
   padding: 12px 10px;
   text-align: left;
   font-size: 11.5px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
 }
 
 td {
   padding: 12px 10px;
-  border-bottom: 1px solid #f6f0ed;
+  border-bottom: 1px solid #f6eff1;
   color: var(--text-main);
+  transition: background 0.2s ease;
 }
 
-tr:last-child td {
-  border-bottom: none;
+tr:hover td {
+  background: #fcf6f9;
 }
 
-tr.latest-row {
-  background: #fafdfb;
+tr.table-row-animated {
+  opacity: 0;
+  transform: translateX(-10px);
+  animation: rowSlideIn 0.4s ease forwards;
+}
+
+@keyframes rowSlideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 tr.latest-row td {
-  color: var(--status-green);
-  font-weight: 700;
+  color: var(--green-emerald);
+  font-weight: 800;
+  background: var(--green-bg);
 }
 
-/* Action Buttons */
-.section-divider {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 22px 0 14px;
-}
-
-.section-divider span {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  color: var(--gold-dark);
-  text-transform: uppercase;
-}
-
-.section-divider::before, .section-divider::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: #e5deda;
-}
-
+/* WhatsApp Interactive Action Cards */
 .actions-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  margin-bottom: 14px;
+  margin: 18px 0 14px;
 }
 
 .btn-action {
   border: none;
-  border-radius: 14px;
-  padding: 16px 12px;
+  border-radius: 16px;
+  padding: 16px 14px;
   color: white;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   justify-content: space-between;
-  min-height: 100px;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  min-height: 96px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
   position: relative;
   overflow: hidden;
 }
 
 .btn-action.receipt {
-  background: linear-gradient(145deg, #0f7a3c, #065427);
+  background: linear-gradient(135deg, #098841 0%, #045a29 100%);
 }
 
 .btn-action.statement {
-  background: var(--primary-gradient);
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  background: linear-gradient(135deg, #38041a 0%, #1d010c 100%);
+  border: 1px solid rgba(212, 175, 55, 0.35);
 }
 
 .btn-action:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 26px rgba(0,0,0,0.18);
 }
 
 .btn-action:active {
-  transform: translateY(0) scale(0.98);
+  transform: translateY(0) scale(0.96);
 }
 
 .btn-title {
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.5px;
   display: flex;
   align-items: center;
@@ -485,48 +497,56 @@ tr.latest-row td {
 .btn-sub {
   font-size: 11px;
   opacity: 0.85;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.3;
-  margin-top: 8px;
 }
 
-.wa-footer-card {
-  background: var(--surface-card);
-  border: 1px dashed var(--border-gold);
+/* Status Notifications */
+.status-banner {
   border-radius: 14px;
-  padding: 14px;
+  padding: 14px 16px;
+  font-size: 13.5px;
+  font-weight: 700;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 13px;
+  gap: 10px;
+  animation: popIn 0.3s ease;
 }
 
-.wa-icon-box {
-  width: 36px;
-  height: 36px;
-  background: var(--status-green-bg);
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.status-loading {
+  background: #fef8eb;
+  color: #8a6503;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+.status-loading::after {
+  content: "";
+  width: 16px; height: 16px;
+  border: 2px solid #8a6503;
+  border-top-color: transparent;
   border-radius: 50%;
-  display: grid;
-  place-items: center;
-  color: var(--status-green);
-  flex-shrink: 0;
+  animation: spin 0.8s linear infinite;
 }
 
-.placeholder-screen {
-  text-align: center;
-  padding: 60px 20px;
-  color: var(--text-muted);
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.status-error {
+  background: #fef2f2;
+  color: #ba1a1a;
+  border: 1px solid #fecaca;
+  animation: shake 0.35s ease;
 }
 
-.placeholder-icon {
-  width: 56px;
-  height: 56px;
-  margin: 0 auto 16px;
-  border-radius: 50%;
-  background: #f2ece9;
-  display: grid;
-  place-items: center;
-  color: var(--gold-dark);
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
 }
 
 .hidden { display: none !important; }
@@ -538,38 +558,41 @@ tr.latest-row td {
   transform: scale(0);
   background: rgba(255, 255, 255, 0.4);
   pointer-events: none;
-  animation: rippleAnim 0.5s ease-out forwards;
+  animation: rippleAnim 0.55s ease-out forwards;
 }
+
 @keyframes rippleAnim {
-  to { transform: scale(3); opacity: 0; }
+  to { transform: scale(3.5); opacity: 0; }
 }
 </style>
 </head>
 <body>
 
 <div class="phone">
-  <!-- Gold & Velvet Topbar -->
   <header class="topbar">
+    <div class="sparkle-canvas" id="sparkles"></div>
     <div class="toprow">
-      <div class="icon-btn" title="Menu">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      <div class="icon-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
       </div>
       <div class="brand">
         <div class="name">New Sheeba</div>
         <div class="sub">Owner Portal</div>
       </div>
-      <div class="icon-btn" title="Profile">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <div class="icon-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
       </div>
     </div>
   </header>
 
   <main class="content">
-    <!-- Search Section -->
     <div class="search-card">
-      <label class="input-label" for="accountInput">Search Customer Passbook</label>
+      <label class="input-label" for="accountInput">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        Search Customer Passbook
+      </label>
       <div class="searchrow">
-        <input id="accountInput" inputmode="numeric" placeholder="Enter ID (e.g. 3575)" autocomplete="off">
+        <input id="accountInput" inputmode="numeric" placeholder="e.g. 3575" autocomplete="off">
         <button id="searchBtn" class="search-btn" title="Search">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         </button>
@@ -578,17 +601,14 @@ tr.latest-row td {
 
     <div id="status" class="status-banner hidden"></div>
 
-    <!-- Dynamic Result View -->
     <section id="result" class="hidden">
-      <!-- Account Overview -->
-      <div class="card">
-        <div class="card-header">
-          <span class="card-title">Customer Profile</span>
-        </div>
+      <!-- Profile Card -->
+      <div class="card" id="cardProfile">
+        <div class="card-title">Customer Profile</div>
         <div class="detail-grid">
           <div class="detail-item">
             <span class="detail-label">Passbook No.</span>
-            <span class="detail-val highlight" id="accountNo">-</span>
+            <span class="detail-val" id="accountNo" style="font-size:16px;">-</span>
           </div>
           <div class="detail-item">
             <span class="detail-label">Full Name</span>
@@ -605,27 +625,25 @@ tr.latest-row td {
         </div>
       </div>
 
-      <!-- Quick Metrics -->
+      <!-- Quick Metrics Grid -->
       <div class="stats-grid">
-        <div class="stat-box primary">
+        <div class="stat-box primary" id="statBox1">
           <div class="stat-lbl">Total Paid</div>
           <div class="stat-num" id="totalPaid">₹0</div>
         </div>
-        <div class="stat-box">
+        <div class="stat-box" id="statBox2">
           <div class="stat-lbl">Installments</div>
           <div class="stat-num" id="installments">0</div>
         </div>
-        <div class="stat-box">
+        <div class="stat-box" id="statBox3">
           <div class="stat-lbl">Last Payment</div>
           <div class="stat-num" style="font-size:12px; margin-top:3px;" id="lastPayment">-</div>
         </div>
       </div>
 
-      <!-- Passbook Ledger -->
-      <div class="card">
-        <div class="card-header">
-          <span class="card-title">Passbook Statement</span>
-        </div>
+      <!-- Passbook Statement -->
+      <div class="card" id="cardStatement">
+        <div class="card-title">Passbook Statement</div>
         <div class="table-container">
           <table>
             <thead>
@@ -641,47 +659,29 @@ tr.latest-row td {
         </div>
       </div>
 
-      <!-- WhatsApp Dispatch Options -->
-      <div class="section-divider">
-        <span>Instant Notifications</span>
-      </div>
-
+      <!-- Action Buttons -->
       <div class="actions-grid">
         <button class="btn-action receipt" id="receiptBtn">
           <span class="btn-title">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16l4-2 4 2 4-2 4 2V8z"></path></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16l4-2 4 2 4-2 4 2V8z"></path></svg>
             Send Receipt
           </span>
-          <span class="btn-sub">Share latest payment acknowledgment</span>
+          <span class="btn-sub">Share last receipt on WhatsApp</span>
         </button>
 
         <button class="btn-action statement" id="statementBtn">
           <span class="btn-title">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"></rect><line x1="8" y1="10" x2="16" y2="10"></line><line x1="8" y1="14" x2="12" y2="14"></line></svg>
-            Full Passbook
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="16" rx="2"></rect><line x1="8" y1="10" x2="16" y2="10"></line><line x1="8" y1="14" x2="12" y2="14"></line></svg>
+            Statement
           </span>
-          <span class="btn-sub">Share complete payment history</span>
+          <span class="btn-sub">Send full statement on WhatsApp</span>
         </button>
-      </div>
-
-      <div class="wa-footer-card">
-        <div class="wa-icon-box">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-        </div>
-        <div>
-          <div style="font-weight:600; font-size:12px;">Active Number: <span id="waNumber">-</span></div>
-          <div style="font-size:11px; color:var(--text-muted);">One-tap instant delivery to client's phone.</div>
-        </div>
       </div>
     </section>
 
-    <!-- Empty Initial Screen -->
-    <div id="welcome" class="placeholder-screen">
-      <div class="placeholder-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
-      </div>
-      <div style="font-weight:600; font-size:14px; margin-bottom:4px;">No Passbook Loaded</div>
-      <div style="font-size:12px;">Enter customer number above to pull account details.</div>
+    <div id="welcome" style="text-align:center; padding:50px 20px; color:var(--text-muted);">
+      <div style="font-weight:700; font-size:14px; margin-bottom:4px;">Enter Passbook Number</div>
+      <div style="font-size:12px;">Search to load account records and ledger.</div>
     </div>
   </main>
 </div>
@@ -690,8 +690,50 @@ tr.latest-row td {
 const API_URL = "https://script.google.com/macros/s/AKfycbzd7pJncxJAObQm1r1M2Ws03EdKSb1xtlq64KNeiF_MpiL5OvPCS8iT3lb8H1_K-dB3Gg/exec";
 let currentCustomer = null;
 
-function money(n) {
-  return "₹" + Number(n || 0).toLocaleString("en-IN");
+// Dynamic Sparkle Generator
+(function initSparkles() {
+  const container = document.getElementById("sparkles");
+  if (!container) return;
+  const count = 18;
+  for (let i = 0; i < count; i++) {
+    const s = document.createElement("span");
+    s.className = "sparkle";
+    const size = (Math.random() * 3.5 + 1.5).toFixed(1);
+    s.style.width = s.style.height = size + "px";
+    s.style.left = (Math.random() * 100).toFixed(1) + "%";
+    s.style.top = (Math.random() * 100).toFixed(1) + "%";
+    s.style.animationDuration = (Math.random() * 2.5 + 2.2).toFixed(2) + "s";
+    s.style.animationDelay = (Math.random() * 3).toFixed(2) + "s";
+    container.appendChild(s);
+  }
+})();
+
+// Animated Number Counter
+function animateCount(el, target, isCurrency = false) {
+  let start = 0;
+  const duration = 900;
+  const startTime = performance.now();
+  
+  function update(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    // Smooth ease-out quad curve
+    const easeOut = 1 - Math.pow(1 - progress, 3);
+    const currentVal = Math.floor(start + (target - start) * easeOut);
+    
+    el.textContent = isCurrency 
+      ? "₹" + currentVal.toLocaleString("en-IN")
+      : currentVal;
+      
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    } else {
+      el.textContent = isCurrency 
+        ? "₹" + target.toLocaleString("en-IN")
+        : target;
+    }
+  }
+  requestAnimationFrame(update);
 }
 
 function cleanPhone(p) {
@@ -716,23 +758,27 @@ function escapeHtml(v) {
 function renderCustomer(c) {
   currentCustomer = c;
   document.getElementById("welcome").classList.add("hidden");
-  document.getElementById("result").classList.remove("hidden");
+  const resultSec = document.getElementById("result");
+  resultSec.classList.remove("hidden");
   
   document.getElementById("accountNo").textContent = c.accountNo || "-";
   document.getElementById("customerName").textContent = c.name || "-";
   document.getElementById("address").textContent = c.address || "-";
   document.getElementById("phone").textContent = c.phone || "Not recorded";
-  document.getElementById("waNumber").textContent = c.phone || "Not recorded";
-  
-  document.getElementById("totalPaid").textContent = money(c.totalPaid);
-  document.getElementById("installments").textContent = (c.payments || []).length;
   document.getElementById("lastPayment").textContent = c.lastPaymentDate || "-";
 
+  // Trigger Counting Animations
+  animateCount(document.getElementById("totalPaid"), Number(c.totalPaid || 0), true);
+  animateCount(document.getElementById("installments"), (c.payments || []).length, false);
+
+  // Render Table with Staggered Slide In
   const body = document.getElementById("paymentsBody");
   body.innerHTML = "";
-  (c.payments || []).forEach((p, i) => {
+  const payments = c.payments || [];
+  payments.forEach((p, i) => {
     const tr = document.createElement("tr");
-    if (i === c.payments.length - 1) tr.className = "latest-row";
+    tr.className = "table-row-animated" + (i === payments.length - 1 ? " latest-row" : "");
+    tr.style.animationDelay = `${(i * 0.04) + 0.15}s`;
     tr.innerHTML = `
       <td>${escapeHtml(p.date)}</td>
       <td>${Number(p.amount || 0).toLocaleString("en-IN")}</td>
@@ -741,16 +787,31 @@ function renderCustomer(c) {
     `;
     body.appendChild(tr);
   });
+
+  // Trigger Stagger Entrance for Cards
+  const cards = [
+    document.getElementById("cardProfile"),
+    document.getElementById("statBox1"),
+    document.getElementById("statBox2"),
+    document.getElementById("statBox3"),
+    document.getElementById("cardStatement")
+  ];
+  
+  cards.forEach(node => {
+    node.classList.remove("animate-in");
+    void node.offsetWidth; // Reflow reset
+    node.classList.add("animate-in");
+  });
 }
 
 async function searchCustomer() {
   const account = document.getElementById("accountInput").value.trim();
   if (!account) {
-    showStatus("Please provide a customer number.", "error");
+    showStatus("Please enter customer number", "error");
     return;
   }
   
-  showStatus("Fetching live ledger...", "loading");
+  showStatus("Retrieving customer passbook...", "loading");
   document.getElementById("result").classList.add("hidden");
 
   try {
@@ -763,7 +824,7 @@ async function searchCustomer() {
     }
     renderCustomer(data.customer);
   } catch (err) {
-    showStatus("Unable to reach Google Sheets database.", "error");
+    showStatus("Connection to database failed.", "error");
   }
 }
 
@@ -771,7 +832,7 @@ function openWhatsApp(kind) {
   if (!currentCustomer) return;
   const phone = cleanPhone(currentCustomer.phone);
   if (!phone) {
-    showStatus("No valid phone number linked to this customer.", "error");
+    showStatus("No phone number registered for customer.", "error");
     return;
   }
   
@@ -785,31 +846,31 @@ _Official Payment Receipt_
 *Passbook No:* ${currentCustomer.accountNo}
 *Customer Name:* ${currentCustomer.name}
 *Payment Date:* ${last?.date || currentCustomer.lastPaymentDate || "-"}
-*Amount Received:* ${money(last?.amount || 0)}
-*Cumulative Paid:* ${money(currentCustomer.totalPaid)}
-*Total Installments:* ${(currentCustomer.payments || []).length}
+*Amount Received:* ₹${Number(last?.amount || 0).toLocaleString("en-IN")}
+*Cumulative Total:* ₹${Number(currentCustomer.totalPaid || 0).toLocaleString("en-IN")}
+*Installments Completed:* ${(currentCustomer.payments || []).length}
 
-Thank you for choosing New Sheeba Jewellery.`;
+Thank you for your valuable relationship with New Sheeba Jewellery.`;
   } else {
     text = 
 `✨ *NEW SHEEBA JEWELLERY* ✨
-_Gold Savings Statement_
+_Customer Account Statement_
 
 *Passbook No:* ${currentCustomer.accountNo}
 *Customer Name:* ${currentCustomer.name}
 *Address:* ${currentCustomer.address || "-"}
-*Total Accumulated:* ${money(currentCustomer.totalPaid)}
-*Completed Installments:* ${(currentCustomer.payments || []).length}
+*Total Amount Paid:* ₹${Number(currentCustomer.totalPaid || 0).toLocaleString("en-IN")}
+*Total Installments:* ${(currentCustomer.payments || []).length}
 *Last Payment:* ${currentCustomer.lastPaymentDate || "-"}
 
-*Transaction Log:*
-` + (currentCustomer.payments || []).map((p, i) => `${i + 1}. ${p.date} — ${money(p.amount)}`).join("\n");
+*Passbook Ledger:*
+` + (currentCustomer.payments || []).map((p, i) => `${i + 1}. ${p.date} — ₹${Number(p.amount || 0).toLocaleString("en-IN")}`).join("\n");
   }
   window.open("https://wa.me/" + phone + "?text=" + encodeURIComponent(text), "_blank");
 }
 
 // Button Ripples
-document.querySelectorAll(".search-btn, .btn-action").forEach(b => {
+document.querySelectorAll(".search-btn, .btn-action, .icon-btn").forEach(b => {
   b.addEventListener("click", e => {
     const rect = b.getBoundingClientRect();
     const size = Math.max(rect.width, rect.height);
