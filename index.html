@@ -2,35 +2,28 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>New Sheeba Jewellery – Gold Edition</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Sheeba Jewellery – Executive Dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  /* Golden Canvas Spectrum */
-  --bg-gold-base: #f9f2dc;
-  --bg-gold-deep: #ebd8a0;
-  --gold-sheen: linear-gradient(135deg, #f7eed3 0%, #ecd79c 50%, #fdf5df 100%);
-  --gold-accent: #cfa12b;
-  --gold-border: rgba(184, 134, 11, 0.28);
-  --gold-border-subtle: rgba(184, 134, 11, 0.16);
-
-  /* Deep Maroon Typography & Accents */
-  --maroon-dark: #380318;
-  --maroon-primary: #520524;
-  --maroon-light: #731238;
-  --maroon-muted: #7d4458;
-  --maroon-gradient: linear-gradient(135deg, #42041d 0%, #63092f 50%, #300214 100%);
-
-  /* Surface Cards */
-  --card-gold: #fffcf5;
-  --card-gold-tint: rgba(255, 252, 245, 0.9);
-  
-  --green-emerald: #0b8036;
-  --green-pill-bg: #eaf6ec;
+  --primary-deep: #160109;
+  --primary-maroon: #2e0415;
+  --gold-primary: #d4af37;
+  --gold-light: #fef0be;
+  --gold-accent: #f3c343;
+  --gold-gradient: linear-gradient(135deg, #caa028 0%, #fdeaa7 45%, #b3820a 100%);
+  --bg-velvet: #0d0106;
+  --surface-ivory: #fcfaf8;
+  --card-bg: #ffffff;
+  --text-main: #1c1517;
+  --text-muted: #827579;
+  --border-subtle: #ece5e2;
+  --green-emerald: #0b8f3c;
+  --green-bg: #eaf8ef;
 }
 
 * {
@@ -42,34 +35,23 @@
 
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  color: var(--maroon-primary);
-  background: radial-gradient(circle at 50% 0%, #fef8e7 0%, #ebd498 100%);
+  color: var(--text-main);
+  background: radial-gradient(circle at 50% 0%, #290315 0%, #0d0106 100%);
   min-height: 100vh;
   display: flex;
-  justify-content: center;
-  overflow-x: hidden;
+  flex-direction: column;
 }
 
-.phone {
-  width: 100%;
-  max-width: 450px;
-  min-height: 100vh;
-  background: var(--gold-sheen);
-  box-shadow: 0 25px 60px rgba(56, 3, 24, 0.25);
-  position: relative;
-  overflow-x: hidden;
-  padding-bottom: 35px;
-}
-
-/* Header with Gold Shimmer */
+/* Full Width Topbar */
 .topbar {
-  background: var(--gold-sheen);
-  padding: 22px 18px 18px;
+  background: linear-gradient(135deg, #240210 0%, #420621 60%, #1a010c 100%);
+  color: white;
+  padding: 16px 40px;
   position: sticky;
   top: 0;
   z-index: 50;
-  border-bottom: 1.5px solid var(--gold-border);
-  box-shadow: 0 6px 20px rgba(94, 12, 44, 0.06);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   overflow: hidden;
 }
 
@@ -84,18 +66,20 @@ body {
 .sparkle {
   position: absolute;
   border-radius: 50%;
-  background: radial-gradient(circle, #ffffff 10%, #d4af37 60%, transparent 80%);
+  background: radial-gradient(circle, #fff 10%, var(--gold-accent) 60%, transparent 80%);
   opacity: 0;
   animation: sparkleTwinkle ease-in-out infinite;
 }
 
 @keyframes sparkleTwinkle {
-  0% { opacity: 0; transform: translateY(8px) scale(0.2); }
-  50% { opacity: 1; transform: translateY(-4px) scale(1); filter: drop-shadow(0 0 4px #cfa12b); }
+  0% { opacity: 0; transform: translateY(10px) scale(0.2); }
+  50% { opacity: 1; transform: translateY(-4px) scale(1); filter: drop-shadow(0 0 6px var(--gold-light)); }
   100% { opacity: 0; transform: translateY(-16px) scale(0.2); }
 }
 
 .toprow {
+  max-width: 1400px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -103,77 +87,132 @@ body {
   z-index: 2;
 }
 
-.brand {
-  text-align: center;
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  display: grid;
+  place-items: center;
+  color: var(--gold-light);
 }
 
 .brand .name {
   font-family: 'Cinzel', serif;
-  background: var(--maroon-gradient);
+  background: var(--gold-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 19px;
-  font-weight: 900;
+  font-size: 22px;
+  font-weight: 800;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
 
 .brand .sub {
-  font-size: 10.5px;
-  color: var(--maroon-muted);
-  letter-spacing: 2.5px;
-  margin-top: 3px;
+  font-size: 11px;
+  color: #eed5df;
+  letter-spacing: 2px;
   text-transform: uppercase;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.badge-live {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: rgba(11, 143, 60, 0.15);
+  border: 1px solid rgba(11, 143, 60, 0.4);
+  font-size: 12px;
   font-weight: 700;
+  color: #4ade80;
 }
 
-.icon-btn {
-  width: 40px;
-  height: 40px;
-  display: grid;
-  place-items: center;
+.badge-live::before {
+  content: "";
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1.5px solid var(--gold-border);
-  color: var(--maroon-primary);
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 2px 8px rgba(94, 12, 44, 0.05);
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
 }
 
-.icon-btn:hover {
-  background: #ffffff;
-  transform: scale(1.1) rotate(6deg);
-  border-color: var(--maroon-primary);
+/* Main Dashboard Workspace */
+.dashboard-container {
+  max-width: 1400px;
+  width: 100%;
+  margin: 30px auto;
+  padding: 0 40px;
+  flex: 1;
 }
 
-.content {
-  padding: 20px 16px;
+.grid-workspace {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+/* Card System */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 22px 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  margin-bottom: 22px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.22);
+}
+
+.card-title {
+  font-family: 'Cinzel', serif;
+  color: var(--primary-maroon);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f6f0ed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 /* Search Card */
-.search-card {
-  background: var(--card-gold);
-  padding: 16px 18px;
-  border-radius: 20px;
-  border: 1px solid var(--gold-border);
-  box-shadow: 0 8px 24px rgba(78, 14, 38, 0.05);
-  margin-bottom: 20px;
-  position: relative;
-  overflow: hidden;
-}
-
 .search-card::before {
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0; height: 3.5px;
-  background: var(--maroon-gradient);
+  background: var(--gold-gradient);
 }
 
 .input-label {
   font-size: 12px;
   font-weight: 800;
-  color: var(--maroon-dark);
+  color: var(--primary-maroon);
   letter-spacing: 0.8px;
   text-transform: uppercase;
   margin-bottom: 12px;
@@ -189,99 +228,47 @@ body {
 
 .searchrow input {
   flex: 1;
-  border: 1.5px solid var(--gold-border);
+  border: 1.5px solid var(--border-subtle);
   border-radius: 14px;
-  padding: 14px 16px;
-  font-size: 18px;
+  padding: 14px 18px;
+  font-size: 17px;
   font-weight: 700;
-  letter-spacing: 1px;
-  color: var(--maroon-dark);
-  background: #ffffff;
+  letter-spacing: 0.8px;
+  color: var(--text-main);
+  background: #fdfbfb;
   outline: none;
   transition: all 0.25s ease;
 }
 
 .searchrow input:focus {
-  border-color: var(--maroon-primary);
-  box-shadow: 0 0 0 4px rgba(82, 5, 36, 0.12);
-  transform: translateY(-1px);
+  border-color: var(--gold-primary);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15);
 }
 
 .search-btn {
-  width: 56px;
+  width: 58px;
   border: none;
   border-radius: 14px;
-  background: var(--maroon-gradient);
-  color: #f7e6a6;
+  background: linear-gradient(135deg, #320317 0%, #57072c 100%);
+  color: var(--gold-light);
   display: grid;
   place-items: center;
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(66, 4, 29, 0.35);
+  box-shadow: 0 6px 18px rgba(50, 3, 23, 0.35);
   transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-  position: relative;
-  overflow: hidden;
 }
 
 .search-btn:hover {
-  transform: scale(1.06) translateY(-2px);
-  box-shadow: 0 10px 24px rgba(66, 4, 29, 0.45);
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 10px 24px rgba(50, 3, 23, 0.45);
 }
 
-.search-btn:active {
-  transform: scale(0.95);
-}
-
-/* Staggered Animated Cards */
-.card {
-  background: var(--card-gold);
-  border: 1px solid var(--gold-border);
-  border-radius: 20px;
-  padding: 20px 18px;
-  box-shadow: 0 8px 24px rgba(78, 14, 38, 0.05);
-  margin-bottom: 16px;
-  position: relative;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(24px) scale(0.97);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.card.animate-in {
-  animation: springCardIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes springCardIn {
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(78, 14, 38, 0.08);
-}
-
-.card-title {
-  font-family: 'Cinzel', serif;
-  color: var(--maroon-dark);
-  font-size: 14.5px;
-  font-weight: 800;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  margin-bottom: 14px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgba(184, 134, 11, 0.15);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-/* Details Section */
+/* Detail Rows */
 .detail-grid {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .detail-item {
@@ -289,58 +276,46 @@ body {
   justify-content: space-between;
   align-items: center;
   font-size: 14px;
-  padding: 2px 0;
 }
 
 .detail-label {
-  color: var(--maroon-muted);
-  font-weight: 600;
+  color: var(--text-muted);
+  font-weight: 500;
 }
 
 .detail-val {
-  color: var(--maroon-dark);
-  font-weight: 800;
+  color: var(--text-main);
+  font-weight: 700;
   text-align: right;
-  max-width: 60%;
+  max-width: 65%;
 }
 
 .detail-val.phone-link {
   color: var(--green-emerald);
   font-weight: 800;
-  letter-spacing: 0.5px;
 }
 
-/* Quick Metrics Row */
+/* Stats Ribbon */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 16px;
+  gap: 12px;
+  margin-bottom: 22px;
 }
 
 .stat-box {
-  background: var(--card-gold);
-  border: 1px solid var(--gold-border);
+  background: var(--card-bg);
+  border: 1px solid var(--border-subtle);
   border-radius: 16px;
-  padding: 16px 8px;
+  padding: 16px 12px;
   text-align: center;
-  box-shadow: 0 6px 18px rgba(78, 14, 38, 0.04);
-  opacity: 0;
-  transform: translateY(20px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
   transition: transform 0.25s ease;
 }
 
-.stat-box.animate-in {
-  animation: springCardIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.stat-box:nth-child(1) { animation-delay: 0.1s; }
-.stat-box:nth-child(2) { animation-delay: 0.2s; }
-.stat-box:nth-child(3) { animation-delay: 0.3s; }
-
 .stat-box.primary {
-  background: #ffffff;
-  border: 1.5px solid var(--maroon-primary);
+  background: linear-gradient(180deg, #ffffff 0%, #fdf8eb 100%);
+  border: 1px solid rgba(212, 175, 55, 0.5);
   position: relative;
   overflow: hidden;
 }
@@ -350,7 +325,7 @@ body {
   position: absolute;
   top: -50%; left: -50%;
   width: 200%; height: 200%;
-  background: linear-gradient(45deg, transparent 45%, rgba(207, 161, 43, 0.25) 50%, transparent 55%);
+  background: linear-gradient(45deg, transparent 45%, rgba(255,255,255,0.7) 50%, transparent 55%);
   transform: rotate(30deg);
   animation: sheenEffect 4s ease-in-out infinite;
 }
@@ -361,8 +336,8 @@ body {
 }
 
 .stat-lbl {
-  font-size: 10.5px;
-  color: var(--maroon-muted);
+  font-size: 11px;
+  color: var(--text-muted);
   font-weight: 700;
   margin-bottom: 6px;
   text-transform: uppercase;
@@ -370,58 +345,62 @@ body {
 }
 
 .stat-num {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 800;
-  color: var(--maroon-dark);
+  color: var(--text-main);
 }
 
 .stat-box.primary .stat-num {
-  color: var(--maroon-primary);
-  font-size: 18px;
+  color: var(--primary-maroon);
+  font-size: 20px;
 }
 
-/* Statement Table */
+/* Table Design */
 .table-container {
   overflow-x: auto;
-  border-radius: 14px;
-  border: 1px solid var(--gold-border);
+  border-radius: 16px;
+  border: 1px solid var(--border-subtle);
+  max-height: 520px;
+  position: relative;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  background: #ffffff;
-  font-size: 13.5px;
+  background: white;
+  font-size: 14px;
 }
 
 th {
-  background: #fbf3dc;
-  color: var(--maroon-dark);
+  background: #f8f4f2;
+  color: var(--primary-maroon);
   font-weight: 800;
-  padding: 12px 10px;
+  padding: 14px 16px;
   text-align: left;
-  font-size: 11.5px;
+  font-size: 12px;
   letter-spacing: 0.6px;
   text-transform: uppercase;
-  border-bottom: 1px solid var(--gold-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 td {
-  padding: 12px 10px;
-  border-bottom: 1px solid rgba(184, 134, 11, 0.12);
-  color: var(--maroon-primary);
-  font-weight: 600;
+  padding: 14px 16px;
+  border-bottom: 1px solid #f6eff1;
+  color: var(--text-main);
   transition: background 0.2s ease;
 }
 
 tr:hover td {
-  background: #fdf8eb;
+  background: #fdf6f9;
 }
 
 tr.table-row-animated {
   opacity: 0;
   transform: translateX(-10px);
-  animation: rowSlideIn 0.4s ease forwards;
+  animation: rowSlideIn 0.35s ease forwards;
 }
 
 @keyframes rowSlideIn {
@@ -434,15 +413,15 @@ tr.table-row-animated {
 tr.latest-row td {
   color: var(--green-emerald);
   font-weight: 800;
-  background: var(--green-pill-bg);
+  background: var(--green-bg);
 }
 
-/* WhatsApp Interactive Action Buttons */
+/* WhatsApp Interactive Action Cards */
 .actions-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  margin: 18px 0 14px;
+  margin-top: 10px;
 }
 
 .btn-action {
@@ -456,7 +435,7 @@ tr.latest-row td {
   justify-content: space-between;
   min-height: 96px;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 6px 18px rgba(56, 3, 24, 0.15);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
   position: relative;
   overflow: hidden;
 }
@@ -466,13 +445,13 @@ tr.latest-row td {
 }
 
 .btn-action.statement {
-  background: var(--maroon-gradient);
-  border: 1.5px solid rgba(235, 212, 152, 0.5);
+  background: linear-gradient(135deg, #38041a 0%, #1d010c 100%);
+  border: 1px solid rgba(212, 175, 55, 0.35);
 }
 
 .btn-action:hover {
   transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 12px 26px rgba(56, 3, 24, 0.25);
+  box-shadow: 0 12px 26px rgba(0,0,0,0.18);
 }
 
 .btn-action:active {
@@ -480,7 +459,7 @@ tr.latest-row td {
 }
 
 .btn-title {
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 800;
   letter-spacing: 0.5px;
   display: flex;
@@ -489,12 +468,12 @@ tr.latest-row td {
 }
 
 .btn-action.statement .btn-title {
-  color: #faecc0;
+  color: var(--gold-light);
 }
 
 .btn-sub {
   font-size: 11px;
-  opacity: 0.9;
+  opacity: 0.85;
   font-weight: 500;
   line-height: 1.3;
 }
@@ -502,8 +481,8 @@ tr.latest-row td {
 /* Status Notifications */
 .status-banner {
   border-radius: 14px;
-  padding: 14px 16px;
-  font-size: 13.5px;
+  padding: 14px 18px;
+  font-size: 14px;
   font-weight: 700;
   margin-bottom: 20px;
   display: flex;
@@ -518,15 +497,15 @@ tr.latest-row td {
 }
 
 .status-loading {
-  background: #ffffff;
-  color: var(--maroon-primary);
-  border: 1px solid var(--gold-border);
+  background: #fef8eb;
+  color: #8a6503;
+  border: 1px solid rgba(212, 175, 55, 0.4);
 }
 
 .status-loading::after {
   content: "";
   width: 16px; height: 16px;
-  border: 2px solid var(--maroon-primary);
+  border: 2px solid #8a6503;
   border-top-color: transparent;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
@@ -538,18 +517,22 @@ tr.latest-row td {
   background: #fef2f2;
   color: #ba1a1a;
   border: 1px solid #fecaca;
-  animation: shake 0.35s ease;
 }
 
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-6px); }
-  75% { transform: translateX(6px); }
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  color: #eed5df;
+}
+
+.empty-state svg {
+  color: var(--gold-primary);
+  margin-bottom: 16px;
 }
 
 .hidden { display: none !important; }
 
-/* Dynamic Ripple */
+/* Micro Ripple */
 .ripple {
   position: absolute;
   border-radius: 50%;
@@ -562,127 +545,147 @@ tr.latest-row td {
 @keyframes rippleAnim {
   to { transform: scale(3.5); opacity: 0; }
 }
+
+@media (max-width: 1024px) {
+  .grid-workspace {
+    grid-template-columns: 1fr;
+  }
+}
 </style>
 </head>
 <body>
 
-<div class="phone">
+  <!-- Header -->
   <header class="topbar">
     <div class="sparkle-canvas" id="sparkles"></div>
     <div class="toprow">
-      <div class="icon-btn">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      <div class="brand-wrapper">
+        <div class="brand-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="brand">
+          <div class="name">New Sheeba Jewellery</div>
+          <div class="sub">Owner Executive Portal</div>
+        </div>
       </div>
-      <div class="brand">
-        <div class="name">New Sheeba</div>
-        <div class="sub">Owner Portal</div>
-      </div>
-      <div class="icon-btn">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <div class="top-actions">
+        <div class="badge-live">Database Connected</div>
       </div>
     </div>
   </header>
 
-  <main class="content">
-    <div class="search-card">
+  <!-- Main Container -->
+  <main class="dashboard-container">
+    <div class="search-card card">
       <label class="input-label" for="accountInput">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
         Search Customer Passbook
       </label>
       <div class="searchrow">
-        <input id="accountInput" inputmode="numeric" placeholder="e.g. 3575" autocomplete="off">
+        <input id="accountInput" inputmode="numeric" placeholder="Enter Customer Number (e.g. 3575)" autocomplete="off">
         <button id="searchBtn" class="search-btn" title="Search">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         </button>
       </div>
     </div>
 
     <div id="status" class="status-banner hidden"></div>
 
-    <section id="result" class="hidden">
-      <!-- Profile Card -->
-      <div class="card" id="cardProfile">
-        <div class="card-title">Customer Profile</div>
-        <div class="detail-grid">
-          <div class="detail-item">
-            <span class="detail-label">Passbook No.</span>
-            <span class="detail-val" id="accountNo" style="font-size:16px;">-</span>
-          </div>
-          <div class="detail-item">
-            <span class="detail-label">Full Name</span>
-            <span class="detail-val" id="customerName">-</span>
-          </div>
-          <div class="detail-item">
-            <span class="detail-label">City / Address</span>
-            <span class="detail-val" id="address">-</span>
-          </div>
-          <div class="detail-item">
-            <span class="detail-label">WhatsApp Contact</span>
-            <span class="detail-val phone-link" id="phone">-</span>
-          </div>
-        </div>
-      </div>
+    <!-- Empty Workspace Screen -->
+    <div id="welcome" class="empty-state">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+      <div style="font-weight:700; font-size:16px; margin-bottom:6px;">Ready for Customer Lookup</div>
+      <div style="font-size:13px; opacity:0.8;">Enter a passbook ID above to load complete transactions and details.</div>
+    </div>
 
-      <!-- Quick Metrics Grid -->
+    <!-- Active Result View (2-Column Desktop Grid) -->
+    <section id="result" class="hidden">
+      <!-- Top Metrics Banner -->
       <div class="stats-grid">
-        <div class="stat-box primary" id="statBox1">
-          <div class="stat-lbl">Total Paid</div>
+        <div class="stat-box primary">
+          <div class="stat-lbl">Total Amount Paid</div>
           <div class="stat-num" id="totalPaid">₹0</div>
         </div>
-        <div class="stat-box" id="statBox2">
-          <div class="stat-lbl">Installments</div>
+        <div class="stat-box">
+          <div class="stat-lbl">Installments Completed</div>
           <div class="stat-num" id="installments">0</div>
         </div>
-        <div class="stat-box" id="statBox3">
-          <div class="stat-lbl">Last Payment</div>
-          <div class="stat-num" style="font-size:12px; margin-top:3px;" id="lastPayment">-</div>
+        <div class="stat-box">
+          <div class="stat-lbl">Latest Payment Date</div>
+          <div class="stat-num" style="font-size:14px; margin-top:3px;" id="lastPayment">-</div>
         </div>
       </div>
 
-      <!-- Passbook Statement -->
-      <div class="card" id="cardStatement">
-        <div class="card-title">Passbook Statement</div>
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Paid (₹)</th>
-                <th>Total (₹)</th>
-                <th>#</th>
-              </tr>
-            </thead>
-            <tbody id="paymentsBody"></tbody>
-          </table>
+      <div class="grid-workspace">
+        <!-- Left Column: Customer Profile & Actions -->
+        <div>
+          <div class="card">
+            <div class="card-title">Customer Profile</div>
+            <div class="detail-grid">
+              <div class="detail-item">
+                <span class="detail-label">Passbook No.</span>
+                <span class="detail-val" id="accountNo" style="font-size:16px;">-</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Customer Name</span>
+                <span class="detail-val" id="customerName">-</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Address / Location</span>
+                <span class="detail-val" id="address">-</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">WhatsApp Contact</span>
+                <span class="detail-val phone-link" id="phone">-</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Instant Communication</div>
+            <div class="actions-grid">
+              <button class="btn-action receipt" id="receiptBtn">
+                <span class="btn-title">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16l4-2 4 2 4-2 4 2V8z"></path></svg>
+                  Send Receipt
+                </span>
+                <span class="btn-sub">Send latest payment receipt</span>
+              </button>
+
+              <button class="btn-action statement" id="statementBtn">
+                <span class="btn-title">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="16" rx="2"></rect><line x1="8" y1="10" x2="16" y2="10"></line><line x1="8" y1="14" x2="12" y2="14"></line></svg>
+                  Statement
+                </span>
+                <span class="btn-sub">Send entire passbook ledger</span>
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <!-- Action Buttons -->
-      <div class="actions-grid">
-        <button class="btn-action receipt" id="receiptBtn">
-          <span class="btn-title">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16l4-2 4 2 4-2 4 2V8z"></path></svg>
-            Send Receipt
-          </span>
-          <span class="btn-sub">Share last receipt on WhatsApp</span>
-        </button>
-
-        <button class="btn-action statement" id="statementBtn">
-          <span class="btn-title">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="16" rx="2"></rect><line x1="8" y1="10" x2="16" y2="10"></line><line x1="8" y1="14" x2="12" y2="14"></line></svg>
-            Statement
-          </span>
-          <span class="btn-sub">Send full statement on WhatsApp</span>
-        </button>
+        <!-- Right Column: Ledger Table -->
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-title">
+            <span>Passbook Statement</span>
+            <span id="recordCountBadge" style="font-size:12px; font-weight:700; color:var(--text-muted);">0 Records</span>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Transaction Date</th>
+                  <th>Amount Paid (₹)</th>
+                  <th>Cumulative Total (₹)</th>
+                </tr>
+              </thead>
+              <tbody id="paymentsBody"></tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </section>
-
-    <div id="welcome" style="text-align:center; padding:50px 20px; color:var(--maroon-muted);">
-      <div style="font-weight:700; font-size:14px; margin-bottom:4px; color:var(--maroon-dark);">Enter Passbook Number</div>
-      <div style="font-size:12px;">Search to load account records and ledger.</div>
-    </div>
   </main>
-</div>
 
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbzd7pJncxJAObQm1r1M2Ws03EdKSb1xtlq64KNeiF_MpiL5OvPCS8iT3lb8H1_K-dB3Gg/exec";
@@ -692,7 +695,7 @@ let currentCustomer = null;
 (function initSparkles() {
   const container = document.getElementById("sparkles");
   if (!container) return;
-  const count = 18;
+  const count = 28;
   for (let i = 0; i < count; i++) {
     const s = document.createElement("span");
     s.className = "sparkle";
@@ -709,7 +712,7 @@ let currentCustomer = null;
 // Animated Number Counter
 function animateCount(el, target, isCurrency = false) {
   let start = 0;
-  const duration = 900;
+  const duration = 800;
   const startTime = performance.now();
   
   function update(currentTime) {
@@ -764,40 +767,27 @@ function renderCustomer(c) {
   document.getElementById("phone").textContent = c.phone || "Not recorded";
   document.getElementById("lastPayment").textContent = c.lastPaymentDate || "-";
 
+  const payments = c.payments || [];
+  document.getElementById("recordCountBadge").textContent = `${payments.length} Records`;
+
   // Trigger Counting Animations
   animateCount(document.getElementById("totalPaid"), Number(c.totalPaid || 0), true);
-  animateCount(document.getElementById("installments"), (c.payments || []).length, false);
+  animateCount(document.getElementById("installments"), payments.length, false);
 
-  // Render Table with Staggered Slide In
+  // Render Table
   const body = document.getElementById("paymentsBody");
   body.innerHTML = "";
-  const payments = c.payments || [];
   payments.forEach((p, i) => {
     const tr = document.createElement("tr");
     tr.className = "table-row-animated" + (i === payments.length - 1 ? " latest-row" : "");
-    tr.style.animationDelay = `${(i * 0.04) + 0.15}s`;
+    tr.style.animationDelay = `${(i * 0.03) + 0.1}s`;
     tr.innerHTML = `
-      <td>${escapeHtml(p.date)}</td>
-      <td>${Number(p.amount || 0).toLocaleString("en-IN")}</td>
-      <td>${Number(p.total || 0).toLocaleString("en-IN")}</td>
       <td>${i + 1}</td>
+      <td>${escapeHtml(p.date)}</td>
+      <td>₹${Number(p.amount || 0).toLocaleString("en-IN")}</td>
+      <td>₹${Number(p.total || 0).toLocaleString("en-IN")}</td>
     `;
     body.appendChild(tr);
-  });
-
-  // Trigger Stagger Entrance for Cards
-  const cards = [
-    document.getElementById("cardProfile"),
-    document.getElementById("statBox1"),
-    document.getElementById("statBox2"),
-    document.getElementById("statBox3"),
-    document.getElementById("cardStatement")
-  ];
-  
-  cards.forEach(node => {
-    node.classList.remove("animate-in");
-    void node.offsetWidth;
-    node.classList.add("animate-in");
   });
 }
 
@@ -808,7 +798,7 @@ async function searchCustomer() {
     return;
   }
   
-  showStatus("Retrieving customer passbook...", "loading");
+  showStatus("Retrieving customer records...", "loading");
   document.getElementById("result").classList.add("hidden");
 
   try {
@@ -867,7 +857,7 @@ _Customer Account Statement_
 }
 
 // Button Ripples
-document.querySelectorAll(".search-btn, .btn-action, .icon-btn").forEach(b => {
+document.querySelectorAll(".search-btn, .btn-action").forEach(b => {
   b.addEventListener("click", e => {
     const rect = b.getBoundingClientRect();
     const size = Math.max(rect.width, rect.height);
