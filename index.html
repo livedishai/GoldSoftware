@@ -3,28 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>New Sheeba Jewellery – Luxury Portal</title>
+<title>New Sheeba Jewellery – Gold Edition</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --primary-deep: #160109;
-  --primary-maroon: #2e0415;
-  --primary-glow: rgba(212, 175, 55, 0.25);
-  --gold-primary: #d4af37;
-  --gold-light: #fef0be;
-  --gold-accent: #f3c343;
-  --gold-gradient: linear-gradient(135deg, #caa028 0%, #fdeaa7 45%, #b3820a 100%);
-  --bg-velvet: #0d0106;
-  --surface-ivory: #fcfaf8;
-  --card-bg: #ffffff;
-  --text-main: #1c1517;
-  --text-muted: #827579;
-  --border-subtle: #ece5e2;
-  --green-emerald: #0b8f3c;
-  --green-bg: #eaf8ef;
+  /* Golden Canvas Spectrum */
+  --bg-gold-base: #f9f2dc;
+  --bg-gold-deep: #ebd8a0;
+  --gold-sheen: linear-gradient(135deg, #f7eed3 0%, #ecd79c 50%, #fdf5df 100%);
+  --gold-accent: #cfa12b;
+  --gold-border: rgba(184, 134, 11, 0.28);
+  --gold-border-subtle: rgba(184, 134, 11, 0.16);
+
+  /* Deep Maroon Typography & Accents */
+  --maroon-dark: #380318;
+  --maroon-primary: #520524;
+  --maroon-light: #731238;
+  --maroon-muted: #7d4458;
+  --maroon-gradient: linear-gradient(135deg, #42041d 0%, #63092f 50%, #300214 100%);
+
+  /* Surface Cards */
+  --card-gold: #fffcf5;
+  --card-gold-tint: rgba(255, 252, 245, 0.9);
+  
+  --green-emerald: #0b8036;
+  --green-pill-bg: #eaf6ec;
 }
 
 * {
@@ -36,8 +42,8 @@
 
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  color: var(--text-main);
-  background: radial-gradient(circle at 50% 0%, #300318 0%, #0d0106 70%);
+  color: var(--maroon-primary);
+  background: radial-gradient(circle at 50% 0%, #fef8e7 0%, #ebd498 100%);
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -48,23 +54,22 @@ body {
   width: 100%;
   max-width: 450px;
   min-height: 100vh;
-  background: var(--surface-ivory);
-  box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+  background: var(--gold-sheen);
+  box-shadow: 0 25px 60px rgba(56, 3, 24, 0.25);
   position: relative;
   overflow-x: hidden;
   padding-bottom: 35px;
 }
 
-/* Header & Animated Sparkles */
+/* Header with Gold Shimmer */
 .topbar {
-  background: linear-gradient(135deg, #240210 0%, #420621 60%, #1a010c 100%);
-  color: white;
+  background: var(--gold-sheen);
   padding: 22px 18px 18px;
   position: sticky;
   top: 0;
   z-index: 50;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.4);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  border-bottom: 1.5px solid var(--gold-border);
+  box-shadow: 0 6px 20px rgba(94, 12, 44, 0.06);
   overflow: hidden;
 }
 
@@ -79,14 +84,14 @@ body {
 .sparkle {
   position: absolute;
   border-radius: 50%;
-  background: radial-gradient(circle, #fff 10%, var(--gold-accent) 60%, transparent 80%);
+  background: radial-gradient(circle, #ffffff 10%, #d4af37 60%, transparent 80%);
   opacity: 0;
   animation: sparkleTwinkle ease-in-out infinite;
 }
 
 @keyframes sparkleTwinkle {
-  0% { opacity: 0; transform: translateY(10px) scale(0.2); }
-  50% { opacity: 1; transform: translateY(-4px) scale(1); filter: drop-shadow(0 0 6px var(--gold-light)); }
+  0% { opacity: 0; transform: translateY(8px) scale(0.2); }
+  50% { opacity: 1; transform: translateY(-4px) scale(1); filter: drop-shadow(0 0 4px #cfa12b); }
   100% { opacity: 0; transform: translateY(-16px) scale(0.2); }
 }
 
@@ -104,30 +109,22 @@ body {
 
 .brand .name {
   font-family: 'Cinzel', serif;
-  background: var(--gold-gradient);
+  background: var(--maroon-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 19px;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: 2px;
   text-transform: uppercase;
-  animation: shineSweep 4s linear infinite;
-  background-size: 200% auto;
-}
-
-@keyframes shineSweep {
-  0% { background-position: 0% center; }
-  100% { background-position: 200% center; }
 }
 
 .brand .sub {
   font-size: 10.5px;
-  color: #eed5df;
+  color: var(--maroon-muted);
   letter-spacing: 2.5px;
   margin-top: 3px;
   text-transform: uppercase;
-  font-weight: 600;
-  opacity: 0.9;
+  font-weight: 700;
 }
 
 .icon-btn {
@@ -136,17 +133,18 @@ body {
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(212, 175, 55, 0.25);
-  color: var(--gold-light);
+  background: rgba(255, 255, 255, 0.6);
+  border: 1.5px solid var(--gold-border);
+  color: var(--maroon-primary);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 2px 8px rgba(94, 12, 44, 0.05);
 }
 
 .icon-btn:hover {
-  background: rgba(212, 175, 55, 0.2);
+  background: #ffffff;
   transform: scale(1.1) rotate(6deg);
-  border-color: var(--gold-primary);
+  border-color: var(--maroon-primary);
 }
 
 .content {
@@ -155,11 +153,11 @@ body {
 
 /* Search Card */
 .search-card {
-  background: var(--card-bg);
+  background: var(--card-gold);
   padding: 16px 18px;
   border-radius: 20px;
-  border: 1px solid var(--border-subtle);
-  box-shadow: 0 8px 24px rgba(35, 4, 18, 0.04);
+  border: 1px solid var(--gold-border);
+  box-shadow: 0 8px 24px rgba(78, 14, 38, 0.05);
   margin-bottom: 20px;
   position: relative;
   overflow: hidden;
@@ -168,14 +166,14 @@ body {
 .search-card::before {
   content: "";
   position: absolute;
-  top: 0; left: 0; right: 0; height: 3px;
-  background: var(--gold-gradient);
+  top: 0; left: 0; right: 0; height: 3.5px;
+  background: var(--maroon-gradient);
 }
 
 .input-label {
   font-size: 12px;
   font-weight: 800;
-  color: var(--primary-maroon);
+  color: var(--maroon-dark);
   letter-spacing: 0.8px;
   text-transform: uppercase;
   margin-bottom: 12px;
@@ -191,22 +189,21 @@ body {
 
 .searchrow input {
   flex: 1;
-  border: 1.5px solid var(--border-subtle);
+  border: 1.5px solid var(--gold-border);
   border-radius: 14px;
   padding: 14px 16px;
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 1px;
-  color: var(--text-main);
-  background: #fdfbfb;
+  color: var(--maroon-dark);
+  background: #ffffff;
   outline: none;
   transition: all 0.25s ease;
 }
 
 .searchrow input:focus {
-  border-color: var(--gold-primary);
-  background: #ffffff;
-  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15);
+  border-color: var(--maroon-primary);
+  box-shadow: 0 0 0 4px rgba(82, 5, 36, 0.12);
   transform: translateY(-1px);
 }
 
@@ -214,12 +211,12 @@ body {
   width: 56px;
   border: none;
   border-radius: 14px;
-  background: linear-gradient(135deg, #320317 0%, #57072c 100%);
-  color: var(--gold-light);
+  background: var(--maroon-gradient);
+  color: #f7e6a6;
   display: grid;
   place-items: center;
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(50, 3, 23, 0.35);
+  box-shadow: 0 6px 18px rgba(66, 4, 29, 0.35);
   transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   position: relative;
   overflow: hidden;
@@ -227,20 +224,20 @@ body {
 
 .search-btn:hover {
   transform: scale(1.06) translateY(-2px);
-  box-shadow: 0 10px 24px rgba(50, 3, 23, 0.45);
+  box-shadow: 0 10px 24px rgba(66, 4, 29, 0.45);
 }
 
 .search-btn:active {
   transform: scale(0.95);
 }
 
-/* Luxury Cards with Stagger Animation */
+/* Staggered Animated Cards */
 .card {
-  background: var(--card-bg);
-  border: 1px solid var(--border-subtle);
+  background: var(--card-gold);
+  border: 1px solid var(--gold-border);
   border-radius: 20px;
   padding: 20px 18px;
-  box-shadow: 0 8px 24px rgba(40, 5, 22, 0.04);
+  box-shadow: 0 8px 24px rgba(78, 14, 38, 0.05);
   margin-bottom: 16px;
   position: relative;
   overflow: hidden;
@@ -262,25 +259,25 @@ body {
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(40, 5, 22, 0.07);
+  box-shadow: 0 12px 30px rgba(78, 14, 38, 0.08);
 }
 
 .card-title {
   font-family: 'Cinzel', serif;
-  color: var(--primary-maroon);
-  font-size: 14px;
+  color: var(--maroon-dark);
+  font-size: 14.5px;
   font-weight: 800;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
   margin-bottom: 14px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #f6f0ed;
+  border-bottom: 1px solid rgba(184, 134, 11, 0.15);
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-/* Detail Rows */
+/* Details Section */
 .detail-grid {
   display: flex;
   flex-direction: column;
@@ -296,13 +293,13 @@ body {
 }
 
 .detail-label {
-  color: var(--text-muted);
-  font-weight: 500;
+  color: var(--maroon-muted);
+  font-weight: 600;
 }
 
 .detail-val {
-  color: var(--text-main);
-  font-weight: 700;
+  color: var(--maroon-dark);
+  font-weight: 800;
   text-align: right;
   max-width: 60%;
 }
@@ -313,7 +310,7 @@ body {
   letter-spacing: 0.5px;
 }
 
-/* Stats Section with Pop In */
+/* Quick Metrics Row */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -322,12 +319,12 @@ body {
 }
 
 .stat-box {
-  background: var(--card-bg);
-  border: 1px solid var(--border-subtle);
+  background: var(--card-gold);
+  border: 1px solid var(--gold-border);
   border-radius: 16px;
   padding: 16px 8px;
   text-align: center;
-  box-shadow: 0 6px 18px rgba(35, 4, 18, 0.03);
+  box-shadow: 0 6px 18px rgba(78, 14, 38, 0.04);
   opacity: 0;
   transform: translateY(20px);
   transition: transform 0.25s ease;
@@ -342,8 +339,8 @@ body {
 .stat-box:nth-child(3) { animation-delay: 0.3s; }
 
 .stat-box.primary {
-  background: linear-gradient(180deg, #ffffff 0%, #fdf8eb 100%);
-  border: 1px solid rgba(212, 175, 55, 0.5);
+  background: #ffffff;
+  border: 1.5px solid var(--maroon-primary);
   position: relative;
   overflow: hidden;
 }
@@ -353,7 +350,7 @@ body {
   position: absolute;
   top: -50%; left: -50%;
   width: 200%; height: 200%;
-  background: linear-gradient(45deg, transparent 45%, rgba(255,255,255,0.7) 50%, transparent 55%);
+  background: linear-gradient(45deg, transparent 45%, rgba(207, 161, 43, 0.25) 50%, transparent 55%);
   transform: rotate(30deg);
   animation: sheenEffect 4s ease-in-out infinite;
 }
@@ -364,60 +361,61 @@ body {
 }
 
 .stat-lbl {
-  font-size: 11px;
-  color: var(--text-muted);
+  font-size: 10.5px;
+  color: var(--maroon-muted);
   font-weight: 700;
   margin-bottom: 6px;
   text-transform: uppercase;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.5px;
 }
 
 .stat-num {
   font-size: 17px;
   font-weight: 800;
-  color: var(--text-main);
-  transition: transform 0.2s ease;
+  color: var(--maroon-dark);
 }
 
 .stat-box.primary .stat-num {
-  color: var(--primary-maroon);
+  color: var(--maroon-primary);
   font-size: 18px;
 }
 
-/* Table Design */
+/* Statement Table */
 .table-container {
   overflow-x: auto;
   border-radius: 14px;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--gold-border);
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
+  background: #ffffff;
   font-size: 13.5px;
 }
 
 th {
-  background: #f7f2ef;
-  color: var(--primary-maroon);
+  background: #fbf3dc;
+  color: var(--maroon-dark);
   font-weight: 800;
   padding: 12px 10px;
   text-align: left;
   font-size: 11.5px;
   letter-spacing: 0.6px;
   text-transform: uppercase;
+  border-bottom: 1px solid var(--gold-border);
 }
 
 td {
   padding: 12px 10px;
-  border-bottom: 1px solid #f6eff1;
-  color: var(--text-main);
+  border-bottom: 1px solid rgba(184, 134, 11, 0.12);
+  color: var(--maroon-primary);
+  font-weight: 600;
   transition: background 0.2s ease;
 }
 
 tr:hover td {
-  background: #fcf6f9;
+  background: #fdf8eb;
 }
 
 tr.table-row-animated {
@@ -436,10 +434,10 @@ tr.table-row-animated {
 tr.latest-row td {
   color: var(--green-emerald);
   font-weight: 800;
-  background: var(--green-bg);
+  background: var(--green-pill-bg);
 }
 
-/* WhatsApp Interactive Action Cards */
+/* WhatsApp Interactive Action Buttons */
 .actions-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -458,7 +456,7 @@ tr.latest-row td {
   justify-content: space-between;
   min-height: 96px;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 18px rgba(56, 3, 24, 0.15);
   position: relative;
   overflow: hidden;
 }
@@ -468,13 +466,13 @@ tr.latest-row td {
 }
 
 .btn-action.statement {
-  background: linear-gradient(135deg, #38041a 0%, #1d010c 100%);
-  border: 1px solid rgba(212, 175, 55, 0.35);
+  background: var(--maroon-gradient);
+  border: 1.5px solid rgba(235, 212, 152, 0.5);
 }
 
 .btn-action:hover {
   transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 12px 26px rgba(0,0,0,0.18);
+  box-shadow: 0 12px 26px rgba(56, 3, 24, 0.25);
 }
 
 .btn-action:active {
@@ -491,12 +489,12 @@ tr.latest-row td {
 }
 
 .btn-action.statement .btn-title {
-  color: var(--gold-light);
+  color: #faecc0;
 }
 
 .btn-sub {
   font-size: 11px;
-  opacity: 0.85;
+  opacity: 0.9;
   font-weight: 500;
   line-height: 1.3;
 }
@@ -520,15 +518,15 @@ tr.latest-row td {
 }
 
 .status-loading {
-  background: #fef8eb;
-  color: #8a6503;
-  border: 1px solid rgba(212, 175, 55, 0.4);
+  background: #ffffff;
+  color: var(--maroon-primary);
+  border: 1px solid var(--gold-border);
 }
 
 .status-loading::after {
   content: "";
   width: 16px; height: 16px;
-  border: 2px solid #8a6503;
+  border: 2px solid var(--maroon-primary);
   border-top-color: transparent;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
@@ -551,7 +549,7 @@ tr.latest-row td {
 
 .hidden { display: none !important; }
 
-/* Micro Ripple */
+/* Dynamic Ripple */
 .ripple {
   position: absolute;
   border-radius: 50%;
@@ -679,8 +677,8 @@ tr.latest-row td {
       </div>
     </section>
 
-    <div id="welcome" style="text-align:center; padding:50px 20px; color:var(--text-muted);">
-      <div style="font-weight:700; font-size:14px; margin-bottom:4px;">Enter Passbook Number</div>
+    <div id="welcome" style="text-align:center; padding:50px 20px; color:var(--maroon-muted);">
+      <div style="font-weight:700; font-size:14px; margin-bottom:4px; color:var(--maroon-dark);">Enter Passbook Number</div>
       <div style="font-size:12px;">Search to load account records and ledger.</div>
     </div>
   </main>
@@ -717,7 +715,6 @@ function animateCount(el, target, isCurrency = false) {
   function update(currentTime) {
     const elapsed = currentTime - startTime;
     const progress = Math.min(elapsed / duration, 1);
-    // Smooth ease-out quad curve
     const easeOut = 1 - Math.pow(1 - progress, 3);
     const currentVal = Math.floor(start + (target - start) * easeOut);
     
@@ -799,7 +796,7 @@ function renderCustomer(c) {
   
   cards.forEach(node => {
     node.classList.remove("animate-in");
-    void node.offsetWidth; // Reflow reset
+    void node.offsetWidth;
     node.classList.add("animate-in");
   });
 }
