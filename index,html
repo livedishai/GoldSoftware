@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>New Sheeba Jewellery – Responsive Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary-deep: #160109;
+  --primary-maroon: #2e0415;
+  --gold-primary: #d4af37;
+  --gold-light: #fef0be;
+  --gold-accent: #f3c343;
+  --gold-gradient: linear-gradient(135deg, #caa028 0%, #fdeaa7 45%, #b3820a 100%);
+  --bg-velvet: #0d0106;
+  --surface-ivory: #fcfaf8;
+  --card-bg: #ffffff;
+  --text-main: #1c1517;
+  --text-muted: #827579;
+  --border-subtle: #ece5e2;
+  --green-emerald: #0b8f3c;
+  --green-bg: #eaf8ef;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--text-main);
+  background: radial-gradient(circle at 50% 0%, #290315 0%, #0d0106 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.topbar {
+  background: linear-gradient(135deg, #240210 0%, #420621 60%, #1a010c 100%);
+  color: white;
+  padding: 16px clamp(16px, 4vw, 40px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  overflow: hidden;
+}
+
+.sparkle-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.sparkle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 10%, var(--gold-accent) 60%, transparent 80%);
+  opacity: 0;
+  animation: sparkleTwinkle ease-in-out infinite;
+}
+
+@keyframes sparkleTwinkle {
+  0% { opacity: 0; transform: translateY(10px) scale(0.2); }
+  50% { opacity: 1; transform: translateY(-4px) scale(1); filter: drop-shadow(0 0 6px var(--gold-light)); }
+  100% { opacity: 0; transform: translateY(-16px) scale(0.2); }
+}
+
+.toprow {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+}
+
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  display: grid;
+  place-items: center;
+  color: var(--gold-light);
+  flex-shrink: 0;
+}
+
+.brand .name {
+  font-family: 'Cinzel', serif;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: clamp(16px, 3.5vw, 22px);
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.brand .sub {
+  font-size: clamp(9px, 2vw, 11px);
+  color: #eed5df;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.badge-live {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: rgba(11, 143, 60, 0.15);
+  border: 1px solid rgba(11, 143, 60, 0.4);
+  font-size: 11px;
+  font-weight: 700;
+  color: #4ade80;
+  white-space: nowrap;
+}
+
+.badge-live::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 6px #22c55e;
+}
+
+/* Responsive Dashboard Layout */
+.dashboard-container {
+  max-width: 1400px;
+  width: 100%;
+  margin: 16px auto 30px;
+  padding: 0 clamp(12px, 3vw, 40px);
+  flex: 1;
+}
+
+.grid-workspace {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 900px) {
+  .grid-workspace {
+    grid-template-columns: 380px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+}
+
+/* Card Styling */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: 18px;
+  padding: clamp(14px, 3vw, 22px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.card-title {
+  font-family: 'Cinzel', serif;
+  color: var(--primary-maroon);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f6f0ed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Search Card */
+.search-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3.5px;
+  background: var(--gold-gradient);
+}
+
+.input-label {
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--primary-maroon);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.searchrow {
+  display: flex;
+  gap: 8px;
+}
+
+.searchrow input {
+  flex: 1;
+  min-width: 0;
+  border: 1.5px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+  background: #fdfbfb;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.searchrow input:focus {
+  border-color: var(--gold-primary);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+}
+
+.search-btn {
+  width: 50px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #320317 0%, #57072c 100%);
+  color: var(--gold-light);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(50, 3, 23, 0.35);
+  transition: transform 0.2s ease;
+}
+
+.search-btn:active {
+  transform: scale(0.95);
+}
+
+/* Detail Rows with text wrapping */
+.detail-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 13.5px;
+}
+
+.detail-label {
+  color: var(--text-muted);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.detail-val {
+  color: var(--text-main);
+  font-weight: 700;
+  text-align: right;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.detail-val.phone-link {
+  color: var(--green-emerald);
+  font-weight: 800;
+}
+
+/* Responsive Metric Cards */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.stat-box {
+  background: var(--card-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 12px 6px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  min-width: 0;
+}
+
+.stat-box.primary {
+  background: linear-gradient(180deg, #ffffff 0%, #fdf8eb 100%);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-lbl {
+  font-size: clamp(9px, 2.2vw, 11px);
+  color: var(--text-muted);
+  font-weight: 700;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stat-num {
+  font-size: clamp(14px, 3.8vw, 18px);
+  font-weight: 800;
+  color: var(--text-main);
+  word-break: break-all;
+}
+
+.stat-box.primary .stat-num {
+  color: var(--primary-maroon);
+}
+
+/* Table Design with safe overflow */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 14px;
+  border: 1px solid var(--border-subtle);
+  max-height: 480px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  font-size: clamp(12px, 2.8vw, 13.5px);
+  min-width: 320px;
+}
+
+th {
+  background: #f8f4f2;
+  color: var(--primary-maroon);
+  font-weight: 800;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 11px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #f6eff1;
+  color: var(--text-main);
+  white-space: nowrap;
+}
+
+tr:hover td {
+  background: #fdf6f9;
+}
+
+tr.table-row-animated {
+  opacity: 0;
+  transform: translateX(-6px);
+  animation: rowSlideIn 0.3s ease forwards;
+}
+
+@keyframes rowSlideIn {
+  to { opacity: 1; transform: translateX(0); }
+}
+
+tr.latest-row td {
+  color: var(--green-emerald);
+  font-weight: 800;
+  background: var(--green-bg);
+}
+
+/* WhatsApp Actions Grid */
+.actions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.btn-action {
+  border: none;
+  border-radius: 14px;
+  padding: 14px 10px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 84px;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-action.receipt {
+  background: linear-gradient(135deg, #098841 0%, #045a29 100%);
+}
+
+.btn-action.statement {
+  background: linear-gradient(135deg, #38041a 0%, #1d010c 100%);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+}
+
+.btn-action:active {
+  transform: scale(0.96);
+}
+
+.btn-title {
+  font-size: clamp(12px, 2.8vw, 13px);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.btn-action.statement .btn-title {
+  color: var(--gold-light);
+}
+
+.btn-sub {
+  font-size: 10.5px;
+  opacity: 0.85;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+/* Status Notifications */
+.status-banner {
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-loading {
+  background: #fef8eb;
+  color: #8a6503;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+.status-loading::after {
+  content: "";
+  width: 14px; height: 14px;
+  border: 2px solid #8a6503;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.status-error {
+  background: #fef2f2;
+  color: #ba1a1a;
+  border: 1px solid #fecaca;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 50px 16px;
+  color: #eed5df;
+}
+
+.empty-state svg {
+  color: var(--gold-primary);
+  margin-bottom: 12px;
+}
+
+.hidden { display: none !important; }
+
+/* Micro Ripple */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  background: rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+  animation: rippleAnim 0.5s ease-out forwards;
+}
+
+@keyframes rippleAnim {
+  to { transform: scale(3); opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="sparkle-canvas" id="sparkles"></div>
+    <div class="toprow">
+      <div class="brand-wrapper">
+        <div class="brand-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="brand">
+          <div class="name">New Sheeba</div>
+          <div class="sub">Owner Portal</div>
+        </div>
+      </div>
+      <div class="badge-live">Live Link</div>
+    </div>
+  </header>
+
+  <!-- Content Container -->
+  <main class="dashboard-container">
+    <div class="search-card card">
+      <label class="input-label" for="accountInput">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        Search Customer Passbook
+      </label>
+      <div class="searchrow">
+        <input id="accountInput" inputmode="numeric" placeholder="Enter ID (e.g. 3575)" autocomplete="off">
+        <button id="searchBtn" class="search-btn" title="Search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="status" class="status-banner hidden"></div>
+
+    <!-- Empty State -->
+    <div id="welcome" class="empty-state">
+      <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+      <div style="font-weight:700; font-size:15px; margin-bottom:4px;">No Passbook Selected</div>
+      <div style="font-size:12px; opacity:0.8;">Enter customer number above to pull account details.</div>
+    </div>
+
+    <!-- Result View -->
+    <section id="result" class="hidden">
+      <!-- 3 Metrics Top Banner -->
+      <div class="stats-grid">
+        <div class="stat-box primary">
+          <div class="stat-lbl">Total Paid</div>
+          <div class="stat-num" id="totalPaid">₹0</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-lbl">Inst. Paid</div>
+          <div class="stat-num" id="installments">0</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-lbl">Last Payment</div>
+          <div class="stat-num" style="font-size:clamp(11px, 2.5vw, 13px); margin-top:2px;" id="lastPayment">-</div>
+        </div>
+      </div>
+
+      <div class="grid-workspace">
+        <!-- Left: Profile & Actions -->
+        <div>
+          <div class="card">
+            <div class="card-title">Customer Profile</div>
+            <div class="detail-grid">
+              <div class="detail-item">
+                <span class="detail-label">Passbook No.</span>
+                <span class="detail-val" id="accountNo" style="font-size:15px;">-</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Customer Name</span>
+                <span class="detail-val" id="customerName">-</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Address</span>
+                <span class="detail-val" id="address">-</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Contact</span>
+                <span class="detail-val phone-link" id="phone">-</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Instant Actions</div>
+            <div class="actions-grid">
+              <button class="btn-action receipt" id="receiptBtn">
+                <span class="btn-title">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16l4-2 4 2 4-2 4 2V8z"></path></svg>
+                  Receipt
+                </span>
+                <span class="btn-sub">Send latest receipt</span>
+              </button>
+
+              <button class="btn-action statement" id="statementBtn">
+                <span class="btn-title">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="16" rx="2"></rect><line x1="8" y1="10" x2="16" y2="10"></line><line x1="8" y1="14" x2="12" y2="14"></line></svg>
+                  Statement
+                </span>
+                <span class="btn-sub">Send full statement</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Ledger Table -->
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-title">
+            <span>Passbook Statement</span>
+            <span id="recordCountBadge" style="font-size:11px; font-weight:700; color:var(--text-muted);">0 Records</span>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Date</th>
+                  <th>Paid (₹)</th>
+                  <th>Total (₹)</th>
+                </tr>
+              </thead>
+              <tbody id="paymentsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycbzd7pJncxJAObQm1r1M2Ws03EdKSb1xtlq64KNeiF_MpiL5OvPCS8iT3lb8H1_K-dB3Gg/exec";
+let currentCustomer = null;
+
+// Dynamic Sparkle Generator
+(function initSparkles() {
+  const container = document.getElementById("sparkles");
+  if (!container) return;
+  const count = 20;
+  for (let i = 0; i < count; i++) {
+    const s = document.createElement("span");
+    s.className = "sparkle";
+    const size = (Math.random() * 3 + 1.5).toFixed(1);
+    s.style.width = s.style.height = size + "px";
+    s.style.left = (Math.random() * 100).toFixed(1) + "%";
+    s.style.top = (Math.random() * 100).toFixed(1) + "%";
+    s.style.animationDuration = (Math.random() * 2.5 + 2.2).toFixed(2) + "s";
+    s.style.animationDelay = (Math.random() * 3).toFixed(2) + "s";
+    container.appendChild(s);
+  }
+})();
+
+// Animated Number Counter
+function animateCount(el, target, isCurrency = false) {
+  let start = 0;
+  const duration = 750;
+  const startTime = performance.now();
+  
+  function update(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const easeOut = 1 - Math.pow(1 - progress, 3);
+    const currentVal = Math.floor(start + (target - start) * easeOut);
+    
+    el.textContent = isCurrency 
+      ? "₹" + currentVal.toLocaleString("en-IN")
+      : currentVal;
+      
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    } else {
+      el.textContent = isCurrency 
+        ? "₹" + target.toLocaleString("en-IN")
+        : target;
+    }
+  }
+  requestAnimationFrame(update);
+}
+
+function cleanPhone(p) {
+  return String(p || "").replace(/\D/g, "");
+}
+
+function showStatus(msg, type = "loading") {
+  const el = document.getElementById("status");
+  el.className = `status-banner status-${type}`;
+  el.textContent = msg;
+  el.classList.remove("hidden");
+}
+
+function hideStatus() {
+  document.getElementById("status").classList.add("hidden");
+}
+
+function escapeHtml(v) {
+  return String(v ?? "").replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[m]));
+}
+
+function renderCustomer(c) {
+  currentCustomer = c;
+  document.getElementById("welcome").classList.add("hidden");
+  const resultSec = document.getElementById("result");
+  resultSec.classList.remove("hidden");
+  
+  document.getElementById("accountNo").textContent = c.accountNo || "-";
+  document.getElementById("customerName").textContent = c.name || "-";
+  document.getElementById("address").textContent = c.address || "-";
+  document.getElementById("phone").textContent = c.phone || "Not recorded";
+  document.getElementById("lastPayment").textContent = c.lastPaymentDate || "-";
+
+  const payments = c.payments || [];
+  document.getElementById("recordCountBadge").textContent = `${payments.length} Records`;
+
+  // Trigger Counting Animations
+  animateCount(document.getElementById("totalPaid"), Number(c.totalPaid || 0), true);
+  animateCount(document.getElementById("installments"), payments.length, false);
+
+  // Render Table
+  const body = document.getElementById("paymentsBody");
+  body.innerHTML = "";
+  payments.forEach((p, i) => {
+    const tr = document.createElement("tr");
+    tr.className = "table-row-animated" + (i === payments.length - 1 ? " latest-row" : "");
+    tr.style.animationDelay = `${(i * 0.02) + 0.08}s`;
+    tr.innerHTML = `
+      <td>${i + 1}</td>
+      <td>${escapeHtml(p.date)}</td>
+      <td>₹${Number(p.amount || 0).toLocaleString("en-IN")}</td>
+      <td>₹${Number(p.total || 0).toLocaleString("en-IN")}</td>
+    `;
+    body.appendChild(tr);
+  });
+}
+
+async function searchCustomer() {
+  const account = document.getElementById("accountInput").value.trim();
+  if (!account) {
+    showStatus("Please enter customer number", "error");
+    return;
+  }
+  
+  showStatus("Retrieving customer records...", "loading");
+  document.getElementById("result").classList.add("hidden");
+
+  try {
+    const res = await fetch(API_URL + "?action=getCustomer&account=" + encodeURIComponent(account), { method: "GET" });
+    const data = await res.json();
+    hideStatus();
+    if (!data.ok) {
+      showStatus(data.message || "Customer not found.", "error");
+      return;
+    }
+    renderCustomer(data.customer);
+  } catch (err) {
+    showStatus("Connection to database failed.", "error");
+  }
+}
+
+function openWhatsApp(kind) {
+  if (!currentCustomer) return;
+  const phone = cleanPhone(currentCustomer.phone);
+  if (!phone) {
+    showStatus("No phone number registered for customer.", "error");
+    return;
+  }
+  
+  let text = "";
+  if (kind === "receipt") {
+    const last = currentCustomer.payments?.[currentCustomer.payments.length - 1];
+    text = 
+`✨ *NEW SHEEBA JEWELLERY* ✨
+_Official Payment Receipt_
+
+*Passbook No:* ${currentCustomer.accountNo}
+*Customer Name:* ${currentCustomer.name}
+*Payment Date:* ${last?.date || currentCustomer.lastPaymentDate || "-"}
+*Amount Received:* ₹${Number(last?.amount || 0).toLocaleString("en-IN")}
+*Cumulative Total:* ₹${Number(currentCustomer.totalPaid || 0).toLocaleString("en-IN")}
+*Installments Completed:* ${(currentCustomer.payments || []).length}
+
+Thank you for your valuable relationship with New Sheeba Jewellery.`;
+  } else {
+    text = 
+`✨ *NEW SHEEBA JEWELLERY* ✨
+_Customer Account Statement_
+
+*Passbook No:* ${currentCustomer.accountNo}
+*Customer Name:* ${currentCustomer.name}
+*Address:* ${currentCustomer.address || "-"}
+*Total Amount Paid:* ₹${Number(currentCustomer.totalPaid || 0).toLocaleString("en-IN")}
+*Total Installments:* ${(currentCustomer.payments || []).length}
+*Last Payment:* ${currentCustomer.lastPaymentDate || "-"}
+
+*Passbook Ledger:*
+` + (currentCustomer.payments || []).map((p, i) => `${i + 1}. ${p.date} — ₹${Number(p.amount || 0).toLocaleString("en-IN")}`).join("\n");
+  }
+  window.open("https://wa.me/" + phone + "?text=" + encodeURIComponent(text), "_blank");
+}
+
+// Button Ripples
+document.querySelectorAll(".search-btn, .btn-action").forEach(b => {
+  b.addEventListener("click", e => {
+    const rect = b.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const span = document.createElement("span");
+    span.className = "ripple";
+    span.style.width = span.style.height = size + "px";
+    span.style.left = (e.clientX - rect.left - size / 2) + "px";
+    span.style.top = (e.clientY - rect.top - size / 2) + "px";
+    b.appendChild(span);
+    span.addEventListener("animationend", () => span.remove());
+  });
+});
+
+document.getElementById("searchBtn").addEventListener("click", searchCustomer);
+document.getElementById("accountInput").addEventListener("keydown", e => { if (e.key === "Enter") searchCustomer(); });
+document.getElementById("receiptBtn").addEventListener("click", () => openWhatsApp("receipt"));
+document.getElementById("statementBtn").addEventListener("click", () => openWhatsApp("statement"));
+</script>
+</body>
+</html>
